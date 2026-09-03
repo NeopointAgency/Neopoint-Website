@@ -20,11 +20,11 @@ import { site } from '../../data/site';
 
 const title = 'Diseño Web que convierte | Sitios que agendan clientes | Neopoint';
 const description =
-  'Sitios web que convierten visitas en clientes. Responden las dudas de tu cliente, cargan rápido y llevan a una sola acción. Primer boceto en 10 días y pagos contra entregas.';
+  'Sitios web que convierten visitas en clientes. Responden las dudas de tu cliente, cargan rápido y llevan a una sola acción. Tu MVP en línea en 10 días y pagos contra entregas.';
 
 /* Cifras del método (aplican a todo proyecto) */
 const promises = [
-  { value: '10 días', label: 'y ves el primer boceto' },
+  { value: '10 días', label: 'y tu MVP ya está en línea' },
   { value: '3 pagos', label: 'contra entregas que puedes ver' },
   { value: '90+', label: 'de calificación en Google' },
 ];
@@ -67,7 +67,7 @@ const pillars = [
 /* 05 · Lo que recibes */
 const deliverables = [
   'Estudio de tu negocio y plan para que el sitio venda',
-  'Boceto de la página de inicio en 10 días',
+  'Tu MVP en 10 días: página de inicio y botón para agendar, en línea',
   'Todos los textos, escritos para tu cliente',
   'Diseño a la medida para celular y computadora',
   'Sistema para agendar: formulario y calendario',
@@ -88,15 +88,15 @@ const extras = [
 
 /* 06 · Cronograma */
 const stages = [
-  { days: 'Etapa 1', title: 'Arranque', items: ['Reunimos tu material y en 10 días entregamos el boceto de la página de inicio.'], pay: 'Primer pago' },
-  { days: 'Etapa 2', title: 'Diseño completo', items: ['Diseñamos el resto del sitio y escribimos los textos. Tú apruebas.'], pay: 'Segundo pago, al aprobar' },
-  { days: 'Etapa 3', title: 'Construcción', items: ['Construimos el sitio, el formulario y el calendario. Lo revisas en vivo.'], pay: null },
-  { days: 'Etapa 4', title: 'Lanzamiento', items: ['Lo conectamos con Google, probamos en celular y lo publicamos.'], pay: 'Tercer pago, contra entrega' },
+  { days: 'Etapa 1 · Primer win', title: 'Tu MVP en 10 días', items: ['Reunimos tu material y en 10 días publicamos la primera versión: inicio y botón para agendar.'], pay: 'Primer pago', win: true },
+  { days: 'Etapa 2', title: 'Diseño completo', win: false, items: ['Diseñamos el resto del sitio y escribimos los textos. Tú apruebas.'], pay: 'Segundo pago, al aprobar' },
+  { days: 'Etapa 3', title: 'Construcción', win: false, items: ['Construimos el sitio, el formulario y el calendario. Lo revisas en vivo.'], pay: null },
+  { days: 'Etapa 4', title: 'Lanzamiento', win: false, items: ['Lo conectamos con Google, probamos en celular y lo publicamos.'], pay: 'Tercer pago, contra entrega' },
 ];
 
 /* 07 · Garantías y alcance */
 const guarantees = [
-  { title: 'Primer resultado en 10 días', text: 'A los 10 días hábiles ves el boceto de tu página de inicio. Si no llega, lo sabes de inmediato.' },
+  { title: 'Tu MVP en 10 días', text: 'A los 10 días hábiles tu primera versión está en línea: inicio y botón para agendar. Si no llega, lo sabes de inmediato.' },
   { title: 'Garantía de satisfacción', text: 'Trabajamos contigo hasta que apruebes el diseño. No entregamos hasta que estés conforme.' },
   { title: 'Garantía de rendimiento', text: 'Tu sitio sale con 90 o más en las pruebas de Google: velocidad, buscadores y uso.' },
 ];
@@ -123,7 +123,7 @@ const nextSteps = [
 ];
 
 const faqs = [
-  { q: 'Ya nos quedó mal una agencia. ¿En qué son diferentes?', a: 'No te pedimos confianza en palabras. Cada pago se libera contra algo que puedes ver. El primer resultado llega en 10 días y hay garantías por escrito.' },
+  { q: 'Ya nos quedó mal una agencia. ¿En qué son diferentes?', a: 'No te pedimos confianza en palabras. Cada pago se libera contra algo que puedes ver. Tu MVP está en línea en 10 días y hay garantías por escrito.' },
   { q: '¿Qué pasa con mi sitio actual y el dominio?', a: 'El dominio es tuyo y así se queda. Tu sitio actual sigue en línea hasta el día del cambio. Sin días fuera del aire.' },
   { q: '¿Por qué no empezamos con anuncios?', a: 'Porque mandar gente a una página que no convence es tirar el dinero. Primero el sitio; luego los anuncios, en su propia propuesta.' },
   { q: 'Hay opciones más baratas. ¿Por qué invertir más?', a: 'Si buscas lo más barato, no somos la opción. Una plantilla no estudia a tu cliente ni escribe para él. Nuestro trabajo es una inversión: un solo cliente cerrado suele pagarla.' },
@@ -314,7 +314,7 @@ const jsonLd = [
   <!-- 06 · Cronograma -->
   <section class="py-20 sm:py-28" aria-labelledby="timeline-title">
     <div class="container-x">
-      <SectionHeading id="timeline-title" eyebrow="Proceso" title="4 etapas. Cada pago, contra algo que puedes ver." description="Sabemos que es difícil saber qué poner en la web para que venda. De eso nos encargamos nosotros. Tú revisas y apruebas. Los tiempos dependen del alcance: un sitio completo suele tomar unas 6 semanas." />
+      <SectionHeading id="timeline-title" eyebrow="Proceso" title="Primero un MVP en 10 días. Luego, el sitio completo." description="Sabemos que es difícil saber qué poner en la web para que venda. De eso nos encargamos nosotros. Tú revisas y apruebas. El resto del sitio depende del alcance: suele tomar unas 6 semanas." />
       <!-- Barra de etapas: el ancho es proporcional a la duración típica; las monedas marcan los pagos -->
       <div class="reveal mt-20 hidden lg:block" aria-hidden="true">
         <div class="mb-14"></div>
@@ -331,8 +331,8 @@ const jsonLd = [
         </div>
       </div>
       <ol class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4" role="list">
-        {stages.map(({ days, title, items, pay }) => (
-          <li class="reveal card-surface flex flex-col p-6 sm:p-7">
+        {stages.map(({ days, title, items, pay, win }) => (
+          <li class:list={['reveal flex flex-col p-6 sm:p-7', win ? 'card ring-2 ring-lime' : 'card-surface']}>
             <span class="text-sm font-medium text-lime-deep">{days}</span>
             <h3 class="mt-2 text-xl font-semibold text-text">{title}</h3>
             <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{items[items.length - 1]}</p>
