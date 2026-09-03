@@ -133,7 +133,7 @@ html[data-theme="dark"] {
   & a:hover { color: var(--color-muted); }
 }
 
-/* ---------- Secciones oscuras con degradado (dinamismo, estilo portafolio) ---------- */
+/* ---------- Secciones oscuras con degradado (solo escala de grises, estilo portafolio) ---------- */
 @utility ink-glow {
   position: relative;
   isolation: isolate;
@@ -141,7 +141,7 @@ html[data-theme="dark"] {
   background-color: var(--color-ink);
   background-image:
     radial-gradient(60% 60% at 90% -10%, rgb(255 255 255 / 0.12), transparent 65%),
-    radial-gradient(45% 50% at 0% 110%, rgb(151 239 73 / 0.09), transparent 65%),
+    radial-gradient(45% 50% at 0% 110%, rgb(255 255 255 / 0.06), transparent 65%),
     linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
   /* Halo blanco que se desplaza lentamente */
   &::before {
@@ -159,14 +159,14 @@ html[data-theme="dark"] {
     pointer-events: none;
     will-change: transform;
   }
-  /* Velo inferior + halo lima tenue */
+  /* Velo inferior + segundo halo gris que se desplaza */
   &::after {
     content: "";
     position: absolute;
     z-index: -1;
     inset: 0;
     background:
-      radial-gradient(40% 45% at 20% 80%, rgb(151 239 73 / 0.07), transparent 70%),
+      radial-gradient(40% 45% at 20% 80%, rgb(255 255 255 / 0.05), transparent 70%),
       linear-gradient(to top, #161616 0%, transparent 35%);
     animation: ink-drift-lime 30s ease-in-out infinite alternate;
     pointer-events: none;
