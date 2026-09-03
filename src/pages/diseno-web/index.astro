@@ -25,7 +25,7 @@ const description =
 /* Cifras del método (aplican a todo proyecto) */
 const promises = [
   { value: '10 días', label: 'y tu MVP ya está en línea' },
-  { value: '3 pagos', label: 'contra entregas que puedes ver' },
+  { value: '1 año', label: 'de panel para ver tus leads' },
   { value: '90+', label: 'de calificación en Google' },
 ];
 
@@ -88,10 +88,10 @@ const extras = [
 
 /* 06 · Cronograma */
 const stages = [
-  { days: 'Etapa 1 · Primer win', title: 'Tu MVP en 10 días', items: ['Reunimos tu material y en 10 días publicamos la primera versión: inicio y botón para agendar.'], pay: 'Primer pago', win: true },
-  { days: 'Etapa 2', title: 'Diseño completo', win: false, items: ['Diseñamos el resto del sitio y escribimos los textos. Tú apruebas.'], pay: 'Segundo pago, al aprobar' },
+  { days: 'Etapa 1 · Primer win', title: 'Tu MVP en 10 días', items: ['Reunimos tu material y en 10 días publicamos la primera versión: inicio y botón para agendar.'], pay: 'Pago al arrancar', win: true },
+  { days: 'Etapa 2', title: 'Diseño completo', win: false, items: ['Diseñamos el resto del sitio y escribimos los textos. Tú apruebas.'], pay: 'Pago al aprobar' },
   { days: 'Etapa 3', title: 'Construcción', win: false, items: ['Construimos el sitio, el formulario y el calendario. Lo revisas en vivo.'], pay: null },
-  { days: 'Etapa 4', title: 'Lanzamiento', win: false, items: ['Lo conectamos con Google, probamos en celular y lo publicamos.'], pay: 'Tercer pago, contra entrega' },
+  { days: 'Etapa 4', title: 'Lanzamiento', win: false, items: ['Lo conectamos con Google, probamos en celular y lo publicamos.'], pay: 'Pago contra entrega' },
 ];
 
 /* 07 · Garantías y alcance */
@@ -118,7 +118,7 @@ const fit = {
 /* Siguiente paso */
 const nextSteps = [
   'Hablamos 30 minutos por videollamada sobre tu negocio',
-  'Recibes una propuesta con alcance, fechas y pagos',
+  'Recibes una propuesta con alcance, fechas y esquema de pagos',
   'Firmamos y arrancamos en 48 horas',
 ];
 
@@ -127,9 +127,9 @@ const faqs = [
   { q: '¿Qué pasa con mi sitio actual y el dominio?', a: 'El dominio es tuyo y así se queda. Tu sitio actual sigue en línea hasta el día del cambio. Sin días fuera del aire.' },
   { q: '¿Por qué no empezamos con anuncios?', a: 'Porque mandar gente a una página que no convence es tirar el dinero. Primero el sitio; luego los anuncios, en su propia propuesta.' },
   { q: 'Hay opciones más baratas. ¿Por qué invertir más?', a: 'Si buscas lo más barato, no somos la opción. Una plantilla no estudia a tu cliente ni escribe para él. Nuestro trabajo es una inversión: un solo cliente cerrado suele pagarla.' },
-  { q: '¿Cuánto cuesta?', a: 'Depende del alcance: páginas, agendado, zonas e integraciones. Tu propuesta llega con cada punto y su valor, en tres pagos contra entregas.' },
+  { q: '¿Cuánto cuesta?', a: 'Depende del alcance: páginas, agendado, zonas e integraciones. Tu propuesta llega con cada punto y su valor.' },
   { q: '¿Cómo sé si el sitio funciona?', a: 'Con un panel de monitoreo por un año. Ves cuánta gente entra, de dónde llega y cuántos se vuelven leads y citas.' },
-  { q: '¿Cómo se paga?', a: 'En tres pagos: al firmar, al aprobar el diseño y contra entrega con el sitio funcionando.' },
+  { q: '¿Cómo se paga?', a: 'En pagos ligados a entregas que puedes ver: al arrancar, al aprobar el diseño y contra entrega. El esquema exacto va en tu propuesta.' },
   { q: '¿Trabajan fuera de México?', a: 'Sí. Tenemos clientes en México, LATAM y Estados Unidos, en español e inglés. Todo es remoto.' },
 ];
 
@@ -324,7 +324,7 @@ const jsonLd = [
               <div class:list={['h-3 rounded-full', i === 3 ? 'bg-lime' : 'bg-ink/10']}></div>
               <span class="absolute left-0 top-5 text-xs text-faint">Etapa {i + 1}</span>
               {[true, true, false, true][i] && (
-                <span class:list={['absolute -top-12 flex size-10 items-center justify-center rounded-full bg-ink text-[0.6rem] font-semibold text-white ring-4 ring-paper', i === 3 ? 'right-0' : 'left-0']}>{[40, 30, 0, 30][i]}%</span>
+                <span class:list={['absolute -top-12 flex size-10 items-center justify-center rounded-full bg-ink text-base font-semibold text-white ring-4 ring-paper', i === 3 ? 'right-0' : 'left-0']} title="Pago">$</span>
               )}
             </div>
           ))}
