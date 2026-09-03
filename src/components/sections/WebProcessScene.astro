@@ -12,7 +12,7 @@ import { getProjects } from '../../lib/portfolio';
 
 const projects = await getProjects();
 const main = projects.find((p) => p.id === 'studio-luto') ?? projects[0];
-const others = projects.filter((p) => p.id !== main.id && p.data.featured && p.data.cover).slice(0, 3);
+const others = projects.filter((p) => p.id !== main.id && p.data.featured && p.data.cover).slice(0, 2);
 
 const keywords = ['cerámica artesanal', 'envíos a todo México', 'pedidos personalizados'];
 const voices = ['“¿Puedo comprar en línea?”', '“Quiero ver el catálogo”'];
@@ -33,7 +33,7 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
     <span class="biz__name">Studio Luto</span>
     <span class="biz__line" style="width:82%"></span>
     <span class="biz__line" style="width:58%"></span>
-    <span class="biz__tag">Cerámica · Guadalajara</span>
+    <span class="biz__tag">Guadalajara, Jal.</span>
   </div>
   {keywords.map((k, i) => (
     <span class:list={['kw', `kw--${i + 1}`]}>{k}</span>
@@ -128,17 +128,17 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
   .label__n { font-size: 0.85em; color: var(--color-faint); }
 
   .biz {
-    position: absolute; left: 8%; top: 30%; width: 34%;
-    display: grid; grid-template-columns: auto 1fr; column-gap: 3cqw; row-gap: 1.6cqw; align-items: center;
-    padding: 4cqw; border-radius: 4cqw;
+    position: absolute; left: 6%; top: 30%; width: 40%;
+    display: grid; grid-template-columns: auto 1fr; column-gap: 2.6cqw; row-gap: 1.6cqw; align-items: center;
+    padding: 3.6cqw; border-radius: 4cqw;
     background: var(--color-paper);
     box-shadow: 0 0 0 1px var(--color-line), 0 24px 48px -28px rgb(0 0 0 / 0.25);
     animation-name: biz;
   }
-  .biz__avatar { grid-row: span 3; display: grid; place-items: center; width: 9cqw; height: 9cqw; border-radius: 50%; background: #111; color: #fff; font-size: 0.85em; font-weight: 600; }
-  .biz__name { font-weight: 600; color: var(--color-text); }
+  .biz__avatar { grid-row: span 3; display: grid; place-items: center; width: 8cqw; height: 8cqw; border-radius: 50%; background: #111; color: #fff; font-size: 0.85em; font-weight: 600; }
+  .biz__name { min-width: 0; font-weight: 600; color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .biz__line { display: block; height: 1.4cqw; border-radius: 999px; background: var(--color-surface-hover); }
-  .biz__tag { grid-column: 2; font-size: 0.8em; color: var(--color-faint); white-space: nowrap; }
+  .biz__tag { grid-column: 2; min-width: 0; font-size: 0.78em; color: var(--color-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   .kw, .voice, .brief {
     position: absolute; display: inline-flex; align-items: center; gap: 0.5em; white-space: nowrap;
@@ -150,9 +150,9 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
     box-shadow: 0 10px 22px -10px rgb(0 0 0 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.14);
     transform-origin: center;
   }
-  .kw--1 { left: 46%; top: 24%; animation-name: kw1; }
-  .kw--2 { left: 50%; top: 40%; animation-name: kw2; }
-  .kw--3 { left: 44%; top: 56%; animation-name: kw3; }
+  .kw--1 { left: 50%; top: 22%; animation-name: kw1; }
+  .kw--2 { left: 56%; top: 39%; animation-name: kw2; }
+  .kw--3 { left: 52%; top: 56%; animation-name: kw3; }
   .voice {
     color: var(--color-text); background: var(--color-surface);
     box-shadow: 0 0 0 1px var(--color-line);
@@ -256,20 +256,20 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
     43.75%, 100% { opacity: 0; transform: translateY(-8px) scale(0.98); }
   }
   @keyframes kw1 {
-    0%, 11.25% { opacity: 0; transform: scale(0.6); left: 46%; top: 24%; }
-    13%, 40.6% { opacity: 1; transform: scale(1); left: 46%; top: 24%; }
+    0%, 11.25% { opacity: 0; transform: scale(0.6); left: 50%; top: 22%; }
+    13%, 40.6% { opacity: 1; transform: scale(1); left: 50%; top: 22%; }
     43.75%, 50% { opacity: 1; transform: scale(1); left: 4%; top: 6%; }
     56.25%, 57.5% { opacity: 1; transform: scale(1); left: 22%; top: 35%; }
     59.5%, 100% { opacity: 0; transform: scale(0.7); left: 22%; top: 35%; }
   }
   @keyframes kw2 {
-    0%, 13.1% { opacity: 0; transform: scale(0.6); left: 50%; top: 40%; }
-    15%, 34.4% { opacity: 1; transform: scale(1); left: 50%; top: 40%; }
+    0%, 13.1% { opacity: 0; transform: scale(0.6); left: 56%; top: 39%; }
+    15%, 34.4% { opacity: 1; transform: scale(1); left: 56%; top: 39%; }
     37.5%, 100% { opacity: 0; transform: scale(0.3); left: 48%; top: 86%; }
   }
   @keyframes kw3 {
-    0%, 15% { opacity: 0; transform: scale(0.6); left: 44%; top: 56%; }
-    17%, 35% { opacity: 1; transform: scale(1); left: 44%; top: 56%; }
+    0%, 15% { opacity: 0; transform: scale(0.6); left: 52%; top: 56%; }
+    17%, 35% { opacity: 1; transform: scale(1); left: 52%; top: 56%; }
     38.5%, 100% { opacity: 0; transform: scale(0.3); left: 46%; top: 86%; }
   }
   @keyframes voice1 {
