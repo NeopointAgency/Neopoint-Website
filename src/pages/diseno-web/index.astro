@@ -1,51 +1,122 @@
 ---
 import Base from '../../layouts/Base.astro';
-import WebProcessScene from '../../components/sections/WebProcessScene.astro';
 import Button from '../../components/ui/Button.astro';
+import WebProcessScene from '../../components/sections/WebProcessScene.astro';
 import GraphicCard from '../../components/ui/GraphicCard.astro';
 import SitemapGraphic from '../../components/graphics/SitemapGraphic.astro';
 import SeoGraphic from '../../components/graphics/SeoGraphic.astro';
 import EditorGraphic from '../../components/graphics/EditorGraphic.astro';
-import CodeGraphic from '../../components/graphics/CodeGraphic.astro';
+import BookingGraphic from '../../components/graphics/BookingGraphic.astro';
 import Faq from '../../components/ui/Faq.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import Portfolio from '../../components/sections/Portfolio.astro';
 import Results from '../../components/sections/Results.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
-import FinalCta from '../../components/sections/FinalCta.astro';
 import { site } from '../../data/site';
 
-const title = 'Diseño Web en México | Sitios web que venden | Neopoint';
+const title = 'Diseño Web que convierte | Sitios que agendan clientes | Neopoint';
 const description =
-  'Diseño y desarrollo de sitios web, landing pages y e-commerce enfocados en captar clientes potenciales. Estructura estratégica, SEO desde el inicio, diseño a la medida y desarrollo de alta eficiencia.';
+  'Diseñamos sitios web como un puente entre lo que busca tu cliente y tu oferta: responden sus dudas, cargan rápido y llevan a una sola acción. Estudio del negocio, textos, diseño a la medida, sistema de agendado y SEO. Primer resultado en 10 días, entrega en 45.';
 
+/* Cifras del método (aplican a todo proyecto) */
+const promises = [
+  { value: '10 días', label: 'para ver el primer boceto' },
+  { value: '45 días', label: 'del arranque al lanzamiento' },
+  { value: '90+', label: 'calificación en las pruebas de Google' },
+];
+
+/* 01 · Lo que espanta a los clientes */
+const mistakes = [
+  { title: 'Habla de la empresa, no del cliente', text: 'Años de experiencia, lista de servicios, fotos genéricas. El visitante entró preguntándose otra cosa.' },
+  { title: 'No responde el miedo principal', text: '“¿Y si pago y no vuelven?”, “¿sí van a terminar?”. Si el sitio no lo contesta, se va con el competidor que sí.' },
+  { title: 'No hay prueba', text: 'Sin trabajos reales, reseñas ni registros visibles nadie contrata. En servicios, la confianza lo es todo.' },
+  { title: 'El botón está escondido', text: 'Menús, pestañas y formularios largos. Quien entra con urgencia desde el celular necesita un botón grande y ya.' },
+  { title: 'Carga lento o falla en el celular', text: 'La mayoría de tus visitas llegan desde el teléfono. Cada segundo de espera es un cliente menos.' },
+  { title: 'No hay una oferta clara', text: 'No dice qué recibe el cliente, cuánto tarda ni por qué elegirte. Un sitio sin oferta es un folleto.' },
+];
+
+/* 02 · El puente */
+const entries = [
+  { title: 'Anuncios', text: 'Meta y Google' },
+  { title: 'Búsqueda', text: '“cerca de mí”' },
+  { title: 'Recomendados', text: 'entran a verificar' },
+];
+
+/* 03 · Perfil del comprador (ejemplo real, resumido) */
+const profile = [
+  { k: 'Lo que desea', v: 'Un techo que aguante el invierno, hecho por alguien que sí llega, sí termina y cobra lo que dijo.' },
+  { k: 'Su miedo principal', v: '“¿Y si les doy el anticipo y no vuelven?”', quote: true },
+  { k: 'Ya le frustró', v: 'Contratistas que no contestan, cotizaciones que nunca llegan y vendedores que tocan la puerta después de cada tormenta.' },
+  { k: 'Necesita ver', v: 'Licencia visible, fotos de trabajos reales en su zona, reseñas de vecinos y una inspección gratis fácil de agendar.' },
+];
+
+/* 04 · Los 4 pilares */
 const pillars = [
-  { graphic: SitemapGraphic, title: 'Estrategia estructural y narrativa', description: 'Diseñamos la ruta que seguirán tus clientes para llegar al contacto de manera clara y efectiva.' },
-  { graphic: SeoGraphic, title: 'Estrategia de posicionamiento orgánico', description: 'Desde el inicio tu sitio estará optimizado para aparecer en las búsquedas y captar clientes potenciales.' },
-  { graphic: EditorGraphic, title: 'Diseño a la medida', description: 'La autenticidad y claridad de tu marca se traducen en un diseño único que impulsa tus oportunidades comerciales.' },
-  { graphic: CodeGraphic, title: 'Desarrollo y despliegue', description: 'Construimos con las mejores herramientas y prácticas para asegurar velocidad, seguridad y escalabilidad.' },
+  { graphic: SitemapGraphic, title: 'Estructura que vende antes de que lean', description: 'Cada sección tiene un trabajo: resolver una duda, dar confianza o llevar al botón. La información se acomoda según qué tan decidido llega el visitante.' },
+  { graphic: EditorGraphic, title: 'Diseño y textos que te vuelven la opción obvia', description: 'Diseño a la medida de tu marca, no una plantilla. Textos que le hablan a tu cliente de sus miedos reales y una sección de prueba: trabajos, reseñas, registros.' },
+  { graphic: BookingGraphic, title: 'Sistema de agendado y seguimiento', description: 'Formulario corto o calendario para elegir día y hora. Aviso inmediato a tu celular y correo, y cada contacto guardado en una lista para que ninguno se pierda.' },
+  { graphic: SeoGraphic, title: 'Que te encuentren en Google', description: 'Cada página lista para que Google la entienda, conexión con tu perfil de negocio y páginas por ciudad o zona para las búsquedas locales.' },
 ];
 
-const process = [
-  { n: '01', title: 'Diagnóstico y estrategia', text: 'Entendemos tu negocio, a quién le vendes y qué necesita ver esa persona para contactarte. De ahí sale la estructura del sitio.' },
-  { n: '02', title: 'Diseño a la medida', text: 'Diseñamos cada pantalla con tu identidad y con un objetivo claro por sección. Revisas y ajustamos antes de programar.' },
-  { n: '03', title: 'Desarrollo y SEO técnico', text: 'Construimos el sitio con tecnología rápida y segura, optimizado para buscadores y para cualquier dispositivo.' },
-  { n: '04', title: 'Lanzamiento y medición', text: 'Publicamos, conectamos analítica y te entregamos un sitio listo para recibir tráfico y convertirlo en clientes.' },
+/* 05 · Lo que recibes */
+const deliverables = [
+  'Estudio del negocio y plan para que el sitio convierta',
+  'Boceto de la página de inicio en 10 días, que define el estilo de todo',
+  'Todos los textos del sitio, escritos para tu cliente',
+  'Diseño a la medida, pensado dos veces: celular y computadora',
+  'Sistema de agendado: formulario corto y calendario',
+  'Aviso inmediato de cada solicitud y lista de contactos',
+  'Páginas de servicio que terminan en el mismo botón',
+  'Páginas por ciudad o zona para búsquedas locales',
+  'Trabajo completo para aparecer en Google',
+  'Tecnología de alto desempeño: carga rápido, siempre',
+];
+const extras = [
+  { title: 'Sesión de arranque y plan estructurado', text: 'Qué necesitamos de ti, qué hacemos nosotros y las fechas de cada cosa.' },
+  { title: 'Ajuste de logo', text: 'Lo pulimos para que se vea nítido en el sitio, en Google y donde se use.' },
+  { title: 'Guía de fotos', text: 'Cómo tomar fotos de tus trabajos con el celular, para que la galería crezca sola.' },
+  { title: 'Soporte directo 30 días', text: 'Después del lanzamiento, línea directa por WhatsApp para ajustes y dudas.' },
 ];
 
-const types = [
-  { title: 'Sitios corporativos', text: 'Presencia digital clara y profesional para empresas y despachos.' },
-  { title: 'Landing pages', text: 'Páginas enfocadas en una sola acción: captar el contacto.' },
-  { title: 'E-commerce', text: 'Tiendas en línea fáciles de administrar y de comprar.' },
-  { title: 'Plataformas y agendas', text: 'Cursos, reservas con pago en línea y sistemas a la medida.' },
+/* 06 · Cronograma */
+const stages = [
+  { days: 'Días 1–10', title: 'Arranque y primer resultado', items: ['Reunimos logo, fotos, registros y datos del negocio', 'Definimos cómo se organiza el sitio y dónde van los botones', 'Entregamos el boceto de la página de inicio'], pay: 'Primer pago · ves el primer resultado' },
+  { days: 'Días 11–20', title: 'Diseño completo', items: ['Con la inicio aprobada, diseñamos el resto del sitio', 'Escribimos todos los textos para tu cliente', 'Apruebas el diseño completo antes de construir'], pay: 'Al aprobar, segundo pago' },
+  { days: 'Días 21–35', title: 'Construcción', items: ['Construimos el sitio, el formulario y el calendario', 'Subimos fotos, servicios y páginas por ciudad', 'Revisas todo ya en funcionamiento'], pay: null },
+  { days: 'Días 36–45', title: 'Lanzamiento', items: ['Configuramos el sitio con Google', 'Probamos velocidad y funcionamiento en celular', 'Lanzamos y damos seguimiento los primeros días'], pay: 'Contra entrega, el tercer pago' },
+];
+
+/* 07 · Garantías y alcance */
+const guarantees = [
+  { title: 'Primer resultado en 10 días', text: 'A los 10 días hábiles tienes el boceto de la página de inicio listo para revisar y aprobar. Si no llega, lo ves de inmediato, no seis meses después.' },
+  { title: 'Garantía de satisfacción', text: 'Trabajamos contigo hasta lograr un diseño que apruebes y que cumpla lo acordado. No firmamos la entrega hasta que estés conforme.' },
+  { title: 'Garantía de rendimiento', text: 'Entregamos el sitio con calificación de 90 o más en las herramientas de medición de Google: velocidad, buscadores y facilidad de uso.' },
+];
+const scope = [
+  { title: 'El precio cubre exactamente lo que ves en la propuesta', text: 'El mapa de sitio y la lista de lo que recibes. Ni más, ni menos.' },
+  { title: 'Cuenta como trabajo extra', text: 'Páginas o funciones fuera del mapa, una herramienta nueva o rediseñar algo ya aprobado.' },
+  { title: 'No cuenta como trabajo extra', text: 'Los ajustes normales de revisión antes de cada aprobación.' },
+  { title: 'Si surge algo extra', text: 'Nunca se hace ni se cobra sin que antes lo veas, sepas cuánto cuesta y cuánto tarda, y lo apruebes.' },
+];
+
+/* 08 · Siguiente paso */
+const nextSteps = [
+  'Revisamos tu negocio juntos: 30 minutos por videollamada',
+  'Recibes una propuesta con alcance exacto, fechas y esquema de pagos',
+  'Firmamos acuerdo y arrancamos en 48 horas',
 ];
 
 const faqs = [
-  { q: '¿Cuánto tarda el desarrollo de un sitio web?', a: 'Depende del alcance. Una landing page puede estar lista en pocas semanas; un sitio corporativo o un e-commerce toma más tiempo por el número de secciones, contenido e integraciones. En la asesoría inicial te damos un calendario realista.' },
-  { q: '¿El sitio incluye SEO?', a: 'Sí. Todo sitio se entrega con la base técnica de SEO: estructura de encabezados, metadatos, velocidad, versión móvil, sitemap y datos estructurados. El posicionamiento continuo se trabaja como servicio aparte.' },
+  { q: 'Ya nos quedó mal una agencia antes. ¿En qué son diferentes?', a: 'No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes ver y revisar, el primer resultado llega en 10 días y hay garantías por escrito. Si en algún punto no cumplimos, lo ves de inmediato, no seis meses después.' },
+  { q: '¿Qué pasa con mi sitio actual y el dominio?', a: 'El dominio es tuyo y así se queda. Tu sitio actual sigue en línea mientras construimos el nuevo, y el día del lanzamiento se hace el cambio. Sin días fuera del aire.' },
+  { q: '¿Por qué no arrancamos con los anuncios de una vez?', a: 'Porque pagar anuncios para mandar gente a una página que no convence es tirar el dinero. Primero el vehículo; luego, con la investigación de palabras clave lista, la estrategia de anuncios en su propia propuesta.' },
+  { q: 'Hay opciones más baratas. ¿Por qué este precio?', a: 'Las hay, y algunas son buenas para lo que son: una plantilla con tus datos. Esto es otra cosa: investigación de tu comprador, textos para sus miedos reales, un sistema de agendado, páginas por zona y garantías por escrito. Un solo cliente cerrado suele pagar la inversión.' },
+  { q: '¿Cómo se paga?', a: 'En tres pagos ligados a entregas que puedes ver y revisar: al firmar, al aprobar el diseño completo y contra entrega con el sitio funcionando. El esquema exacto va en tu propuesta.' },
+  { q: '¿Cuánto tarda?', a: 'Primer boceto en 10 días hábiles y lanzamiento en 45 días para un sitio completo. Una landing page toma menos; un e-commerce o una plataforma puede tomar más. En la propuesta te damos el calendario exacto.' },
+  { q: '¿Qué pasa cuando terminan los 30 días de soporte?', a: 'El sitio queda funcionando y es tuyo: no depende de nosotros para operar. Cambios o mejoras posteriores se cotizan aparte, viendo costo y tiempo antes de decidir.' },
+  { q: '¿Incluye hosting y dominio?', a: 'Se cotizan aparte, como en cualquier proyecto web. Te asesoramos en ambos sin costo extra y los dos quedan a tu nombre.' },
   { q: '¿Puedo actualizar el contenido yo mismo?', a: 'Sí. Definimos contigo qué partes necesitas editar con frecuencia y las dejamos administrables. También podemos encargarnos del mantenimiento.' },
-  { q: '¿Incluye hosting y dominio?', a: 'Te asesoramos en la compra del dominio y configuramos el hosting más adecuado para tu proyecto. Ambos quedan a tu nombre.' },
-  { q: '¿Trabajan con clientes fuera de México?', a: 'Sí. Tenemos clientes en México, LATAM y Estados Unidos. Todo el proceso se lleva de forma remota con reuniones por videollamada.' },
+  { q: '¿Trabajan con clientes fuera de México?', a: 'Sí. Tenemos clientes en México, LATAM y Estados Unidos, con sitios en español e inglés. Todo el proceso se lleva de forma remota.' },
 ];
 
 const jsonLd = [
@@ -53,7 +124,7 @@ const jsonLd = [
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'Diseño Web',
-    serviceType: 'Diseño y desarrollo de sitios web',
+    serviceType: 'Diseño y desarrollo de sitios web que convierten',
     provider: { '@id': `${site.url}/#organization` },
     areaServed: ['MX', 'US', 'Latin America'],
     url: `${site.url}/diseno-web/`,
@@ -68,68 +139,257 @@ const jsonLd = [
 ---
 
 <Base {title} {description} {jsonLd}>
+  <!-- Hero -->
   <section class="bg-paper">
-    <div class="container-x grid items-center gap-12 pt-14 pb-12 sm:pt-24 sm:pb-16 lg:grid-cols-12 lg:gap-10">
+    <div class="container-x grid items-center gap-x-10 gap-y-10 pt-14 pb-12 sm:pt-24 sm:pb-16 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <p class="mb-4 text-sm font-medium text-muted">Diseño web</p>
-        <h1 class="text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.25rem]">No hacemos páginas web, hacemos sitios web que venden</h1>
-        <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">Nos enfocamos en que tu sitio web sea un medio de captación de clientes potenciales.</p>
+        <p class="mb-4 text-sm font-medium text-muted">Diseño web · Sitios que convierten</p>
+        <h1 class="text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.25rem]">Un sitio que convierte visitas en clientes agendados</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">No es una página nueva por tener una página nueva. Es un puente entre lo que busca tu cliente y tu oferta: responde sus dudas, carga rápido y lleva a una sola acción.</p>
         <div class="mt-9 flex flex-col gap-3 sm:flex-row">
           <Button href={site.bookingUrl} size="lg" icon={false}>Agendar tu asesoría</Button>
-          <Button href="/portafolio/" variant="secondary" size="lg">Ver portafolio</Button>
+          <Button href="#puente" variant="secondary" size="lg">Ver cómo funciona</Button>
         </div>
       </div>
       <div class="lg:col-span-7">
         <WebProcessScene />
       </div>
+      <dl class="reveal grid gap-3 sm:grid-cols-3 lg:col-span-12">
+        {promises.map(({ value, label }) => (
+          <div class="card-surface flex items-baseline gap-3 px-5 py-4">
+            <dd class="text-2xl font-semibold tracking-tight text-text">{value}</dd>
+            <dt class="text-sm text-muted">{label}</dt>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 
-  <section class="py-20 sm:py-28" aria-labelledby="pillars-title">
+  <!-- 01 · El problema -->
+  <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="problem-title">
     <div class="container-x">
-      <SectionHeading id="pillars-title" eyebrow="Cómo lo hacemos" title="Cuatro pilares de un sitio que convierte" />
-      <ul class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2" role="list">
-        {pillars.map(({ graphic: Graphic, title, description }) => (
-          <GraphicCard {title} {description}><Graphic /></GraphicCard>
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-7">
+          <SectionHeading id="problem-title" eyebrow="01 · El problema" title="El trabajo ya lo haces bien. Falta que tu sitio lo demuestre." description="Casi todos los sitios hablan de la empresa: años de experiencia, lista de servicios, fotos genéricas. Y la persona que entra está pensando en otra cosa." tone="dark" />
+        </div>
+        <blockquote class="reveal card-ink p-6 lg:col-span-5 sm:p-7">
+          <p class="text-xl font-medium leading-snug text-white sm:text-2xl">“¿Esta gente sí va a venir? ¿Sí van a terminar? ¿O me van a ver la cara?”</p>
+          <footer class="mt-3 text-sm text-white/50">Lo que tu cliente se pregunta antes de escribirte. Si el sitio no lo responde, se va con el competidor que sí lo hizo, aunque haga peor trabajo.</footer>
+        </blockquote>
+      </div>
+      <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
+        {mistakes.map(({ title, text }) => (
+          <li class="reveal card-ink p-6 sm:p-7">
+            <span class="inline-flex size-8 items-center justify-center rounded-lg bg-white/[0.07] text-white/70 ring-1 ring-white/10" aria-hidden="true">
+              <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
+            </span>
+            <h3 class="mt-4 text-lg font-semibold">{title}</h3>
+            <p class="mt-2 leading-relaxed text-white/60">{text}</p>
+          </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="process-title">
+  <!-- 02 · El puente -->
+  <section id="puente" class="py-20 sm:py-28" aria-labelledby="bridge-title">
     <div class="container-x">
-      <SectionHeading id="process-title" eyebrow="Proceso" title="De la idea al sitio publicado, sin sorpresas" tone="dark" />
+      <SectionHeading id="bridge-title" eyebrow="02 · La solución" title="Un puente sólido: no importa por dónde entre, el sitio lo lleva por un solo camino" description="Un solo destino para todo el sitio: que el visitante confíe y dé el paso. Cada página, cada texto y cada botón trabajan para eso." />
+
+      <div class="reveal mt-14 grid gap-4 lg:grid-cols-[1fr_auto_1.5fr_auto_1fr] lg:items-center">
+        <ul class="grid gap-3" role="list">
+          {entries.map(({ title, text }) => (
+            <li class="card-surface px-5 py-4">
+              <span class="block font-semibold text-text">{title}</span>
+              <span class="block text-sm text-muted">{text}</span>
+            </li>
+          ))}
+        </ul>
+        <svg class="mx-auto size-8 rotate-90 text-faint lg:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6" /></svg>
+        <div class="gcard !aspect-auto p-7 sm:p-9">
+          <p class="text-sm font-medium text-white/50">El sitio</p>
+          <h3 class="mt-2 text-2xl font-semibold text-white">Responde miedos, da prueba, genera confianza</h3>
+          <ul class="mt-5 space-y-2 text-white/70" role="list">
+            {['Textos que hablan de lo que a tu cliente le importa', 'Trabajos reales, reseñas y registros a la vista', 'Información acomodada según qué tan decidido llega', 'Carga rápido y funciona igual de bien en el celular'].map((t) => (
+              <li class="flex gap-2.5"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-lime" aria-hidden="true"></span>{t}</li>
+            ))}
+          </ul>
+        </div>
+        <svg class="mx-auto size-8 rotate-90 text-faint lg:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6" /></svg>
+        <div class="grid gap-3">
+          <div class="rounded-card bg-lime p-5 text-ink">
+            <span class="block text-lg font-semibold">Una sola acción</span>
+            <span class="block text-sm text-ink/70">Agendar, cotizar o pedir una inspección: formulario corto o calendario</span>
+          </div>
+          <div class="card-surface px-5 py-4">
+            <span class="block font-semibold text-text">Aviso inmediato a tu equipo</span>
+            <span class="block text-sm text-muted">Y el contacto guardado para seguimiento. Nada se pierde.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · Construimos la oferta -->
+  <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="offer-title">
+    <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-5">
+        <SectionHeading id="offer-title" eyebrow="03 · Antes de diseñar" title="Primero construimos la oferta. Luego el sitio la comunica." description="Un sitio bonito sin oferta es un folleto. Por eso todo proyecto empieza con un estudio del negocio: a quién le vendes, qué desea, qué teme, qué le frustró y qué necesita ver para decidirse." />
+        <ul class="mt-8 space-y-3 text-muted" role="list">
+          {['Perfil del comprador con sus miedos y objeciones reales', 'Qué prometer, en qué orden y con qué prueba', 'El camino del visitante: de la entrada al botón', 'Un plan de sitio que se aprueba antes de construir'].map((t) => (
+            <li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-lime-deep" aria-hidden="true"></span>{t}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="reveal lg:col-span-7">
+        <div class="card overflow-hidden">
+          <div class="flex items-center justify-between gap-4 bg-ink px-6 py-4 text-white">
+            <span class="font-semibold">Perfil del comprador</span>
+            <span class="text-xs text-white/50 sm:text-sm">Ejemplo real: compañía de techos en EE. UU.</span>
+          </div>
+          <dl class="divide-y divide-line">
+            {profile.map(({ k, v, quote }) => (
+              <div class="grid gap-1 px-6 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6">
+                <dt class="text-xs font-medium uppercase tracking-wide text-faint">{k}</dt>
+                <dd class:list={['leading-relaxed', quote ? 'font-medium text-text' : 'text-muted']}>{v}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="border-t border-line bg-paper-soft px-6 py-4 text-sm text-muted">El sitio atiende a los dos visitantes: al que tiene un problema hoy le da velocidad y confianza inmediata; al que está comparando, prueba y razones. Y a ambos los lleva al mismo lugar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · Pilares -->
+  <section class="py-20 sm:py-28" aria-labelledby="pillars-title">
+    <div class="container-x">
+      <SectionHeading id="pillars-title" eyebrow="04 · Cómo lo construimos" title="Los cuatro pilares de un sitio que convierte" />
+      <ul class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2" role="list">
+        {pillars.map(({ graphic: Graphic, title, description }) => (
+          <GraphicCard {title} {description}><Graphic /></GraphicCard>
+        ))}
+      </ul>
+      <div class="reveal mt-12 rounded-card border border-line bg-paper-soft p-6 sm:p-8">
+        <p class="font-semibold text-text">Una verdad que casi nadie te va a decir</p>
+        <p class="mt-2 leading-relaxed text-muted">Nadie puede prometerte que tu sitio va a aparecer arriba en Google en 30 días. Quien te lo promete, te está mintiendo. Lo que sí garantizamos: el sitio queda construido y configurado para posicionarse desde el día uno. Que Google lo encuentre y confíe en él es un proceso gradual. El acelerador es el tráfico pagado, y esa etapa va en su propia propuesta, después del sitio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · Lo que recibes -->
+  <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="deliverables-title">
+    <div class="container-x">
+      <SectionHeading id="deliverables-title" eyebrow="05 · Lo que recibes" title="Todo lo que incluye un proyecto" description="Cada punto se lista en tu propuesta con su valor. Sabes exactamente qué estás comprando, y el proyecto no crece sin control." tone="dark" />
+      <div class="mt-12 grid gap-8 lg:grid-cols-12">
+        <ul class="card-ink divide-y divide-white/[0.07] lg:col-span-7" role="list">
+          {deliverables.map((d) => (
+            <li class="flex items-start gap-3 px-6 py-3.5">
+              <svg class="mt-1 size-4 shrink-0 text-lime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>
+              <span class="text-white/85">{d}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="lg:col-span-5">
+          <p class="mb-3 text-sm font-medium text-white/50">Lo que viene de regalo</p>
+          <ul class="grid gap-3" role="list">
+            {extras.map(({ title, text }) => (
+              <li class="reveal card-ink p-5">
+                <h3 class="font-semibold">{title}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-white/60">{text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · Cronograma -->
+  <section class="py-20 sm:py-28" aria-labelledby="timeline-title">
+    <div class="container-x">
+      <SectionHeading id="timeline-title" eyebrow="06 · Cronograma" title="45 días, en 4 etapas. Cada pago, contra algo que puedes ver." />
       <ol class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4" role="list">
-        {process.map(({ n, title, text }) => (
-          <li class="reveal card-ink p-7">
-            <span class="text-sm font-medium text-white/50">{n}</span>
-            <h3 class="mt-3 text-xl font-semibold">{title}</h3>
-            <p class="mt-2 leading-relaxed text-white/60">{text}</p>
+        {stages.map(({ days, title, items, pay }, i) => (
+          <li class="reveal card-surface flex flex-col p-6 sm:p-7">
+            <span class="text-sm font-medium text-lime-deep">{days}</span>
+            <h3 class="mt-2 text-xl font-semibold text-text">{title}</h3>
+            <ul class="mt-4 flex-1 space-y-2 text-sm leading-relaxed text-muted" role="list">
+              {items.map((it) => <li class="flex gap-2"><span class="text-faint" aria-hidden="true">—</span>{it}</li>)}
+            </ul>
+            {pay && <span class="mt-5 inline-flex w-fit items-center rounded-full border border-line-strong bg-paper px-3 py-1 text-xs font-medium text-text">{pay}</span>}
           </li>
         ))}
       </ol>
     </div>
   </section>
 
-  <section class="py-20 sm:py-28" aria-labelledby="types-title">
-    <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-start">
-      <div class="lg:col-span-5">
-        <SectionHeading id="types-title" eyebrow="Qué construimos" title="Un sitio para cada objetivo comercial" description="Cada proyecto se diseña desde el objetivo: vender, agendar, captar contactos o dar de alta alumnos." align="left" />
-      </div>
-      <ul class="grid gap-4 sm:grid-cols-2 lg:col-span-7" role="list">
-        {types.map(({ title, text }) => (
-          <li class="reveal card-surface p-6">
-            <h3 class="text-lg font-semibold text-text">{title}</h3>
-            <p class="mt-1.5 text-muted">{text}</p>
+  <!-- 07 · Garantías y alcance -->
+  <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="guarantees-title">
+    <div class="container-x">
+      <SectionHeading id="guarantees-title" eyebrow="07 · Lo que protege a los dos" title="Garantías por escrito y un alcance claro" description="No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes revisar, y el alcance queda definido antes de empezar." />
+      <ul class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
+        {guarantees.map(({ title, text }) => (
+          <li class="reveal card p-6 sm:p-7">
+            <span class="inline-flex size-9 items-center justify-center rounded-xl bg-lime text-ink" aria-hidden="true">
+              <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z" /><path d="m9 12 2 2 4-4" /></svg>
+            </span>
+            <h3 class="mt-5 text-lg font-semibold text-text">{title}</h3>
+            <p class="mt-2 leading-relaxed text-muted">{text}</p>
           </li>
         ))}
       </ul>
+      <div class="reveal mt-6 card p-6 sm:p-8">
+        <h3 class="text-lg font-semibold text-text">Qué cubre el precio (y qué no)</h3>
+        <ol class="mt-5 grid gap-5 sm:grid-cols-2" role="list">
+          {scope.map(({ title, text }, i) => (
+            <li class="flex gap-4">
+              <span class="text-sm font-semibold text-lime-deep">0{i + 1}</span>
+              <p class="text-muted"><strong class="font-semibold text-text">{title}: </strong>{text}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-5 text-sm italic text-faint">Esta cláusula protege a los dos: tú sabes exactamente qué compras, y el proyecto no crece sin control.</p>
+      </div>
     </div>
   </section>
 
   <Portfolio />
   <Results />
   <Testimonials />
-  <Faq items={faqs} title="Preguntas frecuentes sobre diseño web" />
-  <FinalCta />
+  <Faq items={faqs} title="Preguntas que seguro tienes" />
+
+  <!-- 08 · Siguiente paso -->
+  <section class="ink-glow py-24 text-white sm:py-32" aria-labelledby="next-title">
+    <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-7">
+        <p class="text-xl font-medium leading-snug text-white/70 sm:text-2xl">“Una página web es solo una herramienta. Con estrategia detrás, se convierte en la máquina que llena tu calendario.”</p>
+        <p class="mt-10 text-sm font-medium text-white/50">Siguiente paso</p>
+        <h2 id="next-title" class="mt-3 text-4xl font-semibold leading-[1.08] sm:text-5xl">¿Listo para arrancar?</h2>
+        <ol class="mt-8 space-y-4" role="list">
+          {nextSteps.map((s, i) => (
+            <li class="flex items-center gap-4">
+              <span class="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-white/20 text-sm font-semibold">{i + 1}</span>
+              <span class="text-lg text-white/85">{s}</span>
+            </li>
+          ))}
+        </ol>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <Button href={site.bookingUrl} variant="inverse" size="lg" icon={false}>Agendar la revisión de 30 minutos</Button>
+          <Button href="/portafolio/" variant="ghost" size="lg" class="text-white/70 hover:text-white">Ver portafolio</Button>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="card-ink p-6 sm:p-8">
+          <p class="font-semibold">Resumen de un proyecto</p>
+          <dl class="mt-4 divide-y divide-white/[0.07] text-sm">
+            {[['Sitio completo a la medida', '✓'], ['Textos escritos para tu cliente', '✓'], ['Sistema de agendado', '✓'], ['Páginas por ciudad o zona', '✓'], ['Trabajo para aparecer en Google', '✓'], ['Regalos incluidos', '5'], ['Primer resultado', '10 días'], ['Entrega completa', '45 días'], ['Pagos', '3, contra entregas']].map(([k, v]) => (
+              <div class="flex items-center justify-between gap-4 py-2.5"><dt class="text-white/60">{k}</dt><dd class="font-medium">{v}</dd></div>
+            ))}
+          </dl>
+          <p class="mt-4 text-xs text-white/40">Capacidad limitada: tomamos pocos proyectos nuevos al mes para cumplir las fechas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </Base>

@@ -1,0 +1,33 @@
+---
+/** Sistema de agendado: calendario con horario elegido y aviso al equipo. */
+---
+<div class="absolute inset-0">
+  <div class="g-panel absolute left-[9%] top-[13%] w-[54%] rounded-[3cqw] p-[3.4cqw]">
+    <div class="flex items-center justify-between text-[max(0.6rem,2.8cqw)] font-semibold text-white">
+      <span>Elige día y hora</span>
+      <span class="text-white/40">Oct</span>
+    </div>
+    <div class="mt-[2.6cqw] grid grid-cols-7 gap-[1.2cqw]" aria-hidden="true">
+      {Array.from({ length: 21 }).map((_, i) => (
+        <span class:list={['aspect-square rounded-[1cqw] text-center text-[max(0.5rem,2.2cqw)] leading-[2.2] text-white/55', i === 10 ? '!bg-lime !text-ink font-semibold' : 'bg-white/[0.06]']}>{i + 6}</span>
+      ))}
+    </div>
+    <div class="mt-[2.6cqw] flex gap-[1.4cqw]">
+      {['9:00', '11:30', '16:00'].map((h, i) => (
+        <span class:list={['rounded-[1.4cqw] px-[2.2cqw] py-[1.1cqw] text-[max(0.52rem,2.3cqw)] font-medium', i === 1 ? 'bg-white text-ink' : 'bg-white/[0.08] text-white/70']}>{h}</span>
+      ))}
+    </div>
+  </div>
+  <div class="g-panel absolute right-[7%] top-[40%] w-[42%] rounded-[3cqw] p-[3cqw] rotate-[3deg] transition-transform duration-700 ease-(--ease-out-expo) group-hover:rotate-[1deg] group-hover:-translate-y-[3%]">
+    <div class="flex items-center gap-[1.8cqw]">
+      <span class="grid size-[5.6cqw] place-items-center rounded-full bg-lime text-ink">
+        <svg class="size-[3cqw]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7" /></svg>
+      </span>
+      <span class="text-[max(0.58rem,2.6cqw)] font-semibold text-white">Nueva cita</span>
+    </div>
+    <p class="mt-[2cqw] text-[max(0.52rem,2.3cqw)] leading-snug text-white/60">Jueves 16 · 11:30<br />Aviso al equipo por WhatsApp y correo</p>
+  </div>
+  <span class="g-tile absolute left-[6%] bottom-[10%] -rotate-[8deg] [--tilt:-8deg]" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>
+  </span>
+</div>

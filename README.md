@@ -67,6 +67,7 @@ Se conserva la estructura de WordPress (`/diseno-web/`, `/generacion-de-leads/`,
 
 - [ ] Confirmar `contactEmail` en `src/data/site.ts` (se usa en el aviso de privacidad)
 - [ ] Revisar textos nuevos de Nosotros, FAQ y sectores (leads)
+- [ ] Diseño web: decidir si se publica un precio “desde” (hoy la página habla de pagos ligados a entregas y remite a la propuesta)
 - [x] Analytics / Meta Pixel: `src/components/layout/Analytics.astro`, activado con `PUBLIC_GA_ID` y `PUBLIC_META_PIXEL` (ver `.env.example`)
 - [ ] Deploy (Vercel, Netlify o Cloudflare Pages: `npm run build` → carpeta `dist/`)
 - [x] Redirecciones 301 para `/lp-attractleads/` → `/generacion-de-leads/` y `/elementor-1495/` → `/` (en `astro.config.mjs`)
