@@ -1,0 +1,41 @@
+---
+/**
+ * Vista previa de un proyecto según su tipo:
+ *  · mockup  → la imagen tal cual (fotos de laptop de proyectos anteriores)
+ *  · desktop → captura real dentro de un marco de navegador
+ *  · mobile  → captura de celular dentro de un marco de teléfono, centrada sobre fondo suave
+ * Siempre ocupa 4:3 para que las rejillas no salten.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props { src: ImageMetadata; alt: string; preview: 'mockup' | 'desktop' | 'mobile'; eager?: boolean; sizes?: string; class?: string }
+const { src, alt, preview, eager = false, sizes = '100vw', class: className = '' } = Astro.props;
+const loading = eager ? 'eager' : 'lazy';
+---
+
+{preview === 'mockup' && (
+  <Image {src} {alt} widths={[400, 640, 800, 1280]} {sizes} format="webp" quality={82} {loading} decoding="async" class:list={['aspect-[4/3] w-full object-cover transition-transform duration-700 ease-(--ease-out-expo) group-hover:scale-[1.03]', className]} />
+)}
+
+{preview === 'desktop' && (
+  <div class:list={['relative aspect-[4/3] w-full overflow-hidden bg-[#1a1a1a] p-[3%] pb-0', className]}>
+    <div class="flex h-full flex-col overflow-hidden rounded-t-[8px] bg-[#0d0d0d] ring-1 ring-white/10">
+      <div class="flex shrink-0 items-center gap-[4px] px-[8px] py-[6px]" aria-hidden="true">
+        <i class="size-[6px] rounded-full bg-white/25"></i><i class="size-[6px] rounded-full bg-white/25"></i><i class="size-[6px] rounded-full bg-white/25"></i>
+        <span class="ml-[8px] h-[8px] flex-1 rounded-full bg-white/[0.07]"></span>
+      </div>
+      <Image {src} {alt} widths={[400, 640, 800, 1280]} {sizes} format="webp" quality={82} {loading} decoding="async" class="h-full w-full flex-1 object-cover object-top transition-transform duration-700 ease-(--ease-out-expo) group-hover:scale-[1.02]" />
+    </div>
+  </div>
+)}
+
+{preview === 'mobile' && (
+  <div class:list={['relative flex aspect-[4/3] w-full items-end justify-center overflow-hidden bg-[radial-gradient(80%_70%_at_50%_100%,#2a2a2a,#111_70%)] pt-[6%]', className]}>
+    <div class="h-full w-[38%] overflow-hidden rounded-t-[14%/8%] bg-[#0d0d0d] p-[1.6%] pb-0 ring-1 ring-white/15 shadow-[0_30px_60px_-30px_rgb(0_0_0/0.9)] transition-transform duration-700 ease-(--ease-out-expo) group-hover:-translate-y-1">
+      <div class="h-full w-full overflow-hidden rounded-t-[12%/6%] bg-white">
+        <Image {src} {alt} widths={[320, 480, 640]} sizes="(min-width: 640px) 160px, 40vw" format="webp" quality={82} {loading} decoding="async" class="w-full object-cover object-top" />
+      </div>
+    </div>
+  </div>
+)}

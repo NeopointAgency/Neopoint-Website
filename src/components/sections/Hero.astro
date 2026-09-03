@@ -5,7 +5,7 @@ import { site } from '../../data/site';
 import { heroStats } from '../../data/home';
 import { getProjects, projectHref } from '../../lib/portfolio';
 
-const projects = (await getProjects()).filter((p) => p.data.cover);
+const projects = (await getProjects()).filter((p) => p.data.cover && p.data.preview !== 'mobile');
 // Dos carriles: proyectos alternados; cada carril se duplica para el bucle infinito.
 const lanes = [projects.filter((_, i) => i % 2 === 0), projects.filter((_, i) => i % 2 === 1)];
 ---

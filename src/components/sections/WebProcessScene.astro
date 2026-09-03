@@ -11,14 +11,14 @@ import { Image } from 'astro:assets';
 import { getProjects } from '../../lib/portfolio';
 
 const projects = await getProjects();
-const main = projects.find((p) => p.id === 'studio-luto') ?? projects[0];
+const main = projects.find((p) => p.id === 'azapro-roofing') ?? projects[0];
 
-const keywords = ['cerámica artesanal', 'envíos a todo México', 'pedidos personalizados'];
+const keywords = ['techos en Seattle', 'inspección gratis', 'garantía por escrito'];
 const voices = [
-  { initial: 'M', text: '¿Puedo comprar en línea?' },
-  { initial: 'R', text: 'Quiero ver el catálogo' },
+  { initial: 'J', text: '¿Sí van a terminar?' },
+  { initial: 'K', text: '¿Están certificados?' },
 ];
-const headline = 'Cerámica artesanal, directo a tu mesa';
+const headline = 'Tu techo, protegido bien. Una vez.';
 const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseñamos a la medida', 'Publicamos y medimos tus leads'];
 ---
 
@@ -32,11 +32,11 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
 
   <!-- 01 · Negocio -->
   <div class="biz">
-    <span class="biz__avatar">SL</span>
-    <span class="biz__name">Studio Luto</span>
+    <span class="biz__avatar">AZ</span>
+    <span class="biz__name">AZAPRO Roofing</span>
     <span class="biz__line" style="width:82%"></span>
     <span class="biz__line" style="width:58%"></span>
-    <span class="biz__tag">Guadalajara, Jal.</span>
+    <span class="biz__tag">Seattle, WA</span>
   </div>
   <span class="tile tile--search">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5" /><path d="m20 20-4-4" /></svg>

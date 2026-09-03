@@ -10,6 +10,8 @@ const portfolio = defineCollection({
       sector: z.string(),
       order: z.number(),
       featured: z.boolean().default(false),
+      /** mockup = foto de laptop (proyectos anteriores); desktop = captura real con marco de navegador; mobile = captura de celular con marco de teléfono */
+      preview: z.enum(['mockup', 'desktop', 'mobile']).default('mockup'),
       url: z.string().url().optional(),
       cover: image().optional(),
       gallery: z.array(image()).default([]),
