@@ -5,6 +5,10 @@ import Button from '../../components/ui/Button.astro';
 import Faq from '../../components/ui/Faq.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import ProjectCard from '../../components/ui/ProjectCard.astro';
+import GraphicCard from '../../components/ui/GraphicCard.astro';
+import AdGraphic from '../../components/graphics/AdGraphic.astro';
+import FunnelGraphic from '../../components/graphics/FunnelGraphic.astro';
+import ChatGraphic from '../../components/graphics/ChatGraphic.astro';
 import ClientsMarquee from '../../components/sections/ClientsMarquee.astro';
 import Results from '../../components/sections/Results.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
@@ -20,9 +24,9 @@ const description =
   'Agencia de adquisición de clientes potenciales. Campañas en Meta y Google con embudos que filtran y califican prospectos, y seguimiento que impulsa los cierres. Sector inmobiliario, solar y tech.';
 
 const steps = [
-  { lead: 'Hacemos lo que funciona, iniciando con', title: 'Enfoque narrativo comercial', text: 'Diseñamos la ruta que seguirán tus clientes para llegar al contacto de manera clara y efectiva.', icon: icons.compass },
-  { lead: 'Después captamos clientes potenciales evitando preguntones', title: 'Modelo Attractleads', text: 'Sistema automatizado que filtra, califica y convierte prospectos en citas sin esfuerzo.', icon: icons.funnel },
-  { lead: 'Pero sabemos que los leads no son nada si no hay ventas…', title: 'Push to convert', text: 'Flujos de conversación y seguimiento que impulsan tus cierres con asesoría y estructura efectiva.', icon: icons.handshake },
+  { lead: 'Hacemos lo que funciona, iniciando con', title: 'Enfoque narrativo comercial', text: 'Diseñamos la ruta que seguirán tus clientes para llegar al contacto de manera clara y efectiva.', graphic: AdGraphic },
+  { lead: 'Después captamos clientes potenciales evitando preguntones', title: 'Modelo Attractleads', text: 'Sistema automatizado que filtra, califica y convierte prospectos en citas sin esfuerzo.', graphic: FunnelGraphic },
+  { lead: 'Pero sabemos que los leads no son nada si no hay ventas…', title: 'Push to convert', text: 'Flujos de conversación y seguimiento que impulsan tus cierres con asesoría y estructura efectiva.', graphic: ChatGraphic },
 ];
 
 const sectors = [
@@ -68,22 +72,14 @@ const jsonLd = [
 
   <ClientsMarquee />
 
-  <section id="metodo" class="bg-ink py-20 text-white sm:py-28" aria-labelledby="method-title">
+  <section id="metodo" class="ink-glow py-20 text-white sm:py-28" aria-labelledby="method-title">
     <div class="container-x">
       <SectionHeading id="method-title" eyebrow="Método" title="Tres pasos entre el anuncio y la venta" tone="dark" />
-      <ol class="mt-14 grid gap-5 lg:grid-cols-3" role="list">
-        {steps.map(({ lead, title, text, icon }, i) => (
-          <li class="reveal flex flex-col rounded-card border border-ink-line bg-ink-soft p-7 sm:p-8">
-            <p class="text-sm font-medium text-white/50">{lead}</p>
-            <div class="mt-6 flex items-center gap-3">
-              <span class="inline-flex size-10 items-center justify-center rounded-xl border border-ink-line text-white">
-                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icon} />
-              </span>
-              <span class="text-sm font-medium text-white/50">0{i + 1}</span>
-            </div>
-            <h3 class="mt-4 text-2xl font-semibold">{title}</h3>
-            <p class="mt-2 leading-relaxed text-white/60">{text}</p>
-          </li>
+      <ol class="mt-14 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3" role="list">
+        {steps.map(({ lead, title, text, graphic: Graphic }, i) => (
+          <GraphicCard {title} description={text} eyebrow={`0${i + 1} · ${lead}`} tone="dark">
+            <Graphic />
+          </GraphicCard>
         ))}
       </ol>
     </div>

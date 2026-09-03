@@ -1,0 +1,41 @@
+---
+/** Diseño a la medida: mock de editor con titular seleccionado y una pieza de portafolio. */
+import { Image } from 'astro:assets';
+import cover from '../../assets/portfolio/gaby-tierra-joyeria/1.webp';
+---
+<div class="absolute inset-0">
+  <svg class="absolute -left-[10%] -top-[10%] h-[80%] w-[70%] text-white" viewBox="0 0 300 200" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+    <path d="M-20 160C60 120 90 40 180 10" opacity="0.08" /><path d="M-20 190C80 150 110 60 220 20" opacity="0.06" /><path d="M-10 220C100 180 130 80 250 30" opacity="0.04" />
+  </svg>
+
+  <div class="absolute left-[16%] top-[14%] w-[62%]">
+    <div class="g-panel rounded-[2cqw] px-[3cqw] py-[1.8cqw] text-[max(0.6rem,2.8cqw)] font-medium text-white/80">Logo</div>
+    <div class="g-panel mt-[2cqw] rounded-[2.6cqw] p-[4cqw]">
+      <div class="relative inline-block">
+        <span class="text-[6cqw] font-semibold leading-none tracking-tight text-white">Tu titular aquí</span>
+        <span class="absolute -inset-x-[1.5cqw] -inset-y-[1.2cqw] rounded-[0.6cqw] border border-lime" aria-hidden="true">
+          <i class="absolute -left-[0.9cqw] -top-[0.9cqw] size-[1.8cqw] bg-lime"></i>
+          <i class="absolute -right-[0.9cqw] -top-[0.9cqw] size-[1.8cqw] bg-lime"></i>
+          <i class="absolute -bottom-[0.9cqw] -left-[0.9cqw] size-[1.8cqw] bg-lime"></i>
+          <i class="absolute -bottom-[0.9cqw] -right-[0.9cqw] size-[1.8cqw] bg-lime"></i>
+        </span>
+      </div>
+      <p class="mt-[3cqw] text-[max(0.6rem,2.8cqw)] text-white/55">Tu contenido, con un objetivo por sección…</p>
+    </div>
+  </div>
+
+  <svg class="absolute left-[50%] top-[41%] w-[6cqw] drop-shadow-[0_6px_10px_rgb(0_0_0/0.6)] transition-transform duration-700 ease-(--ease-out-expo) group-hover:-translate-x-[8%] group-hover:-translate-y-[10%]" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M5 3l14 9-6 1.5L16 20l-3 1.5-3-6.5-5 4z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" />
+  </svg>
+
+  <Image
+    src={cover}
+    alt=""
+    width={480}
+    format="webp"
+    quality={78}
+    loading="lazy"
+    decoding="async"
+    class="absolute right-[6%] bottom-[8%] aspect-[4/3] w-[38%] rotate-[-5deg] rounded-[2.4cqw] object-cover shadow-[0_24px_40px_-18px_rgb(0_0_0/0.9)] ring-1 ring-white/10 transition-transform duration-700 ease-(--ease-out-expo) group-hover:rotate-[-2deg] group-hover:-translate-y-[3%]"
+  />
+</div>

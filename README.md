@@ -26,7 +26,9 @@ src/
     layout/    Header, Footer
     sections/  Hero, ClientsMarquee, Services, Portfolio, Results, Testimonials,
                FinalCta, Showcase (portafolio con monitor fijo), ProjectDetail
-    ui/        Button, Monitor, ProjectCard, PageHero, SectionHeading, FeatureGrid, Faq, Logo
+    ui/        Button, Monitor, ProjectCard, PageHero, SectionHeading, FeatureGrid, Faq, Logo,
+               GraphicCard (tarjeta ilustrada con degradado)
+    graphics/  ilustraciones CSS/SVG para GraphicCard: Sitemap, Seo, Editor, Code, Ad, Funnel, Chat
   content/portfolio/*.md   un archivo por proyecto (colección de contenido)
   content.config.ts        esquema de la colección
   data/
@@ -54,7 +56,7 @@ public/
 
 ## Diseño
 
-Estilo minimalista inspirado en moritzpetersen.com: botones de radio 14px sin sombras, tarjetas con borde fino y radio 20px, tipografía Rethink Sans en pesos medium/semibold, acento lima solo en detalles. La página de portafolio usa `theme="dark"` y el componente `Showcase`: la lista resalta el proyecto activo al hacer scroll o hover y el monitor cambia de pantalla. El hero del home es oscuro, con dos carriles de tarjetas de proyectos en desplazamiento horizontal infinito (se pausan al pasar el cursor; trazo animado y sombra en hover) bajo un degradado que deja visible el lado derecho.
+Estilo minimalista inspirado en moritzpetersen.com: botones de radio 14px sin sombras, tarjetas con borde fino y radio 20px, tipografía Rethink Sans en pesos medium/semibold, acento lima solo en detalles. La página de portafolio usa `theme="dark"` y el componente `Showcase`: la lista resalta el proyecto activo al hacer scroll o hover y el monitor cambia de pantalla. Las tarjetas de servicios (home), pilares (diseño web) y método (leads) son tarjetas ilustradas (`GraphicCard` + `src/components/graphics/`): área visual con degradado oscuro, baldosas flotantes y gráficos en CSS/SVG escalados con unidades `cqw`. Las secciones oscuras usan la utilidad `ink-glow` (halos que se desplazan lentamente, estilo portafolio) y las tarjetas sobre fondo oscuro `card-ink`. El hero del home es oscuro, con dos carriles de tarjetas de proyectos en desplazamiento horizontal infinito (se pausan al pasar el cursor; trazo animado y sombra en hover) bajo un degradado que deja visible el lado derecho.
 
 ## URLs
 

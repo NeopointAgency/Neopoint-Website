@@ -1,0 +1,25 @@
+---
+/** Modelo Attractleads: embudo que filtra y califica hasta la cita. */
+const rows = [
+  { label: 'Clics del anuncio', w: 'w-[82%]' },
+  { label: 'Leads', w: 'w-[66%]' },
+  { label: 'Calificados', w: 'w-[50%]' },
+];
+---
+<div class="absolute inset-0 flex flex-col items-center justify-center gap-[2.4cqw]">
+  {rows.map(({ label, w }, i) => (
+    <span class:list={['g-pill justify-between', w]} style={`opacity:${1 - i * 0.12}`}>
+      <span>{label}</span>
+      <span class="flex gap-[1cqw]" aria-hidden="true">
+        {Array.from({ length: 4 - i }).map(() => <i class="size-[1.9cqw] rounded-full bg-white/45"></i>)}
+      </span>
+    </span>
+  ))}
+  <span class="g-pill w-[36%] bg-none !bg-lime !text-ink" style="background: linear-gradient(180deg,#a9f56a,#8fe83c)">
+    <svg class="size-[3.6cqw]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>
+    Citas
+  </span>
+  <span class="g-tile absolute right-[7%] bottom-[10%] rotate-[8deg] [--tilt:8deg]" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4Z" /></svg>
+  </span>
+</div>

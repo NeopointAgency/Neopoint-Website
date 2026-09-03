@@ -1,0 +1,27 @@
+---
+/**
+ * Tarjeta ilustrada: área visual oscura con degradado (estilo "Cards a la medida")
+ * y título/descripción debajo. El gráfico se pasa por slot y usa unidades cqw
+ * para escalar con el ancho de la tarjeta.
+ */
+interface Props {
+  title: string;
+  description?: string;
+  /** Texto pequeño entre el gráfico y el título (p. ej. número de paso) */
+  eyebrow?: string;
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+const { title, description, eyebrow, tone = 'light', class: className = '' } = Astro.props;
+const dark = tone === 'dark';
+---
+
+<li class:list={['reveal group', className]}>
+  <div class="gcard">
+    <slot />
+    <span class="gcard__sheen" aria-hidden="true"></span>
+  </div>
+  {eyebrow && <p class:list={['mt-5 text-sm font-medium', dark ? 'text-white/50' : 'text-muted']}>{eyebrow}</p>}
+  <h3 class:list={[eyebrow ? 'mt-1.5' : 'mt-5', 'text-lg font-semibold sm:text-xl', dark ? 'text-white' : 'text-text']}>{title}</h3>
+  {description && <p class:list={['mt-1.5 leading-relaxed', dark ? 'text-white/60' : 'text-muted']}>{description}</p>}
+</li>

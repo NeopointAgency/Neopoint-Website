@@ -2,14 +2,17 @@
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import Button from '../../components/ui/Button.astro';
-import FeatureGrid from '../../components/ui/FeatureGrid.astro';
+import GraphicCard from '../../components/ui/GraphicCard.astro';
+import SitemapGraphic from '../../components/graphics/SitemapGraphic.astro';
+import SeoGraphic from '../../components/graphics/SeoGraphic.astro';
+import EditorGraphic from '../../components/graphics/EditorGraphic.astro';
+import CodeGraphic from '../../components/graphics/CodeGraphic.astro';
 import Faq from '../../components/ui/Faq.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import Portfolio from '../../components/sections/Portfolio.astro';
 import Results from '../../components/sections/Results.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import FinalCta from '../../components/sections/FinalCta.astro';
-import { icons } from '../../lib/icons';
 import { site } from '../../data/site';
 
 const title = 'Diseño Web en México | Sitios web que venden | Neopoint';
@@ -17,10 +20,10 @@ const description =
   'Diseño y desarrollo de sitios web, landing pages y e-commerce enfocados en captar clientes potenciales. Estructura estratégica, SEO desde el inicio, diseño a la medida y desarrollo de alta eficiencia.';
 
 const pillars = [
-  { icon: icons.map, title: 'Estructura y navegación estratégica', description: 'Diseñamos la ruta que seguirán tus clientes para llegar al contacto de manera clara y efectiva.' },
-  { icon: icons.search, title: 'Estrategia de posicionamiento', description: 'Desde el inicio tu sitio estará optimizado para aparecer en las búsquedas y captar clientes potenciales.' },
-  { icon: icons.brush, title: 'Diseño a la medida', description: 'La autenticidad y claridad de tu marca se traducen en un diseño único que impulsa tus oportunidades comerciales.' },
-  { icon: icons.bolt, title: 'Desarrollo de alta eficiencia', description: 'Creamos sitios con las mejores herramientas y prácticas para asegurar velocidad, seguridad y escalabilidad.' },
+  { graphic: SitemapGraphic, title: 'Estrategia estructural y narrativa', description: 'Diseñamos la ruta que seguirán tus clientes para llegar al contacto de manera clara y efectiva.' },
+  { graphic: SeoGraphic, title: 'Estrategia de posicionamiento orgánico', description: 'Desde el inicio tu sitio estará optimizado para aparecer en las búsquedas y captar clientes potenciales.' },
+  { graphic: EditorGraphic, title: 'Diseño a la medida', description: 'La autenticidad y claridad de tu marca se traducen en un diseño único que impulsa tus oportunidades comerciales.' },
+  { graphic: CodeGraphic, title: 'Desarrollo y despliegue', description: 'Construimos con las mejores herramientas y prácticas para asegurar velocidad, seguridad y escalabilidad.' },
 ];
 
 const process = [
@@ -75,16 +78,20 @@ const jsonLd = [
   <section class="py-20 sm:py-28" aria-labelledby="pillars-title">
     <div class="container-x">
       <SectionHeading id="pillars-title" eyebrow="Cómo lo hacemos" title="Cuatro pilares de un sitio que convierte" />
-      <div class="mt-12"><FeatureGrid items={pillars} cols={4} /></div>
+      <ul class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2" role="list">
+        {pillars.map(({ graphic: Graphic, title, description }) => (
+          <GraphicCard {title} {description}><Graphic /></GraphicCard>
+        ))}
+      </ul>
     </div>
   </section>
 
-  <section class="bg-ink py-20 text-white sm:py-28" aria-labelledby="process-title">
+  <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="process-title">
     <div class="container-x">
       <SectionHeading id="process-title" eyebrow="Proceso" title="De la idea al sitio publicado, sin sorpresas" tone="dark" />
       <ol class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4" role="list">
         {process.map(({ n, title, text }) => (
-          <li class="reveal rounded-card border border-ink-line bg-ink-soft p-7">
+          <li class="reveal card-ink p-7">
             <span class="text-sm font-medium text-white/50">{n}</span>
             <h3 class="mt-3 text-xl font-semibold">{title}</h3>
             <p class="mt-2 leading-relaxed text-white/60">{text}</p>

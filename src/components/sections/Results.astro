@@ -3,7 +3,7 @@ import SectionHeading from '../ui/SectionHeading.astro';
 import { resultStats } from '../../data/home';
 ---
 
-<section class="bg-ink py-20 text-white sm:py-28" aria-labelledby="results-title">
+<section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="results-title">
   <div class="container-x">
     <SectionHeading id="results-title"
       eyebrow="Resultados"
@@ -13,7 +13,7 @@ import { resultStats } from '../../data/home';
     />
     <dl class="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
       {resultStats.map(({ value, label }) => (
-        <div class="reveal rounded-card border border-ink-line bg-ink-soft p-6 sm:p-8">
+        <div class="reveal card-ink p-6 sm:p-8">
           <dd class="text-3xl font-semibold tracking-tight sm:text-[2.75rem]">{value}</dd>
           <dt class="mt-2 text-sm text-white/55 sm:text-base">{label}</dt>
         </div>
