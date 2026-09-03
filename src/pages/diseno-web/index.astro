@@ -7,7 +7,7 @@ import SitemapGraphic from '../../components/graphics/SitemapGraphic.astro';
 import SeoGraphic from '../../components/graphics/SeoGraphic.astro';
 import EditorGraphic from '../../components/graphics/EditorGraphic.astro';
 import BookingGraphic from '../../components/graphics/BookingGraphic.astro';
-import BridgeGraphic from '../../components/graphics/BridgeGraphic.astro';
+import BridgeScene from '../../components/graphics/BridgeScene.astro';
 import DashboardGraphic from '../../components/graphics/DashboardGraphic.astro';
 import MistakeScene from '../../components/graphics/MistakeScene.astro';
 import Faq from '../../components/ui/Faq.astro';
@@ -146,24 +146,26 @@ const jsonLd = [
 ---
 
 <Base {title} {description} {jsonLd}>
-  <!-- Hero -->
-  <section class="bg-paper">
-    <div class="container-x grid items-center gap-x-10 gap-y-10 pt-14 pb-12 sm:pt-24 sm:pb-16 lg:grid-cols-12">
+  <!-- Hero: pantalla completa, contenido centrado -->
+  <section class="relative flex min-h-svh flex-col justify-center bg-paper !pt-16">
+    <div class="container-x grid items-center gap-x-12 gap-y-10 py-10 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <p class="mb-4 text-sm font-medium text-muted">Diseño web estratégico</p>
-        <h1 class="text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.25rem]">Un sitio que convierte visitas en clientes agendados</h1>
-        <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">No es una página nueva por tener una página nueva. Es un puente entre lo que busca tu cliente y tu oferta: responde sus dudas, carga rápido y lleva a una sola acción.</p>
-        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-muted">
+          <span class="size-1.5 rounded-full bg-lime-deep" aria-hidden="true"></span>Diseño web estratégico
+        </p>
+        <h1 class="text-4xl font-semibold leading-[1.06] tracking-[-0.025em] sm:text-5xl lg:text-[3.15rem] xl:text-[3.5rem]">Un sitio que convierte visitas en clientes agendados</h1>
+        <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">No es una página nueva por tener una página nueva. Es un puente entre lo que busca tu cliente y tu oferta: responde sus dudas, carga rápido y lleva a una sola acción.</p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href={site.bookingUrl} size="lg" icon={false}>Agendar diagnóstico</Button>
           <Button href="#puente" variant="secondary" size="lg">Ver cómo funciona</Button>
         </div>
-        <p class="mt-4 text-sm text-faint">Sesión de 30 minutos, sin costo. Te decimos con claridad si tiene sentido trabajar juntos.</p>
+        <p class="mt-4 text-sm text-faint">30 minutos, sin costo. Te decimos con claridad si tiene sentido trabajar juntos.</p>
       </div>
       <div class="lg:col-span-7">
         <WebProcessScene />
-        <dl class="reveal mt-4 grid grid-cols-3 gap-3">
+        <dl class="mt-4 grid grid-cols-3 gap-3">
           {promises.map(({ value, label }) => (
-            <div class="card-surface px-4 py-3.5">
+            <div class="rounded-card border border-line bg-paper px-4 py-3.5">
               <dd class="text-xl font-semibold tracking-tight text-text sm:text-2xl">{value}</dd>
               <dt class="mt-0.5 text-xs leading-snug text-muted sm:text-sm">{label}</dt>
             </div>
@@ -171,9 +173,13 @@ const jsonLd = [
         </dl>
       </div>
     </div>
+    <a href="#clientes" class="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-xs font-medium text-faint transition-colors hover:text-text lg:inline-flex" aria-label="Bajar al contenido">
+      Desliza
+      <svg class="size-3.5 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg>
+    </a>
   </section>
 
-  <ClientsMarquee />
+  <div id="clientes"><ClientsMarquee /></div>
 
   <!-- 01 · El problema -->
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="problem-title">
@@ -194,7 +200,7 @@ const jsonLd = [
     <div class="container-x">
       <SectionHeading id="bridge-title" eyebrow="La solución" title="Un puente sólido: no importa por dónde entre, el sitio lo lleva por un solo camino" description="Un solo destino para todo el sitio: que el visitante confíe y dé el paso. Cada página, cada texto y cada botón trabajan para eso." />
 
-      <div class="reveal mt-14"><BridgeGraphic /></div>
+      <div class="reveal mt-14"><BridgeScene /></div>
     </div>
   </section>
 
