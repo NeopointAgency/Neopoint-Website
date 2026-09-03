@@ -1,11 +1,11 @@
 ---
 /**
- * Escena animada del hero de Diseño Web (CSS puro, 16 s en bucle):
- * 01 el cursor investiga el negocio → palabras clave
- * 02 voz del cliente → brief
- * 03 se arma el mockup y el titular se escribe con la palabra clave
- * 04 el mockup se convierte en un proyecto real
- * 05 se une al resto de proyectos del portafolio
+ * Escena animada del hero de Diseño Web (CSS puro, 16 s en bucle, con capas encimadas):
+ * 01 el cursor investiga el negocio → palabras clave que pisan la ficha
+ * 02 voz del cliente (burbujas encimadas) → brief
+ * 03 se arma el mockup, el titular se escribe y cae la foto real inclinada encima
+ * 04 la foto cubre el mockup: es el proyecto publicado
+ * 05 se abanica con otros proyectos del portafolio
  */
 import { Image } from 'astro:assets';
 import { getProjects } from '../../lib/portfolio';
@@ -15,16 +15,20 @@ const main = projects.find((p) => p.id === 'studio-luto') ?? projects[0];
 const others = projects.filter((p) => p.id !== main.id && p.data.featured && p.data.cover).slice(0, 2);
 
 const keywords = ['cerámica artesanal', 'envíos a todo México', 'pedidos personalizados'];
-const voices = ['“¿Puedo comprar en línea?”', '“Quiero ver el catálogo”'];
+const voices = [
+  { initial: 'M', text: '¿Puedo comprar en línea?' },
+  { initial: 'R', text: 'Quiero ver el catálogo' },
+];
 const headline = 'Cerámica artesanal, directo a tu mesa';
 const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseñamos a la medida', 'Publicamos y suma a tu portafolio'];
 ---
 
 <div class="scene" data-scene aria-hidden="true">
 <div class="stage">
-  <!-- Etiquetas de fase -->
+  <div class="backdrop"></div>
+
   {labels.map((l, i) => (
-    <p class="label" style={`--i:${i}`}><span class="label__n">0{i + 1}</span>{l}</p>
+    <p class="label"><span class="label__n">0{i + 1}</span>{l}</p>
   ))}
 
   <!-- 01 · Negocio -->
@@ -35,45 +39,59 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
     <span class="biz__line" style="width:58%"></span>
     <span class="biz__tag">Guadalajara, Jal.</span>
   </div>
+  <span class="tile tile--search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5" /><path d="m20 20-4-4" /></svg>
+  </span>
   {keywords.map((k, i) => (
     <span class:list={['kw', `kw--${i + 1}`]}>{k}</span>
   ))}
 
   <!-- 02 · Voz del cliente -->
   {voices.map((v, i) => (
-    <span class:list={['voice', `voice--${i + 1}`]}>{v}</span>
+    <span class:list={['voice', `voice--${i + 1}`]}>
+      <i class="voice__avatar">{v.initial}</i>“{v.text}”
+    </span>
   ))}
   <span class="brief">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7" /></svg>
     Brief listo
   </span>
 
-  <!-- 03 · Mockup → 04 · Proyecto real → 05 · Tarjeta -->
+  <!-- 03 · Mockup -->
   <div class="wire">
-    <div class="wire__skel">
-      <div class="wire__bar">
-        <span class="wire__logo"></span>
-        <span class="wire__nav"></span><span class="wire__nav"></span><span class="wire__nav"></span>
-      </div>
-      <div class="wire__hero">
-        <span class="wire__h wire__h--1"></span>
-        <span class="wire__h wire__h--2"></span>
-        <p class="wire__headline"><span>{headline}</span></p>
-        <span class="wire__btn"></span>
-      </div>
-      <div class="wire__img"></div>
-      <div class="wire__cards"><span></span><span></span><span></span></div>
+    <div class="wire__bar">
+      <span class="wire__logo"></span>
+      <span class="wire__nav"></span><span class="wire__nav"></span><span class="wire__nav"></span>
     </div>
-    {main.data.cover && (
-      <Image src={main.data.cover} alt="" width={720} format="webp" quality={80} loading="eager" decoding="async" class="wire__shot" />
-    )}
+    <div class="wire__hero">
+      <span class="wire__h wire__h--1"></span>
+      <span class="wire__h wire__h--2"></span>
+      <p class="wire__headline"><span>{headline}</span></p>
+      <span class="wire__btn"></span>
+    </div>
+    <div class="wire__img"></div>
+    <div class="wire__cards"><span></span><span></span><span></span></div>
   </div>
+  <span class="tile tile--brush">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3l7 7-9 9H5v-7l9-9Z" /><path d="M12 5l7 7" /></svg>
+  </span>
 
+  <!-- 05 · Otros proyectos (detrás de la foto) -->
   {others.map((p, i) => (
     <div class="row" style={`--i:${i}`}>
-      {p.data.cover && <Image src={p.data.cover} alt="" width={480} format="webp" quality={76} loading="lazy" decoding="async" />}
+      {p.data.cover && <Image src={p.data.cover} alt="" width={560} format="webp" quality={76} loading="lazy" decoding="async" />}
     </div>
   ))}
+
+  <!-- 04 · Foto real: cae inclinada sobre el mockup, lo cubre y luego se abanica -->
+  <div class="photo">
+    {main.data.cover && (
+      <Image src={main.data.cover} alt="" width={800} format="webp" quality={80} loading="eager" decoding="async" />
+    )}
+  </div>
+  <span class="tile tile--check">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7" /></svg>
+  </span>
 
   <!-- Cursor de Mac -->
   <svg class="cursor" viewBox="0 0 24 24" aria-hidden="true">
@@ -103,10 +121,10 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
     width: 100%;
     background: var(--color-paper);
   }
+  .scene.is-playing { --play: running; }
   /* Las unidades cqw se resuelven contra .scene, por eso el contenido va en un hijo */
   .stage { position: absolute; inset: 0; font-size: max(0.62rem, 2.6cqw); }
-  .scene.is-playing { --play: running; }
-  .stage > *, .scene .wire__skel > *, .scene .wire__hero > *, .scene .wire__cards > span, .scene .wire__shot {
+  .stage > *, .wire > *, .wire__hero > * {
     animation-duration: var(--dur);
     animation-iteration-count: infinite;
     animation-fill-mode: both;
@@ -115,12 +133,17 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
   }
   @media (prefers-reduced-motion: reduce) {
     /* Sin movimiento: se muestra el cuadro final (segundo 14.6) */
-    .scene *, .scene { animation-play-state: paused !important; animation-delay: -14.6s !important; animation-duration: var(--dur) !important; }
+    .scene * { animation-play-state: paused !important; animation-delay: -14.6s !important; animation-duration: var(--dur) !important; }
   }
 
-  /* ---------- Piezas ---------- */
+  /* ---------- Capas (z): fondo 0 · ficha/mockup 3 · fila 3-4 · píldoras 5 · burbujas 6 · foto/baldosas 7-8 · cursor 20 ---------- */
+  .backdrop {
+    position: absolute; left: 4%; top: 15%; right: 4%; bottom: 6%; z-index: 0;
+    border-radius: 6cqw;
+    background: var(--color-paper-soft);
+  }
   .label {
-    position: absolute; left: 5%; top: 5%;
+    position: absolute; left: 5%; top: 4.5%; z-index: 2;
     display: inline-flex; align-items: center; gap: 0.6em;
     font-size: max(0.7rem, 2.9cqw); font-weight: 500; color: var(--color-muted);
     opacity: 0;
@@ -128,11 +151,11 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
   .label__n { font-size: 0.85em; color: var(--color-faint); }
 
   .biz {
-    position: absolute; left: 6%; top: 30%; width: 40%;
+    position: absolute; left: 7%; top: 30%; width: 40%; z-index: 3;
     display: grid; grid-template-columns: auto 1fr; column-gap: 2.6cqw; row-gap: 1.6cqw; align-items: center;
     padding: 3.6cqw; border-radius: 4cqw;
     background: var(--color-paper);
-    box-shadow: 0 0 0 1px var(--color-line), 0 24px 48px -28px rgb(0 0 0 / 0.25);
+    box-shadow: 0 0 0 1px var(--color-line), 0 30px 50px -28px rgb(0 0 0 / 0.3);
     animation-name: biz;
   }
   .biz__avatar { grid-row: span 3; display: grid; place-items: center; width: 8cqw; height: 8cqw; border-radius: 50%; background: #111; color: #fff; font-size: 0.85em; font-weight: 600; }
@@ -140,44 +163,65 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
   .biz__line { display: block; height: 1.4cqw; border-radius: 999px; background: var(--color-surface-hover); }
   .biz__tag { grid-column: 2; min-width: 0; font-size: 0.78em; color: var(--color-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+  /* Baldosas flotantes (mismo acabado que las tarjetas ilustradas) */
+  .tile {
+    position: absolute; z-index: 8;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 11cqw; height: 11cqw; border-radius: 2.8cqw; color: #161616;
+    background: linear-gradient(160deg, #ffffff 0%, #e6e6e6 60%, #d0d0d0 100%);
+    box-shadow: 0 18px 30px -14px rgb(0 0 0 / 0.45), inset 0 1px 0 #fff, 0 0 0 1px rgb(0 0 0 / 0.06);
+  }
+  .tile svg { width: 52%; height: 52%; }
+  .tile--search { left: 2%; top: 22%; --tilt: -8deg; animation-name: tileSearch; }
+  .tile--brush { left: 80%; top: 8%; --tilt: 9deg; animation-name: tileBrush; }
+  .tile--check { left: 84%; top: 29%; --tilt: 6deg; color: #0a0a0a; background: linear-gradient(160deg, #d6ff9e, #97ef49); animation-name: tileCheck; }
+
   .kw, .voice, .brief {
     position: absolute; display: inline-flex; align-items: center; gap: 0.5em; white-space: nowrap;
     padding: 1.8cqw 3.2cqw; border-radius: 2.4cqw; font-weight: 500; line-height: 1.2;
   }
   .kw {
-    color: #ececec;
+    z-index: 5; color: #ececec;
     background: linear-gradient(180deg, #3b3b3b, #262626);
-    box-shadow: 0 10px 22px -10px rgb(0 0 0 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.14);
+    box-shadow: 0 14px 26px -12px rgb(0 0 0 / 0.75), inset 0 1px 0 rgb(255 255 255 / 0.14);
     transform-origin: center;
   }
-  .kw--1 { left: 50%; top: 22%; animation-name: kw1; }
-  .kw--2 { left: 56%; top: 39%; animation-name: kw2; }
-  .kw--3 { left: 52%; top: 56%; animation-name: kw3; }
+  .kw--1 { left: 36%; top: 23%; animation-name: kw1; }
+  .kw--2 { left: 42%; top: 41%; animation-name: kw2; }
+  .kw--3 { left: 33%; top: 59%; animation-name: kw3; }
+
   .voice {
-    color: var(--color-text); background: var(--color-surface);
-    box-shadow: 0 0 0 1px var(--color-line);
+    z-index: 6; padding-left: 5.4cqw;
+    color: var(--color-text); background: var(--color-paper);
+    box-shadow: 0 0 0 1px var(--color-line), 0 18px 30px -18px rgb(0 0 0 / 0.35);
     border-bottom-left-radius: 0.6cqw;
   }
-  .voice--1 { left: 58%; top: 60%; animation-name: voice1; }
-  .voice--2 { left: 62%; top: 74%; animation-name: voice2; }
+  .voice__avatar {
+    position: absolute; left: -2.4cqw; top: -2.2cqw;
+    display: grid; place-items: center; width: 6.2cqw; height: 6.2cqw; border-radius: 50%;
+    background: #111; color: #fff; font-style: normal; font-size: 0.72em; font-weight: 600;
+    box-shadow: 0 0 0 2px var(--color-paper);
+  }
+  .voice--1 { left: 46%; top: 59%; animation-name: voice1; }
+  .voice--2 { left: 60%; top: 71%; z-index: 7; animation-name: voice2; }
   .brief {
-    left: 50%; top: 86%; translate: -50% 0;
+    left: 50%; top: 84%; z-index: 7; translate: -50% 0;
     color: #0a0a0a; background: var(--color-lime);
-    box-shadow: 0 14px 28px -14px rgb(151 239 73 / 0.7);
+    box-shadow: 0 16px 30px -14px rgb(151 239 73 / 0.8);
     animation-name: brief;
   }
   .brief svg { width: 1.1em; height: 1.1em; }
 
   /* Mockup */
   .wire {
-    position: absolute; left: 14%; top: 14%; width: 72%; aspect-ratio: 4 / 3;
+    position: absolute; left: 14%; top: 14%; width: 72%; aspect-ratio: 4 / 3; z-index: 3;
+    display: flex; flex-direction: column; gap: 3cqw; padding: 4cqw;
     border-radius: 4cqw; overflow: hidden;
     background: var(--color-paper);
-    box-shadow: 0 0 0 1px var(--color-line), 0 30px 60px -30px rgb(0 0 0 / 0.3);
-    transform-origin: 0 0;
+    box-shadow: 0 0 0 1px var(--color-line), 0 34px 60px -30px rgb(0 0 0 / 0.35);
+    will-change: transform, opacity;
     animation-name: wire;
   }
-  .wire__skel { position: absolute; inset: 0; padding: 4cqw; display: flex; flex-direction: column; gap: 3cqw; }
   .wire__bar { display: flex; align-items: center; gap: 2cqw; }
   .wire__logo { width: 9cqw; height: 2.4cqw; border-radius: 999px; background: #111; }
   .wire__nav { width: 5cqw; height: 1.6cqw; border-radius: 999px; background: var(--color-surface-hover); }
@@ -195,25 +239,37 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
   .wire__img { flex: 1; border-radius: 2.4cqw; background: linear-gradient(135deg, var(--color-surface), var(--color-surface-hover)); }
   .wire__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2cqw; }
   .wire__cards span { height: 9cqw; border-radius: 2cqw; background: var(--color-surface); box-shadow: inset 0 0 0 1px var(--color-line); }
-  .wire__shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation-name: shot; }
 
-  /* Esqueleto: aparece por partes */
   .wire__bar, .wire__hero, .wire__img, .wire__cards { animation-name: skel; }
   .wire__hero { animation-delay: 0.25s; } .wire__img { animation-delay: 0.5s; } .wire__cards { animation-delay: 0.75s; }
   .wire__h { animation-name: hbar; }
   .wire__headline { animation-name: headline; }
   .wire__headline span { animation: type var(--dur) steps(30) infinite both; animation-play-state: var(--play); }
 
-  /* Fila final de proyectos */
+  /* Foto real: misma caja que el mockup; se mueve con transform */
+  .photo {
+    position: absolute; left: 14%; top: 14%; width: 72%; aspect-ratio: 4 / 3; z-index: 7;
+    border-radius: 4cqw; overflow: hidden;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08), 0 40px 70px -30px rgb(0 0 0 / 0.5);
+    transform-origin: 0 0;
+    will-change: transform; /* evita que Chrome deje de pintar la imagen al terminar la transformación */
+    animation-name: photo;
+  }
+  .photo img, .row img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Abanico final: dos proyectos detrás, escalonados */
   .row {
-    position: absolute; top: 36%; width: 27%; aspect-ratio: 4 / 3;
-    left: calc(36.5% + var(--i) * 30.5%);
-    border-radius: 3cqw; overflow: hidden;
-    box-shadow: 0 0 0 1px var(--color-line);
+    position: absolute; top: 24%; width: 40%; aspect-ratio: 4 / 3;
+    left: calc(8% + var(--i) * 19%);
+    z-index: calc(3 + var(--i));
+    border-radius: 3.6cqw; overflow: hidden;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08), 0 30px 50px -28px rgb(0 0 0 / 0.45);
+    --rot: calc(-5deg + var(--i) * 3deg);
+    --dy: calc(var(--i) * 4.5cqw);
+    will-change: transform;
     animation-name: row;
     animation-delay: calc(var(--i) * 0.18s);
   }
-  .row img { width: 100%; height: 100%; object-fit: cover; }
 
   .cursor {
     position: absolute; left: 105%; top: 95%; width: 6cqw; z-index: 20;
@@ -229,22 +285,21 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
     9.4%     { left: 24%; top: 44%; transform: scale(1); }
     10.5%    { transform: scale(0.8); }
     11.5%, 22% { left: 24%; top: 44%; transform: scale(1); }
-    26%      { left: 68%; top: 65%; }
-    34.4%    { left: 54%; top: 88%; transform: scale(1); }
+    26%      { left: 60%; top: 64%; }
+    34.4%    { left: 54%; top: 86%; transform: scale(1); }
     36%      { transform: scale(0.8); }
-    37%, 44% { left: 54%; top: 88%; transform: scale(1); }
-    50%      { left: 12%; top: 10%; }
+    37%, 44% { left: 54%; top: 86%; transform: scale(1); }
+    50%      { left: 12%; top: 90%; }
     56.25%   { left: 30%; top: 40%; transform: scale(1); }
     57.5%    { transform: scale(0.8); }
     58.5%, 72% { left: 30%; top: 40%; transform: scale(1); }
     78%      { left: 82%; top: 80%; opacity: 1; }
     85%, 100% { left: 105%; top: 95%; opacity: 0; }
   }
-  /* Una animación por etiqueta de fase */
-  .label:nth-child(1) { animation-name: label1; }
-  .label:nth-child(2) { animation-name: label2; }
-  .label:nth-child(3) { animation-name: label3; }
-  .label:nth-child(4) { animation-name: label4; }
+  .label:nth-of-type(1) { animation-name: label1; }
+  .label:nth-of-type(2) { animation-name: label2; }
+  .label:nth-of-type(3) { animation-name: label3; }
+  .label:nth-of-type(4) { animation-name: label4; }
   @keyframes label1 { 0%,3%{opacity:0;transform:translateY(6px)} 6%,20%{opacity:1;transform:none} 22.5%,100%{opacity:0;transform:translateY(-6px)} }
   @keyframes label2 { 0%,22.5%{opacity:0;transform:translateY(6px)} 25%,39%{opacity:1;transform:none} 41.5%,100%{opacity:0;transform:translateY(-6px)} }
   @keyframes label3 { 0%,42%{opacity:0;transform:translateY(6px)} 45%,78%{opacity:1;transform:none} 80.5%,100%{opacity:0;transform:translateY(-6px)} }
@@ -255,33 +310,48 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
     3%, 40.6% { opacity: 1; transform: none; }
     43.75%, 100% { opacity: 0; transform: translateY(-8px) scale(0.98); }
   }
+  @keyframes tileSearch {
+    0%, 4.5% { opacity: 0; transform: rotate(var(--tilt)) scale(0.5) translateY(10px); }
+    7%, 40.6% { opacity: 1; transform: rotate(var(--tilt)) scale(1); }
+    43.75%, 100% { opacity: 0; transform: rotate(var(--tilt)) scale(0.7); }
+  }
+  @keyframes tileBrush {
+    0%, 46% { opacity: 0; transform: rotate(var(--tilt)) scale(0.5) translateY(10px); }
+    49%, 79% { opacity: 1; transform: rotate(var(--tilt)) scale(1); }
+    82%, 100% { opacity: 0; transform: rotate(var(--tilt)) scale(0.7); }
+  }
+  @keyframes tileCheck {
+    0%, 88% { opacity: 0; transform: rotate(var(--tilt)) scale(0.5) translateY(10px); }
+    91%, 96.25% { opacity: 1; transform: rotate(var(--tilt)) scale(1); }
+    100% { opacity: 0; transform: rotate(var(--tilt)) scale(0.8); }
+  }
   @keyframes kw1 {
-    0%, 11.25% { opacity: 0; transform: scale(0.6); left: 50%; top: 22%; }
-    13%, 40.6% { opacity: 1; transform: scale(1); left: 50%; top: 22%; }
-    43.75%, 50% { opacity: 1; transform: scale(1); left: 4%; top: 6%; }
+    0%, 11.25% { opacity: 0; transform: scale(0.6); left: 36%; top: 23%; }
+    13%, 40.6% { opacity: 1; transform: scale(1); left: 36%; top: 23%; }
+    43.75%, 50% { opacity: 1; transform: scale(1); left: 4%; top: 86%; }
     56.25%, 57.5% { opacity: 1; transform: scale(1); left: 22%; top: 35%; }
     59.5%, 100% { opacity: 0; transform: scale(0.7); left: 22%; top: 35%; }
   }
   @keyframes kw2 {
-    0%, 13.1% { opacity: 0; transform: scale(0.6); left: 56%; top: 39%; }
-    15%, 34.4% { opacity: 1; transform: scale(1); left: 56%; top: 39%; }
-    37.5%, 100% { opacity: 0; transform: scale(0.3); left: 48%; top: 86%; }
+    0%, 13.1% { opacity: 0; transform: scale(0.6); left: 42%; top: 41%; }
+    15%, 34.4% { opacity: 1; transform: scale(1); left: 42%; top: 41%; }
+    37.5%, 100% { opacity: 0; transform: scale(0.3); left: 48%; top: 84%; }
   }
   @keyframes kw3 {
-    0%, 15% { opacity: 0; transform: scale(0.6); left: 52%; top: 56%; }
-    17%, 35% { opacity: 1; transform: scale(1); left: 52%; top: 56%; }
-    38.5%, 100% { opacity: 0; transform: scale(0.3); left: 46%; top: 86%; }
+    0%, 15% { opacity: 0; transform: scale(0.6); left: 33%; top: 59%; }
+    17%, 35% { opacity: 1; transform: scale(1); left: 33%; top: 59%; }
+    38.5%, 100% { opacity: 0; transform: scale(0.3); left: 46%; top: 84%; }
   }
   @keyframes voice1 {
-    0%, 23.75% { opacity: 0; transform: scale(0.7); left: 58%; top: 60%; }
-    26.25% { opacity: 1; transform: scale(1); left: 58%; top: 60%; }
-    34.4% { opacity: 1; transform: scale(0.9); left: 46%; top: 84%; }
-    35.5%, 100% { opacity: 0; transform: scale(0.3); left: 46%; top: 86%; }
+    0%, 23.75% { opacity: 0; transform: scale(0.7); left: 46%; top: 59%; }
+    26.25% { opacity: 1; transform: scale(1); left: 46%; top: 59%; }
+    34.4% { opacity: 1; transform: scale(0.9); left: 46%; top: 82%; }
+    35.5%, 100% { opacity: 0; transform: scale(0.3); left: 46%; top: 84%; }
   }
   @keyframes voice2 {
-    0%, 26.25% { opacity: 0; transform: scale(0.7); left: 62%; top: 74%; }
-    28.75%, 35% { opacity: 1; transform: scale(1); left: 62%; top: 74%; }
-    38.5%, 100% { opacity: 0; transform: scale(0.3); left: 50%; top: 86%; }
+    0%, 26.25% { opacity: 0; transform: scale(0.7); left: 60%; top: 71%; }
+    28.75%, 35% { opacity: 1; transform: scale(1); left: 60%; top: 71%; }
+    38.5%, 100% { opacity: 0; transform: scale(0.3); left: 50%; top: 84%; }
   }
   @keyframes brief {
     0%, 36% { opacity: 0; transform: scale(0.7); }
@@ -291,33 +361,30 @@ const labels = ['Investigamos el negocio', 'Escuchamos a tus clientes', 'Diseña
   }
   @keyframes wire {
     0%, 42% { opacity: 0; transform: translateY(12px) scale(0.97); }
-    46%, 81.25% { opacity: 1; transform: none; }
-    90%, 96.25% { opacity: 1; transform: translate(-8cqw, 16.5cqw) scale(0.375); }
-    100% { opacity: 0; transform: translate(-8cqw, 16.5cqw) scale(0.375); }
+    46%, 74% { opacity: 1; transform: none; }
+    78%, 100% { opacity: 0; transform: none; }
   }
   @keyframes skel {
     0%, 44% { opacity: 0; transform: translateY(6px); }
     48%, 100% { opacity: 1; transform: none; }
   }
-  @keyframes hbar {
-    0%, 56% { opacity: 1; }
-    59%, 100% { opacity: 0; }
-  }
-  @keyframes headline {
-    0%, 57.5% { opacity: 0; }
-    58%, 100% { opacity: 1; }
-  }
+  @keyframes hbar { 0%, 56% { opacity: 1; } 59%, 100% { opacity: 0; } }
+  @keyframes headline { 0%, 57.5% { opacity: 0; } 58%, 100% { opacity: 1; } }
   @keyframes type {
     0%, 57.5% { clip-path: inset(0 100% 0 0); }
     65.6%, 100% { clip-path: inset(0 0 0 0); }
   }
-  @keyframes shot {
-    0%, 65.6% { opacity: 0; }
-    71.9%, 100% { opacity: 1; }
+  /* Foto: entra inclinada sobre la esquina del mockup → lo cubre → se abanica al frente */
+  @keyframes photo {
+    0%, 59.5% { opacity: 0; transform: translate(46cqw, 30cqw) scale(0.47) rotate(-6deg); }
+    62.5%, 66% { opacity: 1; transform: translate(44cqw, 24cqw) scale(0.47) rotate(-6deg); }
+    72%, 81.25% { opacity: 1; transform: translate(0, 0) scale(1) rotate(0deg); }
+    90%, 96.25% { opacity: 1; transform: translate(36cqw, 16.5cqw) scale(0.556) rotate(3deg); }
+    100% { opacity: 0; transform: translate(36cqw, 16.5cqw) scale(0.556) rotate(3deg); }
   }
   @keyframes row {
-    0%, 84% { opacity: 0; transform: translateX(40cqw); }
-    90%, 96.25% { opacity: 1; transform: none; }
-    100% { opacity: 0; transform: none; }
+    0%, 84% { opacity: 0; transform: translate(-30cqw, var(--dy)) rotate(var(--rot)); }
+    90%, 96.25% { opacity: 1; transform: translate(0, var(--dy)) rotate(var(--rot)); }
+    100% { opacity: 0; transform: translate(0, var(--dy)) rotate(var(--rot)); }
   }
 </style>
