@@ -1,0 +1,143 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Button from '../ui/Button.astro';
+import ProjectCard from '../ui/ProjectCard.astro';
+import { projectHref, type Project } from '../../lib/portfolio';
+import { site } from '../../data/site';
+
+interface Props { project: Project; prev?: Project; next?: Project; related: Project[] }
+const { project, prev, next, related } = Astro.props;
+const { title, sector, url, cover, gallery, results, category } = project.data;
+const { Content } = await render(project);
+---
+
+<article>
+  <!-- Cabecera compacta: migas, título y acciones en una fila; la portada entra en pantalla -->
+  <section class="bg-paper">
+    <div class="container-x pt-6 pb-8 sm:pt-8 sm:pb-10">
+      <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+        <p class="text-sm font-medium text-muted">{sector}</p>
+        <nav aria-label="Migas de pan" class="text-sm text-faint">
+          <ol class="flex flex-wrap items-center gap-2">
+            <li><a href="/" class="transition-colors hover:text-muted">Inicio</a></li>
+            <li aria-hidden="true" class="opacity-50">/</li>
+            <li><a href="/portafolio/" class="transition-colors hover:text-muted">Portafolio</a></li>
+            <li aria-hidden="true" class="opacity-50">/</li>
+            <li aria-current="page">{title}</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="mt-3 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <h1 class="text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text-5xl">{title}</h1>
+        <div class="flex flex-wrap gap-2.5 sm:shrink-0">
+          {url && <Button href={url} variant="secondary">Visitar sitio</Button>}
+          <Button href={site.bookingUrl} icon={false}>Quiero algo así</Button>
+        </div>
+      </div>
+
+      {cover && (
+        <Image
+          src={cover}
+          alt={`Vista principal del proyecto ${title}`}
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 1280px) 1152px, 100vw"
+          format="webp"
+          quality={85}
+          loading="eager"
+          fetchpriority="high"
+          class="mt-8 h-[min(52vh,26rem)] w-full rounded-card border border-line object-cover sm:h-[min(62vh,40rem)]"
+        />
+      )}
+    </div>
+  </section>
+
+  <!-- Descripción + resultados -->
+  <section class="container-x py-14 sm:py-20">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <h2 class="text-sm font-medium text-muted">El proyecto</h2>
+        <div class="prose-np mt-4 text-lg leading-relaxed text-text sm:text-xl">
+          <Content />
+        </div>
+      </div>
+      <aside class="lg:col-span-5">
+        {results.length > 0 ? (
+          <div class="rounded-card bg-ink p-7 text-white sm:p-9">
+            <h2 class="text-sm font-medium text-white/50">Resultados que impactan las ventas</h2>
+            <dl class="mt-6 grid grid-cols-2 gap-6">
+              {results.map((r) => (
+                <div>
+                  <dd class="text-3xl font-semibold tracking-tight sm:text-4xl">{r.value}</dd>
+                  <dt class="mt-1 text-sm text-white/65">{r.label}</dt>
+                </div>
+              ))}
+            </dl>
+            {results.filter((r) => r.note).map((r) => (
+              <p class="mt-6 border-t border-ink-line pt-4 text-xs leading-relaxed text-white/55">*{r.note}</p>
+            ))}
+          </div>
+        ) : (
+          <div class="card-surface p-7 sm:p-9">
+            <h2 class="text-sm font-medium text-muted">Ficha</h2>
+            <dl class="mt-5 divide-y divide-line text-[0.95rem]">
+              <div class="flex justify-between gap-4 py-3"><dt class="text-muted">Tipo</dt><dd class="font-medium text-text">{category === 'funnel' ? 'Funnel de captación' : 'Sitio web'}</dd></div>
+              <div class="flex justify-between gap-4 py-3"><dt class="text-muted">Sector</dt><dd class="text-right font-medium text-text">{sector}</dd></div>
+              <div class="flex justify-between gap-4 py-3"><dt class="text-muted">Agencia</dt><dd class="font-medium text-text">Neopoint</dd></div>
+              {url && (
+                <div class="flex justify-between gap-4 py-3"><dt class="text-muted">Sitio</dt><dd class="truncate font-medium text-text"><a href={url} target="_blank" rel="noopener" class="hover:text-muted">{url.replace(/^https?:\/\//, '').replace(/\/$/, '')}</a></dd></div>
+              )}
+            </dl>
+          </div>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  {gallery.length > 0 && (
+    <section class="container-x pb-14 sm:pb-20" aria-label="Galería del proyecto">
+      <ul class="grid gap-6 sm:grid-cols-2" role="list">
+        {gallery.map((img, i) => (
+          <li class="reveal">
+            <Image
+              src={img}
+              alt={`${title}, vista ${i + 2}`}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 640px) 50vw, 100vw"
+              format="webp"
+              quality={82}
+              loading="lazy"
+              decoding="async"
+              class="aspect-[4/3] w-full rounded-card border border-line object-cover"
+            />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="bg-ink py-20 text-white sm:py-24">
+    <div class="container-x flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <h2 class="max-w-md text-2xl font-medium leading-snug sm:text-3xl">Sé parte de nuestro portafolio con tu caso de éxito.</h2>
+      <Button href={site.bookingUrl} variant="inverse" size="lg" icon={false}>¡Iniciemos!</Button>
+    </div>
+  </section>
+
+  <!-- Relacionados + navegación -->
+  <section class="container-x py-16 sm:py-20">
+    <div class="flex items-end justify-between gap-6">
+      <h2 class="text-2xl font-semibold">Más proyectos</h2>
+      <a href="/portafolio/" class="text-sm font-medium text-muted hover:text-text">Ver todos</a>
+    </div>
+    <ul class="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" role="list">
+      {related.map((p) => <li><ProjectCard project={p} /></li>)}
+    </ul>
+    <nav class="mt-12 flex items-center justify-between gap-4 border-t border-line pt-6 text-sm" aria-label="Proyecto anterior y siguiente">
+      {prev ? <a href={projectHref(prev)} class="group inline-flex items-center gap-2 font-medium text-muted hover:text-text"><span aria-hidden="true" class="transition group-hover:-translate-x-0.5">←</span> {prev.data.title}</a> : <span />}
+      {next ? <a href={projectHref(next)} class="group inline-flex items-center gap-2 font-medium text-muted hover:text-text">{next.data.title} <span aria-hidden="true" class="transition group-hover:translate-x-0.5">→</span></a> : <span />}
+    </nav>
+  </section>
+</article>

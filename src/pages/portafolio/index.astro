@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import Showcase from '../../components/sections/Showcase.astro';
+import Button from '../../components/ui/Button.astro';
+import { getProjects, projectHref } from '../../lib/portfolio';
+import { site } from '../../data/site';
+
+const projects = await getProjects();
+const title = 'Portafolio de sitios web y funnels | Neopoint';
+const description = `Explora ${projects.length} proyectos de diseño web, e-commerce, plataformas y funnels de captación de leads desarrollados por Neopoint para negocios en México, LATAM y USA.`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Portafolio Neopoint',
+    url: `${site.url}/portafolio/`,
+    description,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: projects.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.data.title, url: `${site.url}${projectHref(p)}` })),
+    },
+  },
+];
+---
+
+<Base {title} {description} {jsonLd} theme="dark">
+  <section>
+    <div class="container-x pt-14 pb-6 sm:pt-20 lg:pb-2">
+      <div class="max-w-xl">
+        <h1 class="text-xl font-semibold text-text">Portafolio</h1>
+        <p class="mt-2 text-xl leading-snug text-muted sm:text-2xl">Sitios web, tiendas en línea, plataformas y funnels que generan resultados.</p>
+      </div>
+    </div>
+  </section>
+
+  <Showcase {projects} />
+
+  <section class="border-t border-line py-20">
+    <div class="container-x flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <p class="max-w-md text-2xl font-medium leading-snug text-text">Sé parte de nuestro portafolio con tu caso de éxito.</p>
+      <Button href={site.bookingUrl} variant="inverse" size="lg" icon={false}>¡Iniciemos!</Button>
+    </div>
+  </section>
+</Base>

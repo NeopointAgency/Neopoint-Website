@@ -1,0 +1,28 @@
+---
+/** Cabecera de página interior. */
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  tone?: 'light' | 'dark';
+  align?: 'center' | 'left';
+  class?: string;
+}
+const { eyebrow, title, description, tone = 'light', align = 'left', class: className = '' } = Astro.props;
+const dark = tone === 'dark';
+---
+
+<section class:list={[dark ? 'bg-ink text-white' : 'bg-paper', className]}>
+  <div class:list={['container-x pt-14 pb-12 sm:pt-24 sm:pb-16', align === 'center' ? 'text-center' : '']}>
+    <div class:list={['max-w-3xl', align === 'center' ? 'mx-auto' : '']}>
+      {eyebrow && <p class:list={['mb-4 text-sm font-medium', dark ? 'text-white/50' : 'text-muted']}>{eyebrow}</p>}
+      <h1 class="text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.5rem]">
+        <slot name="title">{title}</slot>
+      </h1>
+      {description && (
+        <p class:list={['mt-6 max-w-2xl text-lg leading-relaxed sm:text-xl', align === 'center' ? 'mx-auto' : '', dark ? 'text-white/60' : 'text-muted']}>{description}</p>
+      )}
+      <slot />
+    </div>
+  </div>
+</section>

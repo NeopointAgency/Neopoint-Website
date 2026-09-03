@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Button from '../../components/ui/Button.astro';
+import FeatureGrid from '../../components/ui/FeatureGrid.astro';
+import Faq from '../../components/ui/Faq.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import Portfolio from '../../components/sections/Portfolio.astro';
+import Results from '../../components/sections/Results.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { icons } from '../../lib/icons';
+import { site } from '../../data/site';
+
+const title = 'Diseño Web en México | Sitios web que venden | Neopoint';
+const description =
+  'Diseño y desarrollo de sitios web, landing pages y e-commerce enfocados en captar clientes potenciales. Estructura estratégica, SEO desde el inicio, diseño a la medida y desarrollo de alta eficiencia.';
+
+const pillars = [
+  { icon: icons.map, title: 'Estructura y navegación estratégica', description: 'Diseñamos la ruta que seguirán tus clientes para llegar al contacto de manera clara y efectiva.' },
+  { icon: icons.search, title: 'Estrategia de posicionamiento', description: 'Desde el inicio tu sitio estará optimizado para aparecer en las búsquedas y captar clientes potenciales.' },
+  { icon: icons.brush, title: 'Diseño a la medida', description: 'La autenticidad y claridad de tu marca se traducen en un diseño único que impulsa tus oportunidades comerciales.' },
+  { icon: icons.bolt, title: 'Desarrollo de alta eficiencia', description: 'Creamos sitios con las mejores herramientas y prácticas para asegurar velocidad, seguridad y escalabilidad.' },
+];
+
+const process = [
+  { n: '01', title: 'Diagnóstico y estrategia', text: 'Entendemos tu negocio, a quién le vendes y qué necesita ver esa persona para contactarte. De ahí sale la estructura del sitio.' },
+  { n: '02', title: 'Diseño a la medida', text: 'Diseñamos cada pantalla con tu identidad y con un objetivo claro por sección. Revisas y ajustamos antes de programar.' },
+  { n: '03', title: 'Desarrollo y SEO técnico', text: 'Construimos el sitio con tecnología rápida y segura, optimizado para buscadores y para cualquier dispositivo.' },
+  { n: '04', title: 'Lanzamiento y medición', text: 'Publicamos, conectamos analítica y te entregamos un sitio listo para recibir tráfico y convertirlo en clientes.' },
+];
+
+const types = [
+  { title: 'Sitios corporativos', text: 'Presencia digital clara y profesional para empresas y despachos.' },
+  { title: 'Landing pages', text: 'Páginas enfocadas en una sola acción: captar el contacto.' },
+  { title: 'E-commerce', text: 'Tiendas en línea fáciles de administrar y de comprar.' },
+  { title: 'Plataformas y agendas', text: 'Cursos, reservas con pago en línea y sistemas a la medida.' },
+];
+
+const faqs = [
+  { q: '¿Cuánto tarda el desarrollo de un sitio web?', a: 'Depende del alcance. Una landing page puede estar lista en pocas semanas; un sitio corporativo o un e-commerce toma más tiempo por el número de secciones, contenido e integraciones. En la asesoría inicial te damos un calendario realista.' },
+  { q: '¿El sitio incluye SEO?', a: 'Sí. Todo sitio se entrega con la base técnica de SEO: estructura de encabezados, metadatos, velocidad, versión móvil, sitemap y datos estructurados. El posicionamiento continuo se trabaja como servicio aparte.' },
+  { q: '¿Puedo actualizar el contenido yo mismo?', a: 'Sí. Definimos contigo qué partes necesitas editar con frecuencia y las dejamos administrables. También podemos encargarnos del mantenimiento.' },
+  { q: '¿Incluye hosting y dominio?', a: 'Te asesoramos en la compra del dominio y configuramos el hosting más adecuado para tu proyecto. Ambos quedan a tu nombre.' },
+  { q: '¿Trabajan con clientes fuera de México?', a: 'Sí. Tenemos clientes en México, LATAM y Estados Unidos. Todo el proceso se lleva de forma remota con reuniones por videollamada.' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Diseño Web',
+    serviceType: 'Diseño y desarrollo de sitios web',
+    provider: { '@id': `${site.url}/#organization` },
+    areaServed: ['MX', 'US', 'Latin America'],
+    url: `${site.url}/diseno-web/`,
+    description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  },
+];
+---
+
+<Base {title} {description} {jsonLd}>
+  <PageHero eyebrow="Diseño web" title="No hacemos páginas web, hacemos sitios web que venden" description="Nos enfocamos en que tu sitio web sea un medio de captación de clientes potenciales.">
+    <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+      <Button href={site.bookingUrl} size="lg" icon={false}>Agendar tu asesoría</Button>
+      <Button href="/portafolio/" variant="secondary" size="lg">Ver portafolio</Button>
+    </div>
+  </PageHero>
+
+  <section class="py-20 sm:py-28" aria-labelledby="pillars-title">
+    <div class="container-x">
+      <SectionHeading id="pillars-title" eyebrow="Cómo lo hacemos" title="Cuatro pilares de un sitio que convierte" />
+      <div class="mt-12"><FeatureGrid items={pillars} cols={4} /></div>
+    </div>
+  </section>
+
+  <section class="bg-ink py-20 text-white sm:py-28" aria-labelledby="process-title">
+    <div class="container-x">
+      <SectionHeading id="process-title" eyebrow="Proceso" title="De la idea al sitio publicado, sin sorpresas" tone="dark" />
+      <ol class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4" role="list">
+        {process.map(({ n, title, text }) => (
+          <li class="reveal rounded-card border border-ink-line bg-ink-soft p-7">
+            <span class="text-sm font-medium text-white/50">{n}</span>
+            <h3 class="mt-3 text-xl font-semibold">{title}</h3>
+            <p class="mt-2 leading-relaxed text-white/60">{text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="types-title">
+    <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-start">
+      <div class="lg:col-span-5">
+        <SectionHeading id="types-title" eyebrow="Qué construimos" title="Un sitio para cada objetivo comercial" description="Cada proyecto se diseña desde el objetivo: vender, agendar, captar contactos o dar de alta alumnos." align="left" />
+      </div>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:col-span-7" role="list">
+        {types.map(({ title, text }) => (
+          <li class="reveal card-surface p-6">
+            <h3 class="text-lg font-semibold text-text">{title}</h3>
+            <p class="mt-1.5 text-muted">{text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Portfolio />
+  <Results />
+  <Testimonials />
+  <Faq items={faqs} title="Preguntas frecuentes sobre diseño web" />
+  <FinalCta />
+</Base>

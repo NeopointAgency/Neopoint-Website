@@ -1,0 +1,18 @@
+---
+import Button from '../ui/Button.astro';
+import { site } from '../../data/site';
+---
+
+<section class="bg-ink py-24 text-white sm:py-32" aria-labelledby="cta-title">
+  <div class="container-x">
+    <div class="max-w-3xl">
+      <p class="text-sm font-medium text-white/50">Eso fue todo…</p>
+      <h2 id="cta-title" class="mt-4 text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-6xl">¿Iniciamos a impactar tus resultados?</h2>
+      <p class="mt-6 max-w-xl text-lg text-white/60">Agenda una asesoría sin costo. Revisamos tu situación actual y te decimos, con claridad, por dónde empezar.</p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <Button href={site.bookingUrl} variant="inverse" size="lg" icon={false}>¡Iniciemos!</Button>
+        <Button href="/portafolio/" variant="ghost" size="lg" class="text-white/70 hover:text-white">Ver portafolio</Button>
+      </div>
+    </div>
+  </div>
+</section>

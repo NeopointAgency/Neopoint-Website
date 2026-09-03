@@ -1,0 +1,67 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import { testimonials } from '../../data/home';
+
+// Tres columnas con reparto alternado; cada columna se duplica para el bucle infinito.
+const columns = [0, 1, 2].map((c) => testimonials.filter((_, i) => i % 3 === c));
+const directions = ['up', 'down', 'up'] as const;
+const durations = ['46s', '54s', '50s'];
+---
+
+<section class="py-20 sm:py-28" aria-labelledby="testimonials-title">
+  <div class="container-x">
+    <SectionHeading id="testimonials-title"
+      eyebrow="Testimonios"
+      title="El resultado está en la opinión de los clientes"
+      description="Lo que dicen las personas y negocios con los que hemos trabajado."
+    />
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {columns.map((items, c) => (
+        <div
+          class:list={['t-col relative h-[34rem] overflow-hidden', c === 1 && 'hidden sm:block', c === 2 && 'hidden lg:block']}
+          data-direction={directions[c]}
+          style={`--dur: ${durations[c]}`}
+        >
+          <ul class="t-track flex flex-col gap-4" role="list">
+            {[0, 1].map((copy) =>
+              items.map(({ quote, author }) => (
+                <li aria-hidden={copy === 1 ? 'true' : undefined}>
+                  <figure class="card-surface p-6">
+                    <blockquote class="text-[1.02rem] leading-relaxed text-text"><p>{quote}</p></blockquote>
+                    <figcaption class="mt-4 flex items-center gap-2.5 text-sm text-muted">
+                      <span class="inline-flex size-7 items-center justify-center rounded-full border border-line bg-paper text-xs font-medium text-text" aria-hidden="true">{author.trim().charAt(0).toUpperCase()}</span>
+                      {author}
+                    </figcaption>
+                  </figure>
+                </li>
+              )),
+            )}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Difuminado en los extremos superior e inferior de cada columna */
+  .t-col {
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  }
+  .t-track {
+    padding-bottom: 1rem; /* mismo valor que el gap para un bucle sin salto */
+    animation: t-scroll var(--dur) linear infinite;
+    will-change: transform;
+  }
+  .t-col[data-direction='down'] .t-track { animation-direction: reverse; }
+  .t-col:hover .t-track { animation-play-state: paused; }
+  @keyframes t-scroll {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .t-track { animation: none; }
+  }
+</style>

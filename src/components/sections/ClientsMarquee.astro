@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import { clients } from '../../data/home';
+---
+
+<section class="border-y border-line bg-paper py-10" aria-labelledby="clients-title">
+  <div class="container-x">
+    <h2 id="clients-title" class="text-sm font-medium text-muted">+60 empresas impactando en el mundo digital</h2>
+  </div>
+
+  <div class="group relative mt-7 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+    <ul class="flex w-max animate-marquee items-center gap-16 pr-16 motion-reduce:animate-none group-hover:[animation-play-state:paused]">
+      {[0, 1].map((copy) =>
+        clients.map(({ name, image }) => (
+          <li class="shrink-0" aria-hidden={copy === 1 ? 'true' : undefined}>
+            <Image
+              src={image}
+              alt={copy === 0 ? name : ''}
+              width={360}
+              format="webp"
+              quality={80}
+              loading="lazy"
+              decoding="async"
+              class="h-9 w-auto brightness-0 opacity-45 transition-opacity duration-300 hover:opacity-85 sm:h-11 [html[data-theme=dark]_&]:invert"
+            />
+          </li>
+        )),
+      )}
+    </ul>
+  </div>
+</section>

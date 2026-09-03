@@ -1,0 +1,101 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Analytics from '../components/layout/Analytics.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Ruta de imagen OG absoluta o relativa a /public */
+  ogImage?: string;
+  noindex?: boolean;
+  /** JSON-LD adicional específico de la página */
+  jsonLd?: Record<string, unknown>[];
+  /** Tema visual de la página completa */
+  theme?: 'light' | 'dark';
+  /** Tono del hero bajo el header transparente (dark = texto blanco al inicio) */
+  headerTone?: 'light' | 'dark';
+}
+
+const { title, description, ogImage = '/og-neopoint.png', noindex = false, jsonLd = [], theme = 'light', headerTone = theme } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${site.url}/#organization`,
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/favicon.png`,
+  description: site.description,
+  foundingDate: String(site.foundingYear),
+  areaServed: ['MX', 'US', 'Latin America'],
+  address: { '@type': 'PostalAddress', addressCountry: 'MX' },
+  sameAs: Object.values(site.social).filter(Boolean),
+};
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  inLanguage: site.lang,
+  publisher: { '@id': `${site.url}/#organization` },
+};
+const schemas = [organization, website, ...jsonLd];
+---
+
+<!doctype html>
+<html lang={site.lang} class="scroll-pt-24" data-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content={theme === 'dark' ? '#0a0a0a' : '#ffffff'} />
+    <meta name="color-scheme" content={theme} />
+
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="300x300" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <Font cssVariable="--font-rethink" preload />
+
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <Analytics />
+    <slot name="head" />
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-btn focus:bg-text focus:px-4 focus:py-2 focus:text-paper"
+    >
+      Saltar al contenido
+    </a>
+    <Header tone={headerTone} />
+    <main id="contenido" class="flex-1 [&>*:first-child]:pt-16">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

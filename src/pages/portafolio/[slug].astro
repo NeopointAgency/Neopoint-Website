@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectDetail from '../../components/sections/ProjectDetail.astro';
+import { getProjects, projectHref } from '../../lib/portfolio';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const all = await getProjects();
+  const websites = all.filter((p) => p.data.category === 'website');
+  return websites.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      prev: websites[i - 1],
+      next: websites[i + 1],
+      related: [...websites.slice(i + 1), ...websites.slice(0, i)].filter((p) => p.data.cover).slice(0, 3),
+    },
+  }));
+}
+
+const { project, prev, next, related } = Astro.props;
+const { title: name, sector } = project.data;
+const title = `${name} | Portafolio Neopoint`;
+const description = `${sector}. ${project.body?.slice(0, 150).trim()}…`;
+const ogImage = project.data.cover?.src;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Portafolio', item: `${site.url}/portafolio/` },
+      { '@type': 'ListItem', position: 3, name, item: `${site.url}${projectHref(project)}` },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name,
+    url: `${site.url}${projectHref(project)}`,
+    description: project.body,
+    creator: { '@id': `${site.url}/#organization` },
+    ...(project.data.url ? { mainEntityOfPage: project.data.url } : {}),
+  },
+];
+---
+
+<Base {title} {description} {ogImage} {jsonLd}>
+  <ProjectDetail {project} {prev} {next} {related} />
+</Base>

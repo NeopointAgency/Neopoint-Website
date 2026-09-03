@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/sections/Hero.astro';
+import ClientsMarquee from '../components/sections/ClientsMarquee.astro';
+import Services from '../components/sections/Services.astro';
+import Portfolio from '../components/sections/Portfolio.astro';
+import Results from '../components/sections/Results.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+import { site } from '../data/site';
+import { services } from '../data/home';
+
+const title = 'Neopoint | Diseño Web y Generación de Leads en México';
+const description =
+  'Estudio de marketing digital en México. Diseñamos sitios web que convierten y campañas de generación de leads con resultados medibles. +60 proyectos, +20k clientes potenciales.';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${site.url}/#service`,
+    name: site.name,
+    url: site.url,
+    description,
+    areaServed: ['MX', 'US', 'Latin America'],
+    priceRange: '$$',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Servicios de marketing digital',
+      itemListElement: services.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: s.title, url: `${site.url}${s.href}`, description: s.description },
+      })),
+    },
+  },
+];
+---
+
+<Base {title} {description} {jsonLd} headerTone="dark">
+  <Hero />
+  <ClientsMarquee />
+  <Services />
+  <Portfolio />
+  <Results />
+  <Testimonials />
+  <FinalCta />
+</Base>

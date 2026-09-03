@@ -1,0 +1,26 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+import ProjectCard from '../ui/ProjectCard.astro';
+import { getFeaturedProjects, type Project } from '../../lib/portfolio';
+
+interface Props { projects?: Project[]; title?: string; description?: string; eyebrow?: string }
+const {
+  projects = await getFeaturedProjects(6),
+  eyebrow = 'Portafolio',
+  title = 'Nuestro trabajo antes de mil palabras',
+  description = 'Explora nuestros proyectos más recientes y sé parte de esta colección.',
+} = Astro.props;
+---
+
+<section class="border-t border-line py-20 sm:py-28" aria-labelledby="portfolio-title">
+  <div class="container-x">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <SectionHeading id="portfolio-title" {eyebrow} {title} {description} />
+      <Button href="/portafolio/" variant="secondary" class="shrink-0 self-start">Ver todos los proyectos</Button>
+    </div>
+    <ul class="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" role="list">
+      {projects.map((p, i) => <li class="reveal"><ProjectCard project={p} eager={i < 3} /></li>)}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+/**
+ * Botón minimalista: radio 14px, sin sombras ni gradientes.
+ * primary   → relleno con el color de texto (negro en claro, blanco en oscuro)
+ * secondary → superficie suave con borde fino
+ * ghost     → solo texto
+ * Los enlaces externos muestran el icono ⤢ automáticamente.
+ */
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'inverse' | 'glass';
+  size?: 'sm' | 'md' | 'lg';
+  external?: boolean;
+  icon?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'primary', size = 'md', external, icon = true, class: className = '', ...rest } = Astro.props;
+const isExternal = external ?? /^https?:\/\//.test(href);
+
+const base =
+  'group inline-flex items-center justify-center gap-2 rounded-btn font-medium whitespace-nowrap transition-[background-color,border-color,color,transform] duration-300 ease-(--ease-out-expo) active:scale-[0.985]';
+const sizes = { sm: 'h-9 px-3.5 text-sm', md: 'h-11 px-5 text-[0.95rem]', lg: 'h-12 px-6 text-base' };
+const variants = {
+  primary: 'bg-text text-paper hover:opacity-90',
+  secondary: 'border border-line bg-surface text-text hover:border-line-strong hover:bg-surface-hover',
+  ghost: 'text-muted hover:text-text',
+  inverse: 'bg-white text-[#0a0a0a] hover:bg-white/90',
+  glass: 'border border-white/15 bg-white/5 text-white backdrop-blur hover:border-white/30 hover:bg-white/10',
+};
+---
+
+<a
+  href={href}
+  class:list={[base, sizes[size], variants[variant], className]}
+  {...(isExternal ? { target: '_blank', rel: 'noopener' } : {})}
+  {...rest}
+>
+  <slot />
+  {icon && isExternal && (
+    <svg class="size-3.5 opacity-70 transition-transform duration-300 group-hover:translate-x-px group-hover:-translate-y-px" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 12 12 4M6 4h6v6" />
+    </svg>
+  )}
+  <slot name="icon" />
+</a>

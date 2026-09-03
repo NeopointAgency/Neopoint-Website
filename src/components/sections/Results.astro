@@ -1,0 +1,23 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import { resultStats } from '../../data/home';
+---
+
+<section class="bg-ink py-20 text-white sm:py-28" aria-labelledby="results-title">
+  <div class="container-x">
+    <SectionHeading id="results-title"
+      eyebrow="Resultados"
+      title="Los buenos resultados vienen de buenas cosechas."
+      description="Más de cuatro años sembrando estrategia, creatividad y datos para que cada negocio coseche clientes reales."
+      tone="dark"
+    />
+    <dl class="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {resultStats.map(({ value, label }) => (
+        <div class="reveal rounded-card border border-ink-line bg-ink-soft p-6 sm:p-8">
+          <dd class="text-3xl font-semibold tracking-tight sm:text-[2.75rem]">{value}</dd>
+          <dt class="mt-2 text-sm text-white/55 sm:text-base">{label}</dt>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

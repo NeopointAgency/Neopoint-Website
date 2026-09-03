@@ -1,0 +1,168 @@
+---
+/**
+ * Showcase de portafolio: lista de proyectos a la izquierda y un monitor fijo
+ * a la derecha cuya pantalla cambia según el proyecto activo (por scroll u hover).
+ * En móvil el monitor queda fijo arriba y la lista corre debajo.
+ */
+import Monitor from '../ui/Monitor.astro';
+import { projectHref, type Project } from '../../lib/portfolio';
+
+interface Props { projects: Project[] }
+const { projects } = Astro.props;
+const counts = {
+  all: projects.length,
+  website: projects.filter((p) => p.data.category === 'website').length,
+  funnel: projects.filter((p) => p.data.category === 'funnel').length,
+};
+---
+
+<section class="relative pb-24 lg:overflow-clip lg:pb-40" data-showcase>
+  <!-- Escenario de ancho completo (escritorio): se queda fijo detrás de las dos columnas -->
+  <div class="sticky top-16 z-0 hidden h-0 lg:block" aria-hidden="true">
+    <div class="absolute inset-x-0 top-0 h-[calc(100vh-4rem)] overflow-hidden">
+      <div class="absolute left-[64%] top-1/2 h-[70%] w-[56%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-white/[0.04] blur-3xl"></div>
+      <div class="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-[#161616] via-[#101010] to-transparent"></div>
+    </div>
+  </div>
+
+  <div class="container-x relative">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-12">
+      <!-- Monitor -->
+      <div class="sticky top-16 z-10 -mx-5 bg-paper px-5 pt-4 sm:-mx-8 sm:px-8 lg:static lg:order-2 lg:col-span-7 lg:m-0 lg:bg-transparent lg:p-0" data-display-wrap>
+        <div class="lg:sticky lg:top-16 lg:flex lg:h-[calc(100vh-4rem)] lg:items-center lg:justify-center">
+          <Monitor {projects} class="max-w-[52rem]" />
+        </div>
+        <div class="pointer-events-none h-8 bg-gradient-to-b from-paper to-transparent lg:hidden" aria-hidden="true"></div>
+      </div>
+
+      <!-- Lista -->
+      <div class="relative lg:order-1 lg:col-span-5 lg:pt-6">
+        <div class="inline-flex flex-wrap items-center gap-1 rounded-btn border border-line bg-surface p-1 text-sm font-medium" role="group" aria-label="Filtrar por tipo" data-filters>
+          <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">Todos <span class="text-faint">{counts.all}</span></button>
+          <button type="button" class="filter-btn" data-filter="website" aria-pressed="false">Sitios web <span class="text-faint">{counts.website}</span></button>
+          <button type="button" class="filter-btn" data-filter="funnel" aria-pressed="false">Funnels <span class="text-faint">{counts.funnel}</span></button>
+        </div>
+
+        <ol class="relative mt-6 lg:mt-8" role="list" data-list>
+          <div class="pointer-events-none absolute left-0 top-0 w-full rounded-card border border-line-strong bg-surface opacity-0 transition-[transform,height,opacity] duration-500 ease-(--ease-out-expo) motion-reduce:transition-none" data-highlight aria-hidden="true"></div>
+          {projects.map((p, i) => (
+            <li data-item={p.id} data-category={p.data.category} {...(i === 0 ? { 'data-active': '' } : {})} class="relative">
+              <a
+                href={projectHref(p)}
+                class="group flex items-center justify-between gap-6 rounded-card px-6 py-5 text-[1.25rem] font-medium text-faint transition-colors duration-500 sm:px-7 sm:py-6 sm:text-[1.375rem] [li[data-active]_&]:text-text [li[data-near]_&]:text-muted"
+              >
+                <span class="truncate">{p.data.title}</span>
+                <svg class="size-4 shrink-0 opacity-0 transition-opacity duration-300 [li[data-active]_&]:opacity-100" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6"/></svg>
+              </a>
+            </li>
+          ))}
+        </ol>
+        <p class="mt-8 hidden text-muted" data-empty>No hay proyectos en esta categoría todavía.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @reference '../../styles/global.css';
+  .filter-btn { @apply rounded-[10px] px-3 py-1.5 text-muted transition-colors duration-300 hover:text-text; }
+  .filter-btn[aria-pressed='true'] { @apply bg-paper text-text shadow-card; }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-showcase]');
+  if (root) {
+    const list = root.querySelector<HTMLElement>('[data-list]')!;
+    const highlight = root.querySelector<HTMLElement>('[data-highlight]')!;
+    const items = [...root.querySelectorAll<HTMLLIElement>('[data-item]')];
+    const monitor = root.querySelector<HTMLElement>('[data-monitor]')!;
+    const displayWrap = root.querySelector<HTMLElement>('[data-display-wrap]')!;
+    const empty = root.querySelector<HTMLElement>('[data-empty]');
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    // Detecta el layout por el CSS aplicado (en escritorio el contenedor del monitor es static).
+    const isDesktop = () => getComputedStyle(displayWrap).position === 'static';
+
+    let active: HTMLLIElement | null = null;
+    let hovered: HTMLLIElement | null = null;
+    let raf = 0;
+
+    const visible = () => items.filter((li) => !li.hidden);
+
+    function moveHighlight(li: HTMLLIElement) {
+      highlight.style.transform = `translateY(${li.offsetTop}px)`;
+      highlight.style.height = `${li.offsetHeight}px`;
+      highlight.style.opacity = '1';
+    }
+
+    function setActive(li: HTMLLIElement | null, force = false) {
+      if (!li || (li === active && !force)) return;
+      active = li;
+      const vis = visible();
+      const idx = vis.indexOf(li);
+      vis.forEach((el, i) => {
+        const d = Math.abs(i - idx);
+        el.toggleAttribute('data-active', d === 0);
+        el.toggleAttribute('data-near', d === 1);
+        el.style.opacity = d === 0 ? '1' : String(Math.max(0.35, 1 - d * 0.18));
+      });
+      monitor.dispatchEvent(new CustomEvent('np:screen', { detail: { id: li.dataset.item } }));
+      moveHighlight(li);
+    }
+
+    function focalLine() {
+      if (!isDesktop()) return displayWrap.getBoundingClientRect().bottom + 56;
+      // Línea focal fija en el viewport: donde queda el primer proyecto con la página
+      // en el tope (así el primero es el activo al cargar), sin bajar del 42 % del alto.
+      const first = visible()[0];
+      const firstCenterAtTop = list.getBoundingClientRect().top + window.scrollY + (first?.offsetHeight ?? 0) / 2;
+      return Math.min(window.innerHeight * 0.42, firstCenterAtTop);
+    }
+
+    function update() {
+      raf = 0;
+      if (hovered) return;
+      const focal = focalLine();
+      const vis = visible();
+      // Antes de que la lista alcance la línea focal, el primero es el activo.
+      const first = vis[0];
+      if (first && first.getBoundingClientRect().top > focal) { setActive(first); return; }
+      let best: HTMLLIElement | null = null;
+      let bestDist = Infinity;
+      for (const li of vis) {
+        const r = li.getBoundingClientRect();
+        if (r.height === 0) continue;
+        const d = Math.abs(r.top + r.height / 2 - focal);
+        if (d < bestDist) { bestDist = d; best = li; }
+      }
+      setActive(best);
+    }
+
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('load', () => { if (active) moveHighlight(active); schedule(); });
+    new ResizeObserver(() => { if (active) moveHighlight(active); schedule(); }).observe(list);
+
+    items.forEach((li) => {
+      li.addEventListener('mouseenter', () => { hovered = li; setActive(li); });
+      li.addEventListener('mouseleave', () => { hovered = null; schedule(); });
+      li.querySelector('a')?.addEventListener('focus', () => setActive(li));
+    });
+
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const f = btn.dataset.filter;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        items.forEach((li) => { li.hidden = !(f === 'all' || li.dataset.category === f); });
+        const vis = visible();
+        if (empty) empty.hidden = vis.length > 0;
+        if (vis[0]) setActive(vis[0], true);
+        if (!isDesktop()) list.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      }),
+    );
+
+    highlight.style.transition = 'none';
+    update();
+    requestAnimationFrame(() => { highlight.style.transition = ''; });
+  }
+</script>

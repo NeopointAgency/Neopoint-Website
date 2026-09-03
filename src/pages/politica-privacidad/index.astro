@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import { site } from '../../data/site';
+
+const title = 'Aviso de privacidad | Neopoint';
+const description = 'Aviso de privacidad de Neopoint: qué datos personales recabamos a través de neopoint.mx, con qué finalidad, cómo los protegemos y cómo ejercer tus derechos ARCO.';
+const updated = '3 de septiembre de 2026';
+---
+
+<Base {title} {description}>
+  <PageHero eyebrow="Legal" title="Aviso de privacidad" description={`Última actualización: ${updated}`} />
+
+  <section class="container-x py-14 sm:py-20">
+    <div class="prose-np mx-auto max-w-3xl">
+      <h2>Responsable de los datos personales</h2>
+      <p>{site.legalName} (en adelante "Neopoint"), con domicilio en México, es responsable del tratamiento de los datos personales que nos proporcionas a través del sitio <a href={site.url}>{site.url.replace('https://', '')}</a> y de los canales vinculados a él, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y su Reglamento.</p>
+
+      <h2>Datos personales que recabamos</h2>
+      <p>Podemos recabar los siguientes datos cuando agendas una asesoría, llenas un formulario, nos escribes o navegas el sitio:</p>
+      <ul>
+        <li>Datos de identificación y contacto: nombre, correo electrónico, teléfono, empresa y puesto.</li>
+        <li>Información sobre tu negocio y el servicio que te interesa, que tú decidas compartirnos.</li>
+        <li>Datos de navegación: dirección IP, tipo de dispositivo y navegador, páginas visitadas y origen de la visita, recabados mediante cookies y tecnologías similares.</li>
+      </ul>
+      <p>No recabamos datos personales sensibles a través de este sitio.</p>
+
+      <h2>Finalidades del tratamiento</h2>
+      <p>Utilizamos tus datos para las siguientes finalidades primarias, necesarias para la relación contigo:</p>
+      <ul>
+        <li>Atender tu solicitud de información, agendar y dar seguimiento a la asesoría.</li>
+        <li>Elaborar propuestas y, en su caso, prestar los servicios contratados y facturarlos.</li>
+        <li>Mantener comunicación sobre el estado de tu proyecto.</li>
+      </ul>
+      <p>Y para las siguientes finalidades secundarias, que puedes rechazar sin que ello afecte la atención de tu solicitud:</p>
+      <ul>
+        <li>Enviarte información sobre nuestros servicios, casos de éxito y contenido de marketing.</li>
+        <li>Medir el desempeño del sitio y de nuestras campañas publicitarias.</li>
+      </ul>
+      <p>Si no deseas que tus datos se traten para las finalidades secundarias, escríbenos a <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.</p>
+
+      <h2>Cookies y tecnologías de seguimiento</h2>
+      <p>Este sitio utiliza cookies propias y de terceros (por ejemplo, herramientas de analítica y píxeles de plataformas publicitarias como Meta y Google) para entender cómo se usa el sitio y mostrar anuncios relevantes. Puedes deshabilitar las cookies desde la configuración de tu navegador; algunas funciones del sitio podrían verse afectadas.</p>
+      <p>Las citas se agendan a través de Cal.com, un servicio de terceros con su propio aviso de privacidad. Al agendar, los datos que captures en ese formulario se comparten con dicho proveedor.</p>
+
+      <h2>Transferencias de datos</h2>
+      <p>No vendemos ni cedemos tus datos personales. Solo los compartimos con proveedores que nos prestan servicios (agenda, correo, alojamiento, analítica y publicidad) y que están obligados a protegerlos, así como con autoridades cuando la ley lo exija.</p>
+
+      <h2>Derechos ARCO y revocación del consentimiento</h2>
+      <p>Tienes derecho a acceder, rectificar y cancelar tus datos personales, así como a oponerte a su tratamiento o revocar el consentimiento que nos hayas otorgado. Para ejercerlos, envía una solicitud a <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a> indicando tu nombre, un medio para responderte, los datos sobre los que deseas ejercer tu derecho y cualquier documento que facilite su localización. Responderemos en un plazo máximo de 20 días hábiles.</p>
+
+      <h2>Conservación y seguridad</h2>
+      <p>Conservamos tus datos mientras exista una relación comercial o mientras sean necesarios para las finalidades descritas, y aplicamos medidas administrativas, técnicas y físicas razonables para protegerlos contra daño, pérdida, alteración o acceso no autorizado.</p>
+
+      <h2>Cambios al aviso de privacidad</h2>
+      <p>Podemos actualizar este aviso para reflejar cambios legales o en nuestros servicios. La versión vigente estará siempre publicada en esta página con su fecha de actualización.</p>
+
+      <h2>Contacto</h2>
+      <p>Para cualquier duda sobre este aviso o el tratamiento de tus datos, escríbenos a <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.</p>
+    </div>
+  </section>
+</Base>

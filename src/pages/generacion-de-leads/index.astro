@@ -1,0 +1,132 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Button from '../../components/ui/Button.astro';
+import Faq from '../../components/ui/Faq.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import ProjectCard from '../../components/ui/ProjectCard.astro';
+import ClientsMarquee from '../../components/sections/ClientsMarquee.astro';
+import Results from '../../components/sections/Results.astro';
+import Testimonials from '../../components/sections/Testimonials.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { icons } from '../../lib/icons';
+import { getProjects } from '../../lib/portfolio';
+import { site } from '../../data/site';
+
+const funnels = (await getProjects()).filter((p) => p.data.category === 'funnel');
+
+const title = 'Generación de Leads en México | Lead Gen Agency | Neopoint';
+const description =
+  'Agencia de adquisición de clientes potenciales. Campañas en Meta y Google con embudos que filtran y califican prospectos, y seguimiento que impulsa los cierres. Sector inmobiliario, solar y tech.';
+
+const steps = [
+  { lead: 'Hacemos lo que funciona, iniciando con', title: 'Enfoque narrativo comercial', text: 'Diseñamos la ruta que seguirán tus clientes para llegar al contacto de manera clara y efectiva.', icon: icons.compass },
+  { lead: 'Después captamos clientes potenciales evitando preguntones', title: 'Modelo Attractleads', text: 'Sistema automatizado que filtra, califica y convierte prospectos en citas sin esfuerzo.', icon: icons.funnel },
+  { lead: 'Pero sabemos que los leads no son nada si no hay ventas…', title: 'Push to convert', text: 'Flujos de conversación y seguimiento que impulsan tus cierres con asesoría y estructura efectiva.', icon: icons.handshake },
+];
+
+const sectors = [
+  { icon: icons.building, title: 'Sector inmobiliario', items: ['Desarrolladores inmobiliarios', 'Arquitectura', 'Venta de preventa'] },
+  { icon: icons.sun, title: 'Sector solar', items: ['Paneles solares residenciales', 'Proyectos comerciales', 'Financiamiento'] },
+  { icon: icons.chip, title: 'Sector tech', items: ['Software y SaaS', 'Servicios digitales', 'Demos y agendas'] },
+];
+
+const faqs = [
+  { q: '¿En qué plataformas hacen las campañas?', a: 'Principalmente Meta (Facebook e Instagram) y Google. Elegimos la mezcla según tu sector, tu ticket y dónde está tu cliente.' },
+  { q: '¿Qué es un lead calificado?', a: 'Un contacto que cumple criterios definidos contigo (zona, presupuesto, necesidad, tiempo de compra). El embudo filtra antes de que llegue a tu equipo de ventas.' },
+  { q: '¿Cuánto debo invertir en pauta?', a: 'La inversión en anuncios se define por objetivo y sector; te proponemos un rango en la asesoría. La pauta se paga directamente a las plataformas y siempre es tuya.' },
+  { q: '¿Cómo mido los resultados?', a: 'Reportamos leads generados, costo por lead, citas agendadas y, cuando conectamos tu CRM, ventas cerradas. Sin métricas de vanidad.' },
+  { q: '¿Cuánto tiempo tarda en verse resultado?', a: 'Las primeras semanas sirven para aprender y optimizar. Normalmente los resultados se estabilizan entre el primer y el segundo mes de campaña.' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Generación de Leads',
+    serviceType: 'Adquisición de clientes potenciales',
+    provider: { '@id': `${site.url}/#organization` },
+    areaServed: ['MX', 'US', 'Latin America'],
+    url: `${site.url}/generacion-de-leads/`,
+    description,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  },
+];
+---
+
+<Base {title} {description} {jsonLd}>
+  <PageHero eyebrow="Adquisición de clientes potenciales · Lead Gen Agency" title="No hacemos publicidad, generamos resultados de la publicidad" description="Campañas, embudos y seguimiento diseñados para que cada peso invertido regrese en clientes potenciales calificados.">
+    <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+      <Button href={site.bookingUrl} size="lg" icon={false}>Agendar demo</Button>
+      <Button href="#metodo" variant="secondary" size="lg">Ver el método</Button>
+    </div>
+  </PageHero>
+
+  <ClientsMarquee />
+
+  <section id="metodo" class="bg-ink py-20 text-white sm:py-28" aria-labelledby="method-title">
+    <div class="container-x">
+      <SectionHeading id="method-title" eyebrow="Método" title="Tres pasos entre el anuncio y la venta" tone="dark" />
+      <ol class="mt-14 grid gap-5 lg:grid-cols-3" role="list">
+        {steps.map(({ lead, title, text, icon }, i) => (
+          <li class="reveal flex flex-col rounded-card border border-ink-line bg-ink-soft p-7 sm:p-8">
+            <p class="text-sm font-medium text-white/50">{lead}</p>
+            <div class="mt-6 flex items-center gap-3">
+              <span class="inline-flex size-10 items-center justify-center rounded-xl border border-ink-line text-white">
+                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icon} />
+              </span>
+              <span class="text-sm font-medium text-white/50">0{i + 1}</span>
+            </div>
+            <h3 class="mt-4 text-2xl font-semibold">{title}</h3>
+            <p class="mt-2 leading-relaxed text-white/60">{text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="sectors-title">
+    <div class="container-x">
+      <SectionHeading id="sectors-title" eyebrow="Sectores" title="Áreas donde la especialización y el enfoque surgen" description="Conocemos el ciclo de venta de estos sectores y construimos embudos a su medida." />
+      <ul class="mt-12 grid gap-5 lg:grid-cols-3" role="list">
+        {sectors.map(({ icon, title, items }) => (
+          <li class="reveal card-surface p-7">
+            <span class="inline-flex size-10 items-center justify-center rounded-xl border border-line bg-paper text-text">
+              <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icon} />
+            </span>
+            <h3 class="mt-5 text-xl font-semibold text-text">{title}</h3>
+            <ul class="mt-4 space-y-2 text-muted">
+              {items.map((it) => (
+                <li class="flex items-center gap-2"><span class="size-1 rounded-full bg-faint" aria-hidden="true"></span>{it}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-10 flex justify-center"><Button href={site.bookingUrl} icon={false}>Agendar demo</Button></div>
+    </div>
+  </section>
+
+  {funnels.length > 0 && (
+    <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="cases-title">
+      <div class="container-x grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-5">
+          <SectionHeading id="cases-title" eyebrow="Caso de éxito" title="Resultados que impactan las ventas" description="Un funnel para preventa inmobiliaria que conecta proyectos con prospectos calificados listos para dar el siguiente paso." align="left" />
+          <div class="mt-8"><Button href="/portafolio/" variant="secondary">Ver portafolio completo</Button></div>
+        </div>
+        <ul class="grid gap-6 lg:col-span-7" role="list">
+          {funnels.map((p) => <li class="reveal"><ProjectCard project={p} /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <Results />
+  <Testimonials />
+  <Faq items={faqs} title="Preguntas frecuentes sobre generación de leads" />
+  <FinalCta />
+</Base>

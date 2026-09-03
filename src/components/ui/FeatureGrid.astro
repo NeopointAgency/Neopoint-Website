@@ -1,0 +1,23 @@
+---
+/** Rejilla de pilares/beneficios con icono. */
+interface Props {
+  items: { title: string; description: string; icon: string }[];
+  cols?: 2 | 3 | 4;
+  tone?: 'light' | 'dark';
+}
+const { items, cols = 4, tone = 'light' } = Astro.props;
+const dark = tone === 'dark';
+const colClass = { 2: 'lg:grid-cols-2', 3: 'lg:grid-cols-3', 4: 'lg:grid-cols-4' }[cols];
+---
+
+<ul class:list={['grid gap-4 sm:grid-cols-2', colClass]} role="list">
+  {items.map(({ title, description, icon }) => (
+    <li class:list={['reveal rounded-card border p-6 sm:p-7', dark ? 'border-ink-line bg-ink-soft' : 'card-surface']}>
+      <span class:list={['inline-flex size-10 items-center justify-center rounded-xl border', dark ? 'border-ink-line text-white' : 'border-line bg-paper text-text']}>
+        <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icon} />
+      </span>
+      <h3 class:list={['mt-5 text-lg font-semibold', dark ? 'text-white' : 'text-text']}>{title}</h3>
+      <p class:list={['mt-2 leading-relaxed', dark ? 'text-white/60' : 'text-muted']}>{description}</p>
+    </li>
+  ))}
+</ul>

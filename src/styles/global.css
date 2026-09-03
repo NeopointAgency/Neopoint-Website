@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens (Neopoint · clean / minimal) ---------- */
+@theme {
+  --font-sans: var(--font-rethink), system-ui, "Segoe UI", Roboto, sans-serif;
+
+  /* Superficies y texto (se invierten en tema oscuro, ver más abajo) */
+  --color-paper: #ffffff;
+  --color-paper-soft: #f5f5f5;
+  --color-surface: #f5f5f5;
+  --color-surface-hover: #ececec;
+  --color-text: #111111;
+  --color-muted: #6b6b6b;
+  --color-faint: #9a9a9a;
+  --color-line: rgb(0 0 0 / 0.08);
+  --color-line-strong: rgb(0 0 0 / 0.14);
+
+  /* Bloques oscuros (siempre oscuros) */
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #141414;
+  --color-ink-line: rgb(255 255 255 / 0.08);
+
+  /* Acento de marca: usar con moderación */
+  --color-lime: #97ef49;
+  --color-lime-soft: #cefea4;
+  --color-lime-deep: #5fb51a;
+
+  --radius-btn: 0.875rem;   /* 14px */
+  --radius-card: 1.25rem;   /* 20px */
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-lift: 0 12px 32px -16px rgb(0 0 0 / 0.18);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 50s linear infinite;
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+}
+
+/* Tema oscuro por página (Base.astro pone data-theme="dark" en <html>) */
+html[data-theme="dark"] {
+  --color-paper: #0a0a0a;
+  --color-paper-soft: #111111;
+  --color-surface: rgb(255 255 255 / 0.05);
+  --color-surface-hover: rgb(255 255 255 / 0.09);
+  --color-text: #f2f2f2;
+  --color-muted: #8f8f8f;
+  --color-faint: #5c5c5c;
+  --color-line: rgb(255 255 255 / 0.09);
+  --color-line-strong: rgb(255 255 255 / 0.16);
+  --shadow-card: none;
+  --shadow-lift: none;
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-text font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--color-lime); color: #0a0a0a; }
+  :focus-visible {
+    outline: 2px solid var(--color-lime-deep);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; letter-spacing: -0.02em; }
+  p { text-wrap: pretty; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+/* ---------- Utilities ---------- */
+@utility container-x {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 640px) { padding-inline: 2rem; }
+}
+
+/* Tarjeta base: borde fino, radio grande, sin sombra pesada */
+@utility card {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  transition: background-color 0.3s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+}
+@utility card-surface {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  transition: background-color 0.3s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo);
+}
+@utility card-hover {
+  &:hover { background: var(--color-surface-hover); border-color: var(--color-line-strong); }
+}
+
+/* Revelado al hacer scroll: CSS puro (scroll-driven animations), sin JS. */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none !important; }
+}
+
+/* Prosa (aviso de privacidad, descripciones) */
+@utility prose-np {
+  & h2 { font-size: 1.375rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--color-text); }
+  & p { margin-bottom: 1rem; line-height: 1.7; color: var(--color-muted); }
+  & ul { margin: 0 0 1rem 1.25rem; list-style: disc; color: var(--color-muted); }
+  & li { margin-bottom: 0.4rem; line-height: 1.6; }
+  & a { color: var(--color-text); text-decoration: underline; text-underline-offset: 3px; }
+  & a:hover { color: var(--color-muted); }
+}
