@@ -8,10 +8,12 @@ import SeoGraphic from '../../components/graphics/SeoGraphic.astro';
 import EditorGraphic from '../../components/graphics/EditorGraphic.astro';
 import BookingGraphic from '../../components/graphics/BookingGraphic.astro';
 import BridgeGraphic from '../../components/graphics/BridgeGraphic.astro';
-import MiniScene from '../../components/graphics/MiniScene.astro';
+import ClientDoubtsGraphic from '../../components/graphics/ClientDoubtsGraphic.astro';
+import MistakeScene from '../../components/graphics/MistakeScene.astro';
 import Faq from '../../components/ui/Faq.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import Portfolio from '../../components/sections/Portfolio.astro';
+import ClientsMarquee from '../../components/sections/ClientsMarquee.astro';
 import Results from '../../components/sections/Results.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
 import { site } from '../../data/site';
@@ -72,6 +74,7 @@ const deliverables = [
   'Trabajo completo para aparecer en Google',
   'Tecnología de alto desempeño: carga rápido, siempre',
 ];
+/* Incluido en cada proyecto, sin costo adicional */
 const extras = [
   { title: 'Sesión de arranque y plan estructurado', text: 'Qué necesitamos de ti, qué hacemos nosotros y las fechas de cada cosa.' },
   { title: 'Ajuste de logo', text: 'Lo pulimos para que se vea nítido en el sitio, en Google y donde se use.' },
@@ -100,9 +103,25 @@ const scope = [
   { title: 'Si surge algo extra', text: 'Nunca se hace ni se cobra sin que antes lo veas, sepas cuánto cuesta y cuánto tarda, y lo apruebes.' },
 ];
 
-/* 08 · Siguiente paso */
+/* Para quién es */
+const fit = {
+  yes: [
+    'Vendes un servicio donde la confianza decide la compra',
+    'Ya tienes clientes y quieres que el sitio traiga más, con menos fricción',
+    'Ves tu sitio como una inversión con retorno, no como un gasto de diseño',
+    'Quieres un proceso con fechas, entregas revisables y garantías por escrito',
+  ],
+  no: [
+    'Buscas la opción más barata o una plantilla con tus datos',
+    'Esperas aparecer primero en Google en 30 días',
+    'No tienes tiempo para revisar y aprobar cada entrega',
+    'Quieres “una página” solo por tener una',
+  ],
+};
+
+/* Siguiente paso */
 const nextSteps = [
-  'Revisamos tu negocio juntos: 30 minutos por videollamada',
+  'Sesión de diagnóstico: 30 minutos por videollamada para entender tu negocio y tu cliente',
   'Recibes una propuesta con alcance exacto, fechas y esquema de pagos',
   'Firmamos acuerdo y arrancamos en 48 horas',
 ];
@@ -111,7 +130,8 @@ const faqs = [
   { q: 'Ya nos quedó mal una agencia antes. ¿En qué son diferentes?', a: 'No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes ver y revisar, el primer resultado llega en 10 días y hay garantías por escrito. Si en algún punto no cumplimos, lo ves de inmediato, no seis meses después.' },
   { q: '¿Qué pasa con mi sitio actual y el dominio?', a: 'El dominio es tuyo y así se queda. Tu sitio actual sigue en línea mientras construimos el nuevo, y el día del lanzamiento se hace el cambio. Sin días fuera del aire.' },
   { q: '¿Por qué no arrancamos con los anuncios de una vez?', a: 'Porque pagar anuncios para mandar gente a una página que no convence es tirar el dinero. Primero el vehículo; luego, con la investigación de palabras clave lista, la estrategia de anuncios en su propia propuesta.' },
-  { q: 'Hay opciones más baratas. ¿Por qué este precio?', a: 'Las hay, y algunas son buenas para lo que son: una plantilla con tus datos. Esto es otra cosa: investigación de tu comprador, textos para sus miedos reales, un sistema de agendado, páginas por zona y garantías por escrito. Un solo cliente cerrado suele pagar la inversión.' },
+  { q: 'Hay opciones más baratas. ¿Por qué invertir más?', a: 'Si lo que buscas es lo más barato, no somos la opción, y preferimos decirlo desde ahora. Una plantilla con tus datos cuesta menos porque no investiga a tu comprador, no escribe para sus miedos reales, no agenda citas ni te posiciona por zona. Nuestro trabajo es para negocios que ven su sitio como una inversión: un solo cliente cerrado suele pagarla.' },
+  { q: '¿Cuánto cuesta?', a: 'La inversión se define por el alcance: número de páginas, sistema de agendado, páginas por zona e integraciones. Cada propuesta llega con el valor de cada entregable desglosado y un esquema de tres pagos ligados a entregas. Lo revisamos juntos en la sesión de diagnóstico.' },
   { q: '¿Cómo se paga?', a: 'En tres pagos ligados a entregas que puedes ver y revisar: al firmar, al aprobar el diseño completo y contra entrega con el sitio funcionando. El esquema exacto va en tu propuesta.' },
   { q: '¿Cuánto tarda?', a: 'Primer boceto en 10 días hábiles y lanzamiento en 45 días para un sitio completo. Una landing page toma menos; un e-commerce o una plataforma puede tomar más. En la propuesta te damos el calendario exacto.' },
   { q: '¿Qué pasa cuando terminan los 30 días de soporte?', a: 'El sitio queda funcionando y es tuyo: no depende de nosotros para operar. Cambios o mejoras posteriores se cotizan aparte, viendo costo y tiempo antes de decidir.' },
@@ -144,13 +164,14 @@ const jsonLd = [
   <section class="bg-paper">
     <div class="container-x grid items-center gap-x-10 gap-y-10 pt-14 pb-12 sm:pt-24 sm:pb-16 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <p class="mb-4 text-sm font-medium text-muted">Diseño web · Sitios que convierten</p>
+        <p class="mb-4 text-sm font-medium text-muted">Diseño web estratégico</p>
         <h1 class="text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.25rem]">Un sitio que convierte visitas en clientes agendados</h1>
         <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">No es una página nueva por tener una página nueva. Es un puente entre lo que busca tu cliente y tu oferta: responde sus dudas, carga rápido y lleva a una sola acción.</p>
         <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-          <Button href={site.bookingUrl} size="lg" icon={false}>Agendar tu asesoría</Button>
+          <Button href={site.bookingUrl} size="lg" icon={false}>Agendar diagnóstico</Button>
           <Button href="#puente" variant="secondary" size="lg">Ver cómo funciona</Button>
         </div>
+        <p class="mt-4 text-sm text-faint">Sesión de 30 minutos, sin costo. Te decimos con claridad si tiene sentido trabajar juntos.</p>
       </div>
       <div class="lg:col-span-7">
         <WebProcessScene />
@@ -166,25 +187,22 @@ const jsonLd = [
     </div>
   </section>
 
+  <ClientsMarquee />
+
   <!-- 01 · El problema -->
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="problem-title">
     <div class="container-x">
       <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
         <div class="lg:col-span-7">
-          <SectionHeading id="problem-title" eyebrow="01 · El problema" title="El trabajo ya lo haces bien. Falta que tu sitio lo demuestre." description="Casi todos los sitios hablan de la empresa: años de experiencia, lista de servicios, fotos genéricas. Y la persona que entra está pensando en otra cosa." tone="dark" />
+          <SectionHeading id="problem-title" eyebrow="El problema" title="El trabajo ya lo haces bien. Falta que tu sitio lo demuestre." description="Casi todos los sitios hablan de la empresa: años de experiencia, lista de servicios, fotos genéricas. Y la persona que entra está pensando en otra cosa. Si el sitio no responde esas dudas, se va con el competidor que sí lo hizo, aunque haga peor trabajo." tone="dark" />
         </div>
-        <blockquote class="reveal card-ink p-6 lg:col-span-5 sm:p-7">
-          <p class="text-xl font-medium leading-snug text-white sm:text-2xl">“¿Esta gente sí va a venir? ¿Sí van a terminar? ¿O me van a ver la cara?”</p>
-          <footer class="mt-3 text-sm text-white/50">Lo que tu cliente se pregunta antes de escribirte. Si el sitio no lo responde, se va con el competidor que sí lo hizo, aunque haga peor trabajo.</footer>
-        </blockquote>
+        <div class="reveal lg:col-span-5"><ClientDoubtsGraphic /></div>
       </div>
-      <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
-        {mistakes.map(({ kind, title, text }) => (
-          <li class="reveal card-ink p-5 sm:p-6">
-            <MiniScene kind={kind as any} />
-            <h3 class="mt-5 text-lg font-semibold">{title}</h3>
-            <p class="mt-2 leading-relaxed text-white/60">{text}</p>
-          </li>
+      <ul class="mt-14 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" role="list">
+        {mistakes.map(({ kind, title, text }, i) => (
+          <GraphicCard {title} description={text} eyebrow={`Error 0${i + 1}`} tone="dark">
+            <MistakeScene kind={kind as any} />
+          </GraphicCard>
         ))}
       </ul>
     </div>
@@ -193,7 +211,7 @@ const jsonLd = [
   <!-- 02 · El puente -->
   <section id="puente" class="py-20 sm:py-28" aria-labelledby="bridge-title">
     <div class="container-x">
-      <SectionHeading id="bridge-title" eyebrow="02 · La solución" title="Un puente sólido: no importa por dónde entre, el sitio lo lleva por un solo camino" description="Un solo destino para todo el sitio: que el visitante confíe y dé el paso. Cada página, cada texto y cada botón trabajan para eso." />
+      <SectionHeading id="bridge-title" eyebrow="La solución" title="Un puente sólido: no importa por dónde entre, el sitio lo lleva por un solo camino" description="Un solo destino para todo el sitio: que el visitante confíe y dé el paso. Cada página, cada texto y cada botón trabajan para eso." />
 
       <div class="reveal mt-14"><BridgeGraphic /></div>
     </div>
@@ -203,7 +221,7 @@ const jsonLd = [
   <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="offer-title">
     <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
       <div class="lg:col-span-5">
-        <SectionHeading id="offer-title" eyebrow="03 · Antes de diseñar" title="Primero construimos la oferta. Luego el sitio la comunica." description="Un sitio bonito sin oferta es un folleto. Por eso todo proyecto empieza con un estudio del negocio: a quién le vendes, qué desea, qué teme, qué le frustró y qué necesita ver para decidirse." />
+        <SectionHeading id="offer-title" eyebrow="Antes de diseñar" title="Primero construimos la oferta. Luego el sitio la comunica." description="Un sitio bonito sin oferta es un folleto. Por eso todo proyecto empieza con un estudio del negocio: a quién le vendes, qué desea, qué teme, qué le frustró y qué necesita ver para decidirse." />
         <ul class="mt-8 space-y-3 text-muted" role="list">
           {['Perfil del comprador con sus miedos y objeciones reales', 'Qué prometer, en qué orden y con qué prueba', 'El camino del visitante: de la entrada al botón', 'Un plan de sitio que se aprueba antes de construir'].map((t) => (
             <li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-lime-deep" aria-hidden="true"></span>{t}</li>
@@ -236,7 +254,7 @@ const jsonLd = [
   <!-- 04 · Pilares -->
   <section class="py-20 sm:py-28" aria-labelledby="pillars-title">
     <div class="container-x">
-      <SectionHeading id="pillars-title" eyebrow="04 · Cómo lo construimos" title="Los cuatro pilares de un sitio que convierte" />
+      <SectionHeading id="pillars-title" eyebrow="Cómo lo construimos" title="Los cuatro pilares de un sitio que convierte" />
       <ul class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2" role="list">
         {pillars.map(({ graphic: Graphic, title, description }) => (
           <GraphicCard {title} {description}><Graphic /></GraphicCard>
@@ -249,38 +267,14 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- 05 · Lo que recibes -->
-  <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="deliverables-title">
-    <div class="container-x">
-      <SectionHeading id="deliverables-title" eyebrow="05 · Lo que recibes" title="Todo lo que incluye un proyecto" description="Cada punto se lista en tu propuesta con su valor. Sabes exactamente qué estás comprando, y el proyecto no crece sin control." tone="dark" />
-      <div class="mt-12 grid gap-8 lg:grid-cols-12">
-        <ul class="card-ink divide-y divide-white/[0.07] lg:col-span-7" role="list">
-          {deliverables.map((d) => (
-            <li class="flex items-start gap-3 px-6 py-3.5">
-              <svg class="mt-1 size-4 shrink-0 text-lime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>
-              <span class="text-white/85">{d}</span>
-            </li>
-          ))}
-        </ul>
-        <div class="lg:col-span-5">
-          <p class="mb-3 text-sm font-medium text-white/50">Lo que viene de regalo</p>
-          <ul class="grid gap-3" role="list">
-            {extras.map(({ title, text }) => (
-              <li class="reveal card-ink p-5">
-                <h3 class="font-semibold">{title}</h3>
-                <p class="mt-1 text-sm leading-relaxed text-white/60">{text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Portfolio />
+  <Results />
+  <Testimonials />
 
   <!-- 06 · Cronograma -->
   <section class="py-20 sm:py-28" aria-labelledby="timeline-title">
     <div class="container-x">
-      <SectionHeading id="timeline-title" eyebrow="06 · Cronograma" title="45 días, en 4 etapas. Cada pago, contra algo que puedes ver." />
+      <SectionHeading id="timeline-title" eyebrow="Proceso" title="45 días, en 4 etapas. Cada pago, contra algo que puedes ver." />
       <!-- Barra de tiempo: cada tramo mide sus días; las monedas marcan los pagos -->
       <div class="reveal mt-20 hidden lg:block" aria-hidden="true">
         <p class="mb-14 text-sm text-muted">Los pagos se liberan contra entregas: el primero al arrancar, el segundo al aprobar el diseño, el tercero con el sitio funcionando.</p>
@@ -311,10 +305,38 @@ const jsonLd = [
     </div>
   </section>
 
+  <!-- 05 · Lo que recibes -->
+  <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="deliverables-title">
+    <div class="container-x">
+      <SectionHeading id="deliverables-title" eyebrow="Lo que recibes" title="Todo lo que incluye un proyecto" description="Cada entregable llega en tu propuesta con su valor desglosado. Sabes exactamente en qué inviertes, y el proyecto no crece sin control." tone="dark" />
+      <div class="mt-12 grid gap-8 lg:grid-cols-12">
+        <ul class="card-ink divide-y divide-white/[0.07] lg:col-span-7" role="list">
+          {deliverables.map((d) => (
+            <li class="flex items-start gap-3 px-6 py-3.5">
+              <svg class="mt-1 size-4 shrink-0 text-lime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>
+              <span class="text-white/85">{d}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="lg:col-span-5">
+          <p class="mb-3 text-sm font-medium text-white/50">Incluido en cada proyecto, sin costo adicional</p>
+          <ul class="grid gap-3" role="list">
+            {extras.map(({ title, text }) => (
+              <li class="reveal card-ink p-5">
+                <h3 class="font-semibold">{title}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-white/60">{text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 07 · Garantías y alcance -->
   <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="guarantees-title">
     <div class="container-x">
-      <SectionHeading id="guarantees-title" eyebrow="07 · Lo que protege a los dos" title="Garantías por escrito y un alcance claro" description="No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes revisar, y el alcance queda definido antes de empezar." />
+      <SectionHeading id="guarantees-title" eyebrow="Lo que protege a los dos" title="Garantías por escrito y un alcance claro" description="No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes revisar, y el alcance queda definido antes de empezar." />
       <ul class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
         {guarantees.map(({ title, text }) => (
           <li class="reveal card p-6 sm:p-7">
@@ -341,12 +363,40 @@ const jsonLd = [
     </div>
   </section>
 
-  <Portfolio />
-  <Results />
-  <Testimonials />
+  <!-- Para quién es -->
+  <section class="py-20 sm:py-28" aria-labelledby="fit-title">
+    <div class="container-x">
+      <SectionHeading id="fit-title" eyebrow="Para quién es" title="No hacemos sitios baratos. Hacemos sitios que se pagan solos." description="Tomamos pocos proyectos al mes para cumplir cada fecha, así que preferimos ser claros desde el principio." />
+      <div class="mt-12 grid gap-4 lg:grid-cols-2">
+        <div class="reveal card p-6 sm:p-8">
+          <h3 class="text-lg font-semibold text-text">Es para ti si…</h3>
+          <ul class="mt-5 space-y-3" role="list">
+            {fit.yes.map((t) => (
+              <li class="flex gap-3 text-muted">
+                <span class="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true"><svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7" /></svg></span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="reveal card-surface p-6 sm:p-8">
+          <h3 class="text-lg font-semibold text-text">No es para ti si…</h3>
+          <ul class="mt-5 space-y-3" role="list">
+            {fit.no.map((t) => (
+              <li class="flex gap-3 text-muted">
+                <span class="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-ink text-white" aria-hidden="true"><svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg></span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <Faq items={faqs} title="Preguntas que seguro tienes" />
 
-  <!-- 08 · Siguiente paso -->
+  <!-- Siguiente paso -->
   <section class="ink-glow py-24 text-white sm:py-32" aria-labelledby="next-title">
     <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
       <div class="lg:col-span-7">
@@ -368,13 +418,13 @@ const jsonLd = [
       </div>
       <div class="lg:col-span-5">
         <div class="card-ink p-6 sm:p-8">
-          <p class="font-semibold">Resumen de un proyecto</p>
+          <p class="font-semibold">Lo que incluye un proyecto</p>
           <dl class="mt-4 divide-y divide-white/[0.07] text-sm">
-            {[['Sitio completo a la medida', '✓'], ['Textos escritos para tu cliente', '✓'], ['Sistema de agendado', '✓'], ['Páginas por ciudad o zona', '✓'], ['Trabajo para aparecer en Google', '✓'], ['Regalos incluidos', '5'], ['Primer resultado', '10 días'], ['Entrega completa', '45 días'], ['Pagos', '3, contra entregas']].map(([k, v]) => (
+            {[['Sitio completo a la medida', '✓'], ['Textos escritos para tu cliente', '✓'], ['Sistema de agendado', '✓'], ['Páginas por ciudad o zona', '✓'], ['Trabajo para aparecer en Google', '✓'], ['Incluidos sin costo adicional', '5'], ['Primer resultado', '10 días'], ['Entrega completa', '45 días'], ['Pagos', '3, contra entregas']].map(([k, v]) => (
               <div class="flex items-center justify-between gap-4 py-2.5"><dt class="text-white/60">{k}</dt><dd class="font-medium">{v}</dd></div>
             ))}
           </dl>
-          <p class="mt-4 text-xs text-white/40">Capacidad limitada: tomamos pocos proyectos nuevos al mes para cumplir las fechas.</p>
+          <p class="mt-4 text-xs text-white/40">La inversión se define por alcance y llega desglosada en tu propuesta.</p>
         </div>
       </div>
     </div>
