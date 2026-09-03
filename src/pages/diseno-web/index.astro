@@ -8,7 +8,7 @@ import SeoGraphic from '../../components/graphics/SeoGraphic.astro';
 import EditorGraphic from '../../components/graphics/EditorGraphic.astro';
 import BookingGraphic from '../../components/graphics/BookingGraphic.astro';
 import BridgeGraphic from '../../components/graphics/BridgeGraphic.astro';
-import ClientDoubtsGraphic from '../../components/graphics/ClientDoubtsGraphic.astro';
+import DashboardGraphic from '../../components/graphics/DashboardGraphic.astro';
 import MistakeScene from '../../components/graphics/MistakeScene.astro';
 import Faq from '../../components/ui/Faq.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
@@ -73,6 +73,7 @@ const deliverables = [
   'Páginas por ciudad o zona para búsquedas locales',
   'Trabajo completo para aparecer en Google',
   'Tecnología de alto desempeño: carga rápido, siempre',
+  'Panel de monitoreo anual: leads, visitas y de dónde llega el tráfico',
 ];
 /* Incluido en cada proyecto, sin costo adicional */
 const extras = [
@@ -132,6 +133,7 @@ const faqs = [
   { q: '¿Por qué no arrancamos con los anuncios de una vez?', a: 'Porque pagar anuncios para mandar gente a una página que no convence es tirar el dinero. Primero el vehículo; luego, con la investigación de palabras clave lista, la estrategia de anuncios en su propia propuesta.' },
   { q: 'Hay opciones más baratas. ¿Por qué invertir más?', a: 'Si lo que buscas es lo más barato, no somos la opción, y preferimos decirlo desde ahora. Una plantilla con tus datos cuesta menos porque no investiga a tu comprador, no escribe para sus miedos reales, no agenda citas ni te posiciona por zona. Nuestro trabajo es para negocios que ven su sitio como una inversión: un solo cliente cerrado suele pagarla.' },
   { q: '¿Cuánto cuesta?', a: 'La inversión se define por el alcance: número de páginas, sistema de agendado, páginas por zona e integraciones. Cada propuesta llega con el valor de cada entregable desglosado y un esquema de tres pagos ligados a entregas. Lo revisamos juntos en la sesión de diagnóstico.' },
+  { q: '¿Cómo sé si el sitio está funcionando?', a: 'Con tu sitio recibes acceso a un panel de monitoreo durante un año: cuántas personas lo visitan, de dónde llegan (Google, anuncios, recomendados), cuántas se convierten en leads y cuántas en citas. Sin métricas de vanidad: lo que necesitas para decidir dónde invertir.' },
   { q: '¿Cómo se paga?', a: 'En tres pagos ligados a entregas que puedes ver y revisar: al firmar, al aprobar el diseño completo y contra entrega con el sitio funcionando. El esquema exacto va en tu propuesta.' },
   { q: '¿Cuánto tarda?', a: 'Primer boceto en 10 días hábiles y lanzamiento en 45 días para un sitio completo. Una landing page toma menos; un e-commerce o una plataforma puede tomar más. En la propuesta te damos el calendario exacto.' },
   { q: '¿Qué pasa cuando terminan los 30 días de soporte?', a: 'El sitio queda funcionando y es tuyo: no depende de nosotros para operar. Cambios o mejoras posteriores se cotizan aparte, viendo costo y tiempo antes de decidir.' },
@@ -192,12 +194,7 @@ const jsonLd = [
   <!-- 01 · El problema -->
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="problem-title">
     <div class="container-x">
-      <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
-        <div class="lg:col-span-7">
-          <SectionHeading id="problem-title" eyebrow="El problema" title="El trabajo ya lo haces bien. Falta que tu sitio lo demuestre." description="Casi todos los sitios hablan de la empresa: años de experiencia, lista de servicios, fotos genéricas. Y la persona que entra está pensando en otra cosa. Si el sitio no responde esas dudas, se va con el competidor que sí lo hizo, aunque haga peor trabajo." tone="dark" />
-        </div>
-        <div class="reveal lg:col-span-5"><ClientDoubtsGraphic /></div>
-      </div>
+      <SectionHeading id="problem-title" eyebrow="El problema" title="El trabajo ya lo haces bien. Falta que tu sitio lo demuestre." description="Casi todos los sitios hablan de la empresa: años de experiencia, lista de servicios, fotos genéricas. Y la persona que entra está pensando en otra cosa: si van a cumplir, si es seguro, por qué ellos y no el de al lado. Si el sitio no lo responde, se va con el competidor que sí lo hizo." tone="dark" />
       <ul class="mt-14 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" role="list">
         {mistakes.map(({ kind, title, text }, i) => (
           <GraphicCard {title} description={text} eyebrow={`Error 0${i + 1}`} tone="dark">
@@ -263,6 +260,34 @@ const jsonLd = [
       <div class="reveal mt-12 rounded-card border border-line bg-paper-soft p-6 sm:p-8">
         <p class="font-semibold text-text">Una verdad que casi nadie te va a decir</p>
         <p class="mt-2 leading-relaxed text-muted">Nadie puede prometerte que tu sitio va a aparecer arriba en Google en 30 días. Quien te lo promete, te está mintiendo. Lo que sí garantizamos: el sitio queda construido y configurado para posicionarse desde el día uno. Que Google lo encuentre y confíe en él es un proceso gradual. El acelerador es el tráfico pagado, y esa etapa va en su propia propuesta, después del sitio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Después del lanzamiento: monitoreo -->
+  <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="monitor-title">
+    <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
+      <div class="order-2 lg:order-1 lg:col-span-6">
+        <div class="reveal group">
+          <div class="gcard"><DashboardGraphic /><span class="gcard__sheen" aria-hidden="true"></span></div>
+          <p class="mt-3 text-xs text-faint">Datos ilustrativos.</p>
+        </div>
+      </div>
+      <div class="order-1 lg:order-2 lg:col-span-6">
+        <SectionHeading id="monitor-title" eyebrow="Después del lanzamiento" title="Sabes qué pasa con tu sitio, todo el año" description="Un sitio que no se mide es una apuesta. Con tu proyecto recibes acceso a un panel de monitoreo durante un año: cuánta gente entra, de dónde llega y cuántos se convierten en leads y en citas." />
+        <ul class="mt-8 grid gap-3 sm:grid-cols-2" role="list">
+          {[
+            ['Visitas y tráfico', 'Cuántas personas entran y desde qué canal: Google, anuncios, recomendados.'],
+            ['Leads y citas', 'Cada contacto y cada cita agendada, en un solo lugar.'],
+            ['Tendencia mes a mes', 'Ves si el sitio crece o si hay que ajustar algo.'],
+            ['Decisiones con datos', 'Sabes dónde invertir el siguiente peso, sin adivinar.'],
+          ].map(([t, d]) => (
+            <li class="card p-5">
+              <h3 class="font-semibold text-text">{t}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-muted">{d}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
@@ -420,7 +445,7 @@ const jsonLd = [
         <div class="card-ink p-6 sm:p-8">
           <p class="font-semibold">Lo que incluye un proyecto</p>
           <dl class="mt-4 divide-y divide-white/[0.07] text-sm">
-            {[['Sitio completo a la medida', '✓'], ['Textos escritos para tu cliente', '✓'], ['Sistema de agendado', '✓'], ['Páginas por ciudad o zona', '✓'], ['Trabajo para aparecer en Google', '✓'], ['Incluidos sin costo adicional', '5'], ['Primer resultado', '10 días'], ['Entrega completa', '45 días'], ['Pagos', '3, contra entregas']].map(([k, v]) => (
+            {[['Sitio completo a la medida', '✓'], ['Textos escritos para tu cliente', '✓'], ['Sistema de agendado', '✓'], ['Páginas por ciudad o zona', '✓'], ['Trabajo para aparecer en Google', '✓'], ['Panel de monitoreo', '12 meses'], ['Incluidos sin costo adicional', '5'], ['Primer resultado', '10 días'], ['Entrega completa', '45 días'], ['Pagos', '3, contra entregas']].map(([k, v]) => (
               <div class="flex items-center justify-between gap-4 py-2.5"><dt class="text-white/60">{k}</dt><dd class="font-medium">{v}</dd></div>
             ))}
           </dl>

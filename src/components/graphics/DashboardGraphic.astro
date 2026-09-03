@@ -1,0 +1,49 @@
+---
+/** Panel de monitoreo: visitas, leads y citas por mes, y de dónde llega el tráfico. */
+const kpis = [
+  { label: 'Visitas', value: '4,820', delta: '+18%' },
+  { label: 'Leads', value: '132', delta: '+24%' },
+  { label: 'Citas', value: '41', delta: '+31%' },
+];
+const bars = [38, 46, 42, 58, 64, 60, 72, 78, 74, 88, 92, 100];
+const sources = [
+  { name: 'Google', pct: 52 },
+  { name: 'Meta', pct: 31 },
+  { name: 'Directo / recomendados', pct: 17 },
+];
+---
+<div class="absolute inset-0 p-[5%]">
+  <div class="g-panel flex h-full flex-col rounded-[3cqw] p-[3.4cqw]">
+    <div class="flex items-center justify-between">
+      <span class="text-[max(0.6rem,2.8cqw)] font-semibold text-white">Tu panel</span>
+      <span class="rounded-full bg-white/10 px-[2cqw] py-[0.6cqw] text-[max(0.5rem,2.2cqw)] text-white/60">Últimos 12 meses</span>
+    </div>
+    <div class="mt-[2.6cqw] grid grid-cols-3 gap-[2cqw]">
+      {kpis.map(({ label, value, delta }) => (
+        <div class="rounded-[2cqw] bg-white/[0.06] p-[2.4cqw] ring-1 ring-white/[0.06]">
+          <p class="text-[max(0.5rem,2.2cqw)] text-white/50">{label}</p>
+          <p class="mt-[0.6cqw] text-[max(0.8rem,4cqw)] font-semibold leading-none text-white">{value}</p>
+          <p class="mt-[1cqw] text-[max(0.48rem,2cqw)] font-medium text-lime">{delta}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-[2.6cqw] grid flex-1 grid-cols-[1.5fr_1fr] gap-[2.6cqw]">
+      <div class="flex items-end gap-[1cqw] rounded-[2cqw] bg-white/[0.04] p-[2.4cqw]">
+        {bars.map((h, i) => (
+          <span class:list={['flex-1 rounded-[0.6cqw]', i === bars.length - 1 ? 'bg-lime' : 'bg-white/25']} style={`height:${h}%`}></span>
+        ))}
+      </div>
+      <ul class="flex flex-col justify-center gap-[1.8cqw]" role="list">
+        {sources.map(({ name, pct }) => (
+          <li>
+            <div class="flex justify-between text-[max(0.48rem,2.1cqw)] text-white/70"><span>{name}</span><span>{pct}%</span></div>
+            <span class="mt-[0.8cqw] block h-[1.2cqw] rounded-full bg-white/10"><i class="block h-full rounded-full bg-white/70" style={`width:${pct}%`}></i></span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+  <span class="g-tile absolute left-[2%] bottom-[5%] -rotate-[8deg] [--tilt:-8deg]" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16" /><path d="m7 15 4-5 3 3 5-7" /></svg>
+  </span>
+</div>
