@@ -67,7 +67,7 @@ const pillars = [
 /* 05 · Lo que recibes */
 const deliverables = [
   'Estudio de tu negocio y plan para que el sitio venda',
-  'Tu MVP en 10 días: página de inicio y botón para agendar, en línea',
+  'Tu MVP en 10 días: la página o función que más necesitas para empezar a vender, en línea',
   'Todos los textos, escritos para tu cliente',
   'Diseño a la medida para celular y computadora',
   'Sistema para agendar: formulario y calendario',
@@ -88,14 +88,14 @@ const extras = [
 
 /* Cómo trabajamos: tres momentos, sin mecánica de venta */
 const moments = [
-  { n: '10 días', title: 'Tu MVP en línea', text: 'Página de inicio y botón para agendar, publicados. Tu primer win antes de dos semanas.', win: true },
+  { n: '10 días', title: 'Tu MVP en línea', text: 'La página o función que más necesitas para empezar a vender, publicada. Tu primer win antes de dos semanas.', win: true },
   { n: 'Apruebas', title: 'Antes de construir', text: 'Ves el diseño completo y los textos. Nada se construye sin tu visto bueno.' },
   { n: 'En línea', title: 'Lanzamos, y un año contigo', text: 'Publicamos y lo conectamos con Google. Después, un año de soporte, sistema de leads y panel de monitoreo, incluido.' },
 ];
 
 /* 07 · Garantías y alcance */
 const guarantees = [
-  { title: 'Tu MVP en 10 días', text: 'A los 10 días hábiles tu primera versión está en línea: inicio y botón para agendar. Si no llega, lo sabes de inmediato.' },
+  { title: 'Tu MVP en 10 días', text: 'A los 10 días hábiles está en línea lo que más necesitas para empezar a vender. Si no llega, lo sabes de inmediato.' },
   { title: 'Garantía de satisfacción', text: 'Trabajamos contigo hasta que apruebes el diseño. No entregamos hasta que estés conforme.' },
   { title: 'Garantía de rendimiento', text: 'Tu sitio sale con 90 o más en las pruebas de Google: velocidad, buscadores y uso.' },
 ];
@@ -375,7 +375,7 @@ const jsonLd = [
   <!-- Para quién es -->
   <section class="py-20 sm:py-28" aria-labelledby="fit-title">
     <div class="container-x">
-      <SectionHeading id="fit-title" eyebrow="Para quién es" title="No hacemos sitios baratos. Hacemos sitios que se pagan solos." />
+      <SectionHeading id="fit-title" eyebrow="Para quién es" title="No hacemos sitios baratos. Hacemos sitios que se pagan solos." description="Solo tomamos 5 proyectos web al mes, para cumplir cada fecha. Por eso somos claros desde el inicio." />
       <div class="mt-12 grid gap-4 lg:grid-cols-2">
         <div class="reveal card p-6 sm:p-8">
           <h3 class="text-lg font-semibold text-text">Es para ti si…</h3>
@@ -420,7 +420,8 @@ const jsonLd = [
             </li>
           ))}
         </ol>
-        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <p class="mt-8 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-sm font-medium text-white/80 ring-1 ring-white/10"><span class="size-1.5 rounded-full bg-lime" aria-hidden="true"></span>Solo 5 proyectos web al mes</p>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
           <Button href={site.bookingUrl} variant="inverse" size="lg" icon={false}>Agendar la revisión de 30 minutos</Button>
           <Button href="/portafolio/" variant="ghost" size="lg" class="text-white/70 hover:text-white">Ver portafolio</Button>
         </div>
