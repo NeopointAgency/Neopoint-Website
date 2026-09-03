@@ -20,7 +20,7 @@ import { site } from '../../data/site';
 
 const title = 'Diseño Web que convierte | Sitios que agendan clientes | Neopoint';
 const description =
-  'Sitios web que convierten visitas en clientes. Responden las dudas de tu cliente, cargan rápido y llevan a una sola acción. Tu MVP en línea en 10 días y pagos contra entregas.';
+  'Sitios web que convierten visitas en clientes. Responden las dudas de tu cliente, cargan rápido y llevan a una sola acción. Tu MVP en línea en 10 días y garantías por escrito.';
 
 /* Cifras del método (aplican a todo proyecto) */
 const promises = [
@@ -40,7 +40,7 @@ const mistakes = [
 /* Lo que ya intentaste */
 const attempts = [
   { title: 'La agencia que hace de todo', what: 'Redes, logos, videos y páginas.', happened: 'Te entregó una página bonita que habla de tu empresa. No vende, porque eso no es lo suyo.', missing: 'Un método con un solo fin: que el sitio venda.' },
-  { title: 'El freelancer', what: 'Buen precio y buena voluntad.', happened: 'Sin proceso ni garantías. Se alarga o desaparece, y te deja un sitio a medias.', missing: 'Fechas, pagos contra entregas y alguien que responda.' },
+  { title: 'El freelancer', what: 'Buen precio y buena voluntad.', happened: 'Sin proceso ni garantías. Se alarga o desaparece, y te deja un sitio a medias.', missing: 'Fechas, avances que puedes ver y alguien que responda.' },
   { title: 'Hacerla tú en Wix o WordPress', what: 'Una plantilla con tus datos.', happened: 'Semanas de tu tiempo, carga lenta y textos que no convencen.', missing: 'Saber qué decirle a tu cliente. Eso no viene en la plantilla.' },
 ];
 
@@ -86,12 +86,11 @@ const extras = [
   { title: 'Soporte directo 30 días', text: 'Línea directa por WhatsApp después del lanzamiento.' },
 ];
 
-/* 06 · Cronograma */
-const stages = [
-  { days: 'Etapa 1 · Primer win', title: 'Tu MVP en 10 días', items: ['Reunimos tu material y en 10 días publicamos la primera versión: inicio y botón para agendar.'], pay: 'Pago al arrancar', win: true },
-  { days: 'Etapa 2', title: 'Diseño completo', win: false, items: ['Diseñamos el resto del sitio y escribimos los textos. Tú apruebas.'], pay: 'Pago al aprobar' },
-  { days: 'Etapa 3', title: 'Construcción', win: false, items: ['Construimos el sitio, el formulario y el calendario. Lo revisas en vivo.'], pay: null },
-  { days: 'Etapa 4', title: 'Lanzamiento', win: false, items: ['Lo conectamos con Google, probamos en celular y lo publicamos.'], pay: 'Pago contra entrega' },
+/* Cómo trabajamos: tres momentos, sin mecánica de venta */
+const moments = [
+  { n: '10 días', title: 'Tu MVP en línea', text: 'Página de inicio y botón para agendar, publicados. Tu primer win antes de dos semanas.', win: true },
+  { n: 'Apruebas', title: 'Antes de construir', text: 'Ves el diseño completo y los textos. Nada se construye sin tu visto bueno.' },
+  { n: '1 año', title: 'Lanzamos y medimos', text: 'Publicamos, lo conectamos con Google y ves tus leads en el panel todo el año.' },
 ];
 
 /* 07 · Garantías y alcance */
@@ -106,7 +105,7 @@ const fit = {
   yes: [
     'Vendes un servicio donde la confianza decide',
     'Ves tu sitio como una inversión, no como un gasto',
-    'Quieres fechas, entregas y garantías por escrito',
+    'Quieres ver avances y tener garantías por escrito',
   ],
   no: [
     'Buscas lo más barato o una plantilla con tus datos',
@@ -118,18 +117,17 @@ const fit = {
 /* Siguiente paso */
 const nextSteps = [
   'Hablamos 30 minutos por videollamada sobre tu negocio',
-  'Recibes una propuesta con alcance, fechas y esquema de pagos',
+  'Recibes una propuesta clara con todo lo que incluye',
   'Firmamos y arrancamos en 48 horas',
 ];
 
 const faqs = [
-  { q: 'Ya nos quedó mal una agencia. ¿En qué son diferentes?', a: 'No te pedimos confianza en palabras. Cada pago se libera contra algo que puedes ver. Tu MVP está en línea en 10 días y hay garantías por escrito.' },
+  { q: 'Ya nos quedó mal una agencia. ¿En qué son diferentes?', a: 'No te pedimos confianza en palabras. Tu MVP está en línea en 10 días, ves cada avance antes de seguir y hay garantías por escrito.' },
   { q: '¿Qué pasa con mi sitio actual y el dominio?', a: 'El dominio es tuyo y así se queda. Tu sitio actual sigue en línea hasta el día del cambio. Sin días fuera del aire.' },
   { q: '¿Por qué no empezamos con anuncios?', a: 'Porque mandar gente a una página que no convence es tirar el dinero. Primero el sitio; luego los anuncios, en su propia propuesta.' },
   { q: 'Hay opciones más baratas. ¿Por qué invertir más?', a: 'Si buscas lo más barato, no somos la opción. Una plantilla no estudia a tu cliente ni escribe para él. Nuestro trabajo es una inversión: un solo cliente cerrado suele pagarla.' },
-  { q: '¿Cuánto cuesta?', a: 'Depende del alcance: páginas, agendado, zonas e integraciones. Tu propuesta llega con cada punto y su valor.' },
+  { q: '¿Cuánto cuesta?', a: 'Depende del alcance. En el diagnóstico lo vemos juntos y recibes una propuesta clara con todo lo que incluye.' },
   { q: '¿Cómo sé si el sitio funciona?', a: 'Con un panel de monitoreo por un año. Ves cuánta gente entra, de dónde llega y cuántos se vuelven leads y citas.' },
-  { q: '¿Cómo se paga?', a: 'En pagos ligados a entregas que puedes ver: al arrancar, al aprobar el diseño y contra entrega. El esquema exacto va en tu propuesta.' },
   { q: '¿Trabajan fuera de México?', a: 'Sí. Tenemos clientes en México, LATAM y Estados Unidos, en español e inglés. Todo es remoto.' },
 ];
 
@@ -268,12 +266,12 @@ const jsonLd = [
   </section>
 
   <!-- 04 · Pilares -->
-  <section class="py-20 sm:py-28" aria-labelledby="pillars-title">
+  <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="pillars-title">
     <div class="container-x">
-      <SectionHeading id="pillars-title" eyebrow="Cómo lo construimos" title="Cuatro cosas que hacen que un sitio venda" />
+      <SectionHeading id="pillars-title" eyebrow="Cómo lo construimos" title="Cuatro cosas que hacen que un sitio venda" tone="dark" />
       <ul class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2" role="list">
         {pillars.map(({ graphic: Graphic, title, description }) => (
-          <GraphicCard {title} {description}><Graphic /></GraphicCard>
+          <GraphicCard {title} {description} tone="dark"><Graphic /></GraphicCard>
         ))}
       </ul>
     </div>
@@ -311,32 +309,17 @@ const jsonLd = [
   <Results />
   <Testimonials />
 
-  <!-- 06 · Cronograma -->
-  <section class="py-20 sm:py-28" aria-labelledby="timeline-title">
+  <!-- Cómo trabajamos -->
+  <section class="py-20 sm:py-28" aria-labelledby="how-title">
     <div class="container-x">
-      <SectionHeading id="timeline-title" eyebrow="Proceso" title="Primero un MVP en 10 días. Luego, el sitio completo." description="Sabemos que es difícil saber qué poner en la web para que venda. De eso nos encargamos nosotros. Tú revisas y apruebas. El resto del sitio depende del alcance: suele tomar unas 6 semanas." />
-      <!-- Barra de etapas: el ancho es proporcional a la duración típica; las monedas marcan los pagos -->
-      <div class="reveal mt-20 hidden lg:block" aria-hidden="true">
-        <div class="mb-14"></div>
-        <div class="flex items-center gap-1.5">
-          {[10, 10, 15, 10].map((d, i) => (
-            <div class="relative" style={`flex:${d}`}>
-              <div class:list={['h-3 rounded-full', i === 3 ? 'bg-lime' : 'bg-ink/10']}></div>
-              <span class="absolute left-0 top-5 text-xs text-faint">Etapa {i + 1}</span>
-              {[true, true, false, true][i] && (
-                <span class:list={['absolute -top-12 flex size-10 items-center justify-center rounded-full bg-ink text-base font-semibold text-white ring-4 ring-paper', i === 3 ? 'right-0' : 'left-0']} title="Pago">$</span>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-      <ol class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4" role="list">
-        {stages.map(({ days, title, items, pay, win }) => (
+      <SectionHeading id="how-title" eyebrow="Cómo trabajamos" title="Ves resultados antes de avanzar" description="Sabemos que es difícil saber qué poner en la web para que venda. De eso nos encargamos nosotros. Tú revisas y apruebas." />
+      <ol class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
+        {moments.map(({ n, title, text, win }) => (
           <li class:list={['reveal flex flex-col p-6 sm:p-7', win ? 'card ring-2 ring-lime' : 'card-surface']}>
-            <span class="text-sm font-medium text-lime-deep">{days}</span>
-            <h3 class="mt-2 text-xl font-semibold text-text">{title}</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{items[items.length - 1]}</p>
-            {pay && <span class="mt-5 inline-flex w-fit items-center rounded-full border border-line-strong bg-paper px-3 py-1 text-xs font-medium text-text">{pay}</span>}
+            <span class="text-2xl font-semibold tracking-tight text-text">{n}</span>
+            <h3 class="mt-1 text-lg font-semibold text-text">{title}</h3>
+            <p class="mt-2 leading-relaxed text-muted">{text}</p>
+            {win && <span class="mt-4 inline-flex w-fit items-center rounded-full bg-lime px-3 py-1 text-xs font-semibold text-ink">Primer win</span>}
           </li>
         ))}
       </ol>
@@ -346,7 +329,7 @@ const jsonLd = [
   <!-- 05 · Lo que recibes -->
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="deliverables-title">
     <div class="container-x">
-      <SectionHeading id="deliverables-title" eyebrow="Lo que recibes" title="Todo lo que incluye un proyecto" description="Cada punto llega en tu propuesta con su valor. Sabes en qué inviertes y el proyecto no crece sin control." tone="dark" />
+      <SectionHeading id="deliverables-title" eyebrow="Lo que recibes" title="Todo lo que incluye un proyecto" description="Sabes exactamente qué recibes. Nada queda a la interpretación." tone="dark" />
       <div class="mt-12 grid gap-8 lg:grid-cols-12">
         <ul class="card-ink divide-y divide-white/[0.07] lg:col-span-7" role="list">
           {deliverables.map((d) => (
@@ -374,7 +357,7 @@ const jsonLd = [
   <!-- 07 · Garantías y alcance -->
   <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="guarantees-title">
     <div class="container-x">
-      <SectionHeading id="guarantees-title" eyebrow="Lo que protege a los dos" title="Garantías por escrito, para que esta vez no te equivoques" description="No te pedimos confianza en palabras. Cada pago va contra algo que puedes ver, y el alcance queda claro antes de empezar." />
+      <SectionHeading id="guarantees-title" eyebrow="Lo que protege a los dos" title="Garantías por escrito, para que esta vez no te equivoques" description="No te pedimos confianza en palabras. Ves cada avance antes de seguir, y todo queda claro antes de empezar." />
       <ul class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
         {guarantees.map(({ title, text }) => (
           <li class="reveal card p-6 sm:p-7">
