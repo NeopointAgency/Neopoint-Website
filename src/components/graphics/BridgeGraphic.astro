@@ -1,0 +1,91 @@
+---
+/**
+ * El puente: tu cliente (con su duda) cruza sobre tres tablones
+ * (responde dudas · muestra pruebas · carga rápido) y llega al botón.
+ */
+const planks = [
+  { n: '1', title: 'Responde sus dudas', text: '“¿Sí van a venir?”' },
+  { n: '2', title: 'Muestra pruebas', text: 'trabajos, reseñas, registros' },
+  { n: '3', title: 'Carga rápido', text: 'también en el celular' },
+];
+---
+<div class="bridge gcard group !aspect-auto p-6 sm:p-8 lg:p-10">
+  <div class="relative z-10 grid gap-8 lg:grid-cols-[1fr_2.2fr_1fr] lg:items-center">
+    <!-- Tu cliente -->
+    <div class="flex flex-col items-center text-center">
+      <div class="relative">
+        <span class="bubble absolute -top-16 left-1/2 w-44 -translate-x-1/2 rounded-2xl bg-white px-3.5 py-2.5 text-sm font-medium leading-snug text-ink shadow-[0_18px_30px_-18px_rgb(0_0_0/0.8)]">
+          ¿Esta gente sí va a venir? ¿Sí van a terminar?
+          <i class="absolute -bottom-1.5 left-1/2 size-3 -translate-x-1/2 rotate-45 bg-white" aria-hidden="true"></i>
+        </span>
+        <span class="grid size-20 place-items-center rounded-full bg-white/10 ring-1 ring-white/15">
+          <svg class="size-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" /></svg>
+        </span>
+      </div>
+      <p class="mt-4 font-semibold text-white">Tu cliente</p>
+      <p class="mt-1 text-sm text-white/55">Llega desde Google, un anuncio o una recomendación</p>
+    </div>
+
+    <!-- El puente -->
+    <div class="relative">
+      <p class="mb-6 text-center text-sm font-medium text-white/50">El sitio es el puente</p>
+      <div class="deck relative rounded-2xl p-2 sm:p-2.5">
+        <ol class="grid gap-2 sm:grid-cols-3" role="list">
+          {planks.map(({ n, title, text }) => (
+            <li class="plank rounded-xl px-4 py-3.5 text-center">
+              <span class="block text-xs font-semibold text-lime-deep">{n}</span>
+              <span class="mt-1 block font-semibold leading-tight text-ink">{title}</span>
+              <span class="mt-0.5 block text-xs text-ink/60">{text}</span>
+            </li>
+          ))}
+        </ol>
+        <!-- Cursor que cruza -->
+        <svg class="walker absolute -top-3 left-0 z-10 w-6 drop-shadow-[0_4px_8px_rgb(0_0_0/0.5)]" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 3l14 9-6 1.5L16 20l-3 1.5-3-6.5-5 4z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <p class="mt-5 text-center text-xs text-white/40">Sin puente, el visitante duda y se va con el competidor que sí se lo respondió.</p>
+    </div>
+
+    <!-- Tu negocio -->
+    <div class="flex flex-col items-center text-center">
+      <div class="phone w-40 rounded-[1.4rem] p-3">
+        <span class="mx-auto mb-3 block h-1 w-10 rounded-full bg-white/15"></span>
+        <span class="block rounded-lg bg-white/[0.07] px-2.5 py-1.5 text-left text-[0.65rem] text-white/60">Tu negocio</span>
+        <span class="mt-2 block rounded-lg bg-white/[0.07] px-2.5 py-1.5 text-left text-[0.65rem] text-white/60">Servicios · Trabajos</span>
+        <span class="cta mt-3 block rounded-xl bg-lime py-2.5 text-center text-sm font-semibold text-ink">Agendar</span>
+        <span class="mt-2 inline-flex items-center gap-1 rounded-full bg-white/10 px-2 py-1 text-[0.62rem] font-medium text-white/80">
+          <svg class="size-3 text-lime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7" /></svg>
+          Cita confirmada
+        </span>
+      </div>
+      <p class="mt-4 font-semibold text-white">Una sola acción</p>
+      <p class="mt-1 text-sm text-white/55">Agendar, cotizar o pedir una visita. Tu equipo recibe el aviso al momento.</p>
+    </div>
+  </div>
+  <span class="gcard__sheen" aria-hidden="true"></span>
+</div>
+
+<style>
+  .deck {
+    background: linear-gradient(180deg, #f2f2f2, #d9d9d9);
+    box-shadow: 0 30px 50px -30px rgb(0 0 0 / 0.9), inset 0 1px 0 #fff;
+  }
+  .plank {
+    background: linear-gradient(180deg, #ffffff, #efefef);
+    box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), inset 0 1px 0 #fff;
+  }
+  .phone {
+    background: linear-gradient(180deg, #2a2a2a, #161616);
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.12), inset 0 1px 0 rgb(255 255 255 / 0.12), 0 30px 50px -30px rgb(0 0 0 / 0.9);
+  }
+  .cta { box-shadow: 0 10px 20px -10px rgb(151 239 73 / 0.8); }
+  .walker { animation: walk 6s cubic-bezier(0.45, 0, 0.25, 1) infinite; }
+  @keyframes walk {
+    0%, 8%   { left: 2%;  transform: translateY(0); opacity: 0; }
+    12%      { opacity: 1; }
+    88%      { left: 94%; transform: translateY(0); opacity: 1; }
+    92%, 100% { left: 94%; opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .walker { animation: none; left: 45%; } }
+</style>

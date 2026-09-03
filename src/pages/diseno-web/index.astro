@@ -7,6 +7,8 @@ import SitemapGraphic from '../../components/graphics/SitemapGraphic.astro';
 import SeoGraphic from '../../components/graphics/SeoGraphic.astro';
 import EditorGraphic from '../../components/graphics/EditorGraphic.astro';
 import BookingGraphic from '../../components/graphics/BookingGraphic.astro';
+import BridgeGraphic from '../../components/graphics/BridgeGraphic.astro';
+import MiniScene from '../../components/graphics/MiniScene.astro';
 import Faq from '../../components/ui/Faq.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import Portfolio from '../../components/sections/Portfolio.astro';
@@ -27,22 +29,21 @@ const promises = [
 
 /* 01 · Lo que espanta a los clientes */
 const mistakes = [
-  { title: 'Habla de la empresa, no del cliente', text: 'Años de experiencia, lista de servicios, fotos genéricas. El visitante entró preguntándose otra cosa.' },
-  { title: 'No responde el miedo principal', text: '“¿Y si pago y no vuelven?”, “¿sí van a terminar?”. Si el sitio no lo contesta, se va con el competidor que sí.' },
-  { title: 'No hay prueba', text: 'Sin trabajos reales, reseñas ni registros visibles nadie contrata. En servicios, la confianza lo es todo.' },
-  { title: 'El botón está escondido', text: 'Menús, pestañas y formularios largos. Quien entra con urgencia desde el celular necesita un botón grande y ya.' },
-  { title: 'Carga lento o falla en el celular', text: 'La mayoría de tus visitas llegan desde el teléfono. Cada segundo de espera es un cliente menos.' },
-  { title: 'No hay una oferta clara', text: 'No dice qué recibe el cliente, cuánto tarda ni por qué elegirte. Un sitio sin oferta es un folleto.' },
-];
-
-/* 02 · El puente */
-const entries = [
-  { title: 'Anuncios', text: 'Meta y Google' },
-  { title: 'Búsqueda', text: '“cerca de mí”' },
-  { title: 'Recomendados', text: 'entran a verificar' },
+  { kind: 'company', title: 'Habla de la empresa, no del cliente', text: 'Años de experiencia, lista de servicios, fotos genéricas. El visitante entró preguntándose otra cosa.' },
+  { kind: 'fear', title: 'No responde el miedo principal', text: '“¿Y si pago y no vuelven?”, “¿sí van a terminar?”. Si el sitio no lo contesta, se va con el competidor que sí.' },
+  { kind: 'proof', title: 'No hay prueba', text: 'Sin trabajos reales, reseñas ni registros visibles nadie contrata. En servicios, la confianza lo es todo.' },
+  { kind: 'button', title: 'El botón está escondido', text: 'Menús, pestañas y formularios largos. Quien entra con urgencia desde el celular necesita un botón grande y ya.' },
+  { kind: 'slow', title: 'Carga lento o falla en el celular', text: 'La mayoría de tus visitas llegan desde el teléfono. Cada segundo de espera es un cliente menos.' },
+  { kind: 'offer', title: 'No hay una oferta clara', text: 'No dice qué recibe el cliente, cuánto tarda ni por qué elegirte. Un sitio sin oferta es un folleto.' },
 ];
 
 /* 03 · Perfil del comprador (ejemplo real, resumido) */
+const profileIcons: Record<string, string> = {
+  'Lo que desea': '<path d="M12 21s-7-4.6-9.3-8.6C.8 9 3 5 6.8 5c2 0 3.4 1 4.2 2.3C11.8 6 13.2 5 15.2 5 19 5 21.2 9 19.3 12.4 17 16.4 12 21 12 21Z"/>',
+  'Su miedo principal': '<path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17h.01"/>',
+  'Ya le frustró': '<path d="M17 14V2M9 18.1V22a2 2 0 0 0 2 2l3-8h5.3a2 2 0 0 0 2-2.3l-1.4-8A2 2 0 0 0 18 4H9a2 2 0 0 0-2 2v8l2 4.1Z" transform="rotate(180 12 12)"/>',
+  'Necesita ver': '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+};
 const profile = [
   { k: 'Lo que desea', v: 'Un techo que aguante el invierno, hecho por alguien que sí llega, sí termina y cobra lo que dijo.' },
   { k: 'Su miedo principal', v: '“¿Y si les doy el anticipo y no vuelven?”', quote: true },
@@ -178,12 +179,10 @@ const jsonLd = [
         </blockquote>
       </div>
       <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
-        {mistakes.map(({ title, text }) => (
-          <li class="reveal card-ink p-6 sm:p-7">
-            <span class="inline-flex size-8 items-center justify-center rounded-lg bg-white/[0.07] text-white/70 ring-1 ring-white/10" aria-hidden="true">
-              <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
-            </span>
-            <h3 class="mt-4 text-lg font-semibold">{title}</h3>
+        {mistakes.map(({ kind, title, text }) => (
+          <li class="reveal card-ink p-5 sm:p-6">
+            <MiniScene kind={kind as any} />
+            <h3 class="mt-5 text-lg font-semibold">{title}</h3>
             <p class="mt-2 leading-relaxed text-white/60">{text}</p>
           </li>
         ))}
@@ -196,37 +195,7 @@ const jsonLd = [
     <div class="container-x">
       <SectionHeading id="bridge-title" eyebrow="02 · La solución" title="Un puente sólido: no importa por dónde entre, el sitio lo lleva por un solo camino" description="Un solo destino para todo el sitio: que el visitante confíe y dé el paso. Cada página, cada texto y cada botón trabajan para eso." />
 
-      <div class="reveal mt-14 grid gap-4 lg:grid-cols-[1fr_auto_1.5fr_auto_1fr] lg:items-center">
-        <ul class="grid gap-3" role="list">
-          {entries.map(({ title, text }) => (
-            <li class="card-surface px-5 py-4">
-              <span class="block font-semibold text-text">{title}</span>
-              <span class="block text-sm text-muted">{text}</span>
-            </li>
-          ))}
-        </ul>
-        <svg class="mx-auto size-8 rotate-90 text-faint lg:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6" /></svg>
-        <div class="gcard !aspect-auto p-7 sm:p-9">
-          <p class="text-sm font-medium text-white/50">El sitio</p>
-          <h3 class="mt-2 text-2xl font-semibold text-white">Responde miedos, da prueba, genera confianza</h3>
-          <ul class="mt-5 space-y-2 text-white/70" role="list">
-            {['Textos que hablan de lo que a tu cliente le importa', 'Trabajos reales, reseñas y registros a la vista', 'Información acomodada según qué tan decidido llega', 'Carga rápido y funciona igual de bien en el celular'].map((t) => (
-              <li class="flex gap-2.5"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-lime" aria-hidden="true"></span>{t}</li>
-            ))}
-          </ul>
-        </div>
-        <svg class="mx-auto size-8 rotate-90 text-faint lg:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6" /></svg>
-        <div class="grid gap-3">
-          <div class="rounded-card bg-lime p-5 text-ink">
-            <span class="block text-lg font-semibold">Una sola acción</span>
-            <span class="block text-sm text-ink/70">Agendar, cotizar o pedir una inspección: formulario corto o calendario</span>
-          </div>
-          <div class="card-surface px-5 py-4">
-            <span class="block font-semibold text-text">Aviso inmediato a tu equipo</span>
-            <span class="block text-sm text-muted">Y el contacto guardado para seguimiento. Nada se pierde.</span>
-          </div>
-        </div>
-      </div>
+      <div class="reveal mt-14"><BridgeGraphic /></div>
     </div>
   </section>
 
@@ -249,8 +218,11 @@ const jsonLd = [
           </div>
           <dl class="divide-y divide-line">
             {profile.map(({ k, v, quote }) => (
-              <div class="grid gap-1 px-6 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6">
-                <dt class="text-xs font-medium uppercase tracking-wide text-faint">{k}</dt>
+              <div class="grid gap-2 px-6 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6">
+                <dt class="flex items-center gap-2.5 text-xs font-medium uppercase tracking-wide text-faint">
+                  <span class="inline-flex size-7 shrink-0 items-center justify-center rounded-lg bg-paper-soft text-text ring-1 ring-line"><svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={profileIcons[k]} /></span>
+                  {k}
+                </dt>
                 <dd class:list={['leading-relaxed', quote ? 'font-medium text-text' : 'text-muted']}>{v}</dd>
               </div>
             ))}
@@ -309,6 +281,21 @@ const jsonLd = [
   <section class="py-20 sm:py-28" aria-labelledby="timeline-title">
     <div class="container-x">
       <SectionHeading id="timeline-title" eyebrow="06 · Cronograma" title="45 días, en 4 etapas. Cada pago, contra algo que puedes ver." />
+      <!-- Barra de tiempo: cada tramo mide sus días; las monedas marcan los pagos -->
+      <div class="reveal mt-20 hidden lg:block" aria-hidden="true">
+        <p class="mb-14 text-sm text-muted">Los pagos se liberan contra entregas: el primero al arrancar, el segundo al aprobar el diseño, el tercero con el sitio funcionando.</p>
+        <div class="flex items-center gap-1.5">
+          {[10, 10, 15, 10].map((d, i) => (
+            <div class="relative" style={`flex:${d}`}>
+              <div class:list={['h-3 rounded-full', i === 3 ? 'bg-lime' : 'bg-ink/10']}></div>
+              <span class="absolute left-0 top-5 text-xs text-faint">día {[1, 11, 21, 36][i]}</span>
+              {[true, true, false, true][i] && (
+                <span class:list={['absolute -top-12 flex size-10 items-center justify-center rounded-full bg-ink text-[0.6rem] font-semibold text-white ring-4 ring-paper', i === 3 ? 'right-0' : 'left-0']}>{[40, 30, 0, 30][i]}%</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
       <ol class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4" role="list">
         {stages.map(({ days, title, items, pay }, i) => (
           <li class="reveal card-surface flex flex-col p-6 sm:p-7">
