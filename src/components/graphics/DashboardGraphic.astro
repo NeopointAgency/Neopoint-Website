@@ -1,5 +1,5 @@
 ---
-/** Panel de monitoreo: visitas, leads y citas por mes, y de dónde llega el tráfico. */
+/** Panel de monitoreo (versión clara): visitas, leads y citas por mes, y de dónde llega el tráfico. */
 const kpis = [
   { label: 'Visitas', value: '4,820', delta: '+18%' },
   { label: 'Leads', value: '132', delta: '+24%' },
@@ -13,31 +13,31 @@ const sources = [
 ];
 ---
 <div class="absolute inset-0 p-[5%]">
-  <div class="g-panel flex h-full flex-col rounded-[3cqw] p-[3.4cqw]">
+  <div class="flex h-full flex-col rounded-[3cqw] bg-paper p-[3.4cqw] shadow-[0_0_0_1px_var(--color-line),0_30px_50px_-30px_rgb(0_0_0/0.25)]">
     <div class="flex items-center justify-between">
-      <span class="text-[max(0.6rem,2.8cqw)] font-semibold text-white">Tu panel</span>
-      <span class="rounded-full bg-white/10 px-[2cqw] py-[0.6cqw] text-[max(0.5rem,2.2cqw)] text-white/60">Últimos 12 meses</span>
+      <span class="text-[max(0.6rem,2.8cqw)] font-semibold text-text">Tu panel</span>
+      <span class="rounded-full bg-surface px-[2cqw] py-[0.6cqw] text-[max(0.5rem,2.2cqw)] text-muted">Últimos 12 meses</span>
     </div>
     <div class="mt-[2.6cqw] grid grid-cols-3 gap-[2cqw]">
       {kpis.map(({ label, value, delta }) => (
-        <div class="rounded-[2cqw] bg-white/[0.06] p-[2.4cqw] ring-1 ring-white/[0.06]">
-          <p class="text-[max(0.5rem,2.2cqw)] text-white/50">{label}</p>
-          <p class="mt-[0.6cqw] text-[max(0.8rem,4cqw)] font-semibold leading-none text-white">{value}</p>
-          <p class="mt-[1cqw] text-[max(0.48rem,2cqw)] font-medium text-lime">{delta}</p>
+        <div class="rounded-[2cqw] bg-surface p-[2.4cqw]">
+          <p class="text-[max(0.5rem,2.2cqw)] text-muted">{label}</p>
+          <p class="mt-[0.6cqw] text-[max(0.8rem,4cqw)] font-semibold leading-none text-text">{value}</p>
+          <p class="mt-[1cqw] text-[max(0.48rem,2cqw)] font-medium text-lime-deep">{delta}</p>
         </div>
       ))}
     </div>
     <div class="mt-[2.6cqw] grid flex-1 grid-cols-[1.5fr_1fr] gap-[2.6cqw]">
-      <div class="flex items-end gap-[1cqw] rounded-[2cqw] bg-white/[0.04] p-[2.4cqw]">
+      <div class="flex items-end gap-[1cqw] rounded-[2cqw] bg-surface p-[2.4cqw]">
         {bars.map((h, i) => (
-          <span class:list={['flex-1 rounded-[0.6cqw]', i === bars.length - 1 ? 'bg-lime' : 'bg-white/25']} style={`height:${h}%`}></span>
+          <span class:list={['flex-1 rounded-[0.6cqw]', i === bars.length - 1 ? 'bg-lime' : 'bg-ink/20']} style={`height:${h}%`}></span>
         ))}
       </div>
       <ul class="flex flex-col justify-center gap-[1.8cqw]" role="list">
         {sources.map(({ name, pct }) => (
           <li>
-            <div class="flex justify-between text-[max(0.48rem,2.1cqw)] text-white/70"><span>{name}</span><span>{pct}%</span></div>
-            <span class="mt-[0.8cqw] block h-[1.2cqw] rounded-full bg-white/10"><i class="block h-full rounded-full bg-white/70" style={`width:${pct}%`}></i></span>
+            <div class="flex justify-between text-[max(0.48rem,2.1cqw)] text-muted"><span>{name}</span><span>{pct}%</span></div>
+            <span class="mt-[0.8cqw] block h-[1.2cqw] rounded-full bg-ink/10"><i class="block h-full rounded-full bg-ink/70" style={`width:${pct}%`}></i></span>
           </li>
         ))}
       </ul>
