@@ -17,15 +17,17 @@ const planks = [
     <line x1="0" y1="2" x2="100" y2="2" pathLength="100" class="path__track" />
     <line x1="0" y1="2" x2="100" y2="2" pathLength="100" class="path__done" />
   </svg>
+  <span class="arrow arrow--1">→</span>
+  <span class="arrow arrow--2">→</span>
 
   <!-- Cliente -->
   <div class="visitor">
-    <span class="vbubble">¿Sí cumplen? ¿Por qué ellos?</span>
+    <span class="vbubble"><span class="vbubble__q">¿Sí cumplen? ¿Por qué ellos?</span><span class="vbubble__a">Duda resuelta ✓</span></span>
     <span class="avatar">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" /></svg>
     </span>
   </div>
-  <p class="caption caption--left">Tu cliente</p>
+  <p class="caption caption--left">Tu cliente llega con dudas</p>
 
   <!-- Puente -->
   <div class="deck">
@@ -39,14 +41,14 @@ const planks = [
       </div>
     ))}
   </div>
-  <p class="caption caption--center">El sitio es el puente</p>
+  <p class="caption caption--center">El sitio hace tres cosas, en este orden</p>
 
   <!-- Botón -->
   <div class="goal">
     <span class="goal__ok">✓ Cita confirmada</span>
     <span class="goal__cta">Agendar</span>
   </div>
-  <p class="caption caption--right">Una sola acción</p>
+  <p class="caption caption--right">Y agenda</p>
 </div>
 </div>
 
@@ -74,7 +76,7 @@ const planks = [
 
   /* Pies de foto */
   .caption { position: absolute; bottom: 2.4cqw; font-size: max(0.6rem, 1.5cqw); font-weight: 500; color: var(--color-faint); }
-  .caption--left { left: 6%; width: 12%; text-align: center; }
+  .caption--left { left: 3%; width: 18%; text-align: center; }
   .caption--center { left: 50%; translate: -50% 0; }
   .caption--right { right: 6%; width: 14%; text-align: center; }
 
@@ -83,8 +85,11 @@ const planks = [
   .path__track { stroke: rgb(0 0 0 / 0.14); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 2.2 2.2; vector-effect: non-scaling-stroke; }
   .path__done { stroke: var(--color-lime); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; vector-effect: non-scaling-stroke; animation-name: pathDone; animation-timing-function: linear; }
 
+  .arrow { position: absolute; bottom: 16.4cqw; font-size: max(0.9rem, 2.4cqw); font-weight: 600; color: var(--color-faint); z-index: 4; }
+  .arrow--1 { left: 18.6%; } .arrow--2 { left: 76.6%; }
+
   /* Cliente */
-  .visitor { position: absolute; left: 6%; bottom: 14.2cqw; width: 12%; text-align: center; z-index: 5; animation-name: walk; }
+  .visitor { position: absolute; left: 6%; bottom: 14.2cqw; width: 12%; text-align: center; z-index: 5; animation-name: appear; }
   .avatar {
     display: grid; place-items: center; width: 8cqw; height: 8cqw; margin: 0 auto; border-radius: 50%; color: #fff;
     background: linear-gradient(180deg, #3b3b3b, #1a1a1a);
@@ -98,6 +103,8 @@ const planks = [
     box-shadow: 0 14px 26px -12px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.14);
     animation-name: bubble;
   }
+  .vbubble__q, .vbubble__a { display: block; }
+  .vbubble__a { position: absolute; inset: 0; display: grid; place-items: center; border-radius: inherit; background: var(--color-lime); color: #0a0a0a; opacity: 0; animation-name: answer; }
   .vbubble::after { content: ""; position: absolute; left: 50%; bottom: -0.6cqw; width: 1.2cqw; height: 1.2cqw; translate: -50% 0; rotate: 45deg; background: #262626; }
 
   /* Puente */
@@ -139,15 +146,7 @@ const planks = [
 
   /* ───── Keyframes (1 s = 10 %) ─────
      0–1 llega · 1–2.5 tablón 1 · 2.5–4.5 tablón 2 · 4.5–6.5 tablón 3 · 6.5–8 botón · hold · 9.4–10 fade */
-  @keyframes walk {
-    0%, 4%    { left: 6%; opacity: 0; }
-    8%        { opacity: 1; }
-    18%, 25%  { left: 24%; opacity: 1; }
-    38%, 45%  { left: 41%; }
-    58%, 65%  { left: 58%; }
-    78%, 92%  { left: 66%; opacity: 1; }
-    96%, 100% { left: 66%; opacity: 0; }
-  }
+  @keyframes appear { 0%, 2% { opacity: 0; transform: translateY(6px); } 8%, 92% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; transform: none; } }
   @keyframes pathDone {
     0%, 8%  { stroke-dashoffset: 100; opacity: 1; }
     18%     { stroke-dashoffset: 78; }
@@ -159,7 +158,8 @@ const planks = [
     78%, 92% { stroke-dashoffset: 0; opacity: 1; }
     96%, 100% { stroke-dashoffset: 0; opacity: 0; }
   }
-  @keyframes bubble { 0%, 40% { opacity: 1; transform: none; } 45%, 100% { opacity: 0; transform: translateY(-6px); } }
+  @keyframes bubble { 0%, 4% { opacity: 0; } 10%, 92% { opacity: 1; } 96%, 100% { opacity: 0; } }
+  @keyframes answer { 0%, 40% { opacity: 0; } 44%, 100% { opacity: 1; } }
   @keyframes plank1 { 0%, 17% { box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), inset 0 1px 0 #fff; } 20%, 92% { box-shadow: 0 0 0 0.45cqw var(--color-lime), inset 0 1px 0 #fff; } 96%, 100% { box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), inset 0 1px 0 #fff; } }
   @keyframes plank2 { 0%, 37% { box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), inset 0 1px 0 #fff; } 40%, 92% { box-shadow: 0 0 0 0.45cqw var(--color-lime), inset 0 1px 0 #fff; } 96%, 100% { box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), inset 0 1px 0 #fff; } }
   @keyframes plank3 { 0%, 57% { box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), inset 0 1px 0 #fff; } 60%, 92% { box-shadow: 0 0 0 0.45cqw var(--color-lime), inset 0 1px 0 #fff; } 96%, 100% { box-shadow: 0 1px 0 rgb(0 0 0 / 0.08), inset 0 1px 0 #fff; } }
