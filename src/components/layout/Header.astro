@@ -41,7 +41,7 @@ const isActive = (href: string) => current === href || (href !== '/' && current.
       </ul>
 
       <div class="flex items-center gap-2">
-        <div class="hidden sm:block"><Button href={site.bookingUrl} size="sm" icon={false} class="rounded-pill">Agendar asesoría</Button></div>
+        <div class="hidden sm:block"><Button href={site.bookingUrl} size="sm" icon={false} class="rounded-pill">Agendar diagnóstico</Button></div>
         <button
           type="button"
           class="inline-flex size-10 items-center justify-center rounded-pill text-text transition hover:bg-surface lg:hidden"
@@ -66,7 +66,7 @@ const isActive = (href: string) => current === href || (href !== '/' && current.
           </li>
         ))}
         <li class="mt-2 border-t border-line pt-3">
-          <Button href={site.bookingUrl} class="w-full" icon={false}>Agendar asesoría</Button>
+          <Button href={site.bookingUrl} class="w-full" icon={false}>Agendar diagnóstico</Button>
         </li>
       </ul>
     </div>

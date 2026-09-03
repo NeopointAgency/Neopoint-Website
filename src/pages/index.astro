@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/sections/Hero.astro';
 import ClientsMarquee from '../components/sections/ClientsMarquee.astro';
 import Services from '../components/sections/Services.astro';
+import HowWeWork from '../components/sections/HowWeWork.astro';
 import Portfolio from '../components/sections/Portfolio.astro';
 import Results from '../components/sections/Results.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
@@ -12,7 +13,7 @@ import { services } from '../data/home';
 
 const title = 'Neopoint | Diseño Web y Generación de Leads en México';
 const description =
-  'Estudio de marketing digital en México. Diseñamos sitios web que convierten y campañas de generación de leads con resultados medibles. +60 proyectos, +20k clientes potenciales.';
+  'Sitios web que venden y campañas que llenan tu agenda. Marketing que trae clientes, no likes. Más de 60 negocios y 20 mil clientes potenciales generados.';
 
 const jsonLd = [
   {
@@ -40,6 +41,7 @@ const jsonLd = [
   <Hero />
   <ClientsMarquee />
   <Services />
+  <HowWeWork />
   <Portfolio />
   <Results />
   <Testimonials />

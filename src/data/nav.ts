@@ -15,7 +15,7 @@ export const footerNav = {
   empresa: [
     { label: 'Portafolio', href: '/portafolio/' },
     { label: 'Nosotros', href: '/nosotros/' },
-    { label: 'Agendar asesoría', href: 'https://cal.com/neopoint-agency-rq1nwu/neopoint-web-studio' },
+    { label: 'Agendar diagnóstico', href: 'https://cal.com/neopoint-agency-rq1nwu/neopoint-web-studio' },
   ],
   legal: [{ label: 'Política de privacidad', href: '/politica-privacidad/' }],
 } as const;

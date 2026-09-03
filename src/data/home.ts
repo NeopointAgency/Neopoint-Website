@@ -20,15 +20,15 @@ export const services = [
     title: 'Diseño Web',
     href: '/diseno-web/',
     description:
-      'Sitios web rápidos, claros y pensados para convertir. Diseño a medida, optimización SEO y una experiencia que representa tu marca.',
-    bullets: ['Landing pages y sitios corporativos', 'E-commerce', 'SEO técnico y velocidad'],
+      'Un sitio que responde las dudas de tu cliente, carga rápido y lleva a una sola acción. Tu MVP en línea en 10 días.',
+    bullets: ['MVP en 10 días', 'Sistema para agendar', 'Un año de soporte y panel'],
   },
   {
     title: 'Generación de Leads',
     href: '/generacion-de-leads/',
     description:
-      'Campañas en Meta y Google con embudos que atraen clientes potenciales calificados. Medimos cada peso invertido.',
-    bullets: ['Meta Ads y Google Ads', 'Embudos y automatización', 'Reportes con datos reales'],
+      'Campañas en Meta y Google con embudos que filtran y califican. A ti solo llegan los que sí quieren comprar.',
+    bullets: ['Meta y Google Ads', 'Embudos que califican', 'Seguimiento hasta la cita'],
   },
 ];
 

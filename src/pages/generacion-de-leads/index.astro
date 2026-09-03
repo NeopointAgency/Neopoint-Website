@@ -21,12 +21,12 @@ const funnels = (await getProjects()).filter((p) => p.data.category === 'funnel'
 
 const title = 'Generación de Leads en México | Lead Gen Agency | Neopoint';
 const description =
-  'Agencia de adquisición de clientes potenciales. Campañas en Meta y Google con embudos que filtran y califican prospectos, y seguimiento que impulsa los cierres. Sector inmobiliario, solar y tech.';
+  'Campañas en Meta y Google con embudos que filtran y califican. A ti solo llegan los que sí quieren comprar. Sector inmobiliario, solar y tech.';
 
 const steps = [
-  { lead: 'Hacemos lo que funciona, iniciando con', title: 'Enfoque narrativo comercial', text: 'Diseñamos la ruta que seguirán tus clientes para llegar al contacto de manera clara y efectiva.', graphic: AdGraphic },
-  { lead: 'Después captamos clientes potenciales evitando preguntones', title: 'Modelo Attractleads', text: 'Sistema automatizado que filtra, califica y convierte prospectos en citas sin esfuerzo.', graphic: FunnelGraphic },
-  { lead: 'Pero sabemos que los leads no son nada si no hay ventas…', title: 'Push to convert', text: 'Flujos de conversación y seguimiento que impulsan tus cierres con asesoría y estructura efectiva.', graphic: ChatGraphic },
+  { lead: '01 · Primero', title: 'Un anuncio que habla claro', text: 'Le decimos a tu cliente lo que quiere oír: qué vendes, para quién y por qué tú.', graphic: AdGraphic },
+  { lead: '02 · Después', title: 'Un embudo que filtra', text: 'Califica antes de que lleguen a ti. Fuera curiosos y preguntones.', graphic: FunnelGraphic },
+  { lead: '03 · Al final', title: 'Seguimiento hasta la cita', text: 'Conversación y recordatorios para que el lead se vuelva cita, y la cita venta.', graphic: ChatGraphic },
 ];
 
 const sectors = [
@@ -36,11 +36,11 @@ const sectors = [
 ];
 
 const faqs = [
-  { q: '¿En qué plataformas hacen las campañas?', a: 'Principalmente Meta (Facebook e Instagram) y Google. Elegimos la mezcla según tu sector, tu ticket y dónde está tu cliente.' },
-  { q: '¿Qué es un lead calificado?', a: 'Un contacto que cumple criterios definidos contigo (zona, presupuesto, necesidad, tiempo de compra). El embudo filtra antes de que llegue a tu equipo de ventas.' },
-  { q: '¿Cuánto debo invertir en pauta?', a: 'La inversión en anuncios se define por objetivo y sector; te proponemos un rango en la asesoría. La pauta se paga directamente a las plataformas y siempre es tuya.' },
-  { q: '¿Cómo mido los resultados?', a: 'Reportamos leads generados, costo por lead, citas agendadas y, cuando conectamos tu CRM, ventas cerradas. Sin métricas de vanidad.' },
-  { q: '¿Cuánto tiempo tarda en verse resultado?', a: 'Las primeras semanas sirven para aprender y optimizar. Normalmente los resultados se estabilizan entre el primer y el segundo mes de campaña.' },
+  { q: '¿En qué plataformas hacen las campañas?', a: 'Meta (Facebook e Instagram) y Google. Elegimos según tu sector y dónde está tu cliente.' },
+  { q: '¿Qué es un lead calificado?', a: 'Un contacto que cumple lo que definimos contigo: zona, presupuesto y tiempo de compra. El embudo filtra antes de que llegue a ti.' },
+  { q: '¿Cuánto debo invertir en anuncios?', a: 'Depende del objetivo y el sector. Te proponemos un rango en el diagnóstico. La pauta se paga a las plataformas y siempre es tuya.' },
+  { q: '¿Cómo mido los resultados?', a: 'Leads, costo por lead, citas y, si conectamos tu CRM, ventas. Sin métricas de vanidad.' },
+  { q: '¿Cuánto tarda en verse resultado?', a: 'Las primeras semanas son de aprendizaje. Los resultados suelen estabilizarse entre el primer y el segundo mes.' },
 ];
 
 const jsonLd = [
@@ -63,10 +63,10 @@ const jsonLd = [
 ---
 
 <Base {title} {description} {jsonLd}>
-  <PageHero eyebrow="Adquisición de clientes potenciales · Lead Gen Agency" title="No hacemos publicidad, generamos resultados de la publicidad" description="Campañas, embudos y seguimiento diseñados para que cada peso invertido regrese en clientes potenciales calificados.">
+  <PageHero eyebrow="Generación de leads" title="Anuncios que traen clientes, no curiosos" description="Sabemos cuál es el miedo: pagar publicidad y recibir preguntones. Por eso filtramos antes de que lleguen a ti.">
     <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-      <Button href={site.bookingUrl} size="lg" icon={false}>Agendar demo</Button>
-      <Button href="#metodo" variant="secondary" size="lg">Ver el método</Button>
+      <Button href={site.bookingUrl} size="lg" icon={false}>Agendar diagnóstico</Button>
+      <Button href="#metodo" variant="secondary" size="lg">Ver cómo funciona</Button>
     </div>
   </PageHero>
 
@@ -76,8 +76,8 @@ const jsonLd = [
     <div class="container-x">
       <SectionHeading id="method-title" eyebrow="Método" title="Tres pasos entre el anuncio y la venta" tone="dark" />
       <ol class="mt-14 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3" role="list">
-        {steps.map(({ lead, title, text, graphic: Graphic }, i) => (
-          <GraphicCard {title} description={text} eyebrow={`0${i + 1} · ${lead}`} tone="dark">
+        {steps.map(({ lead, title, text, graphic: Graphic }) => (
+          <GraphicCard {title} description={text} eyebrow={lead} tone="dark">
             <Graphic />
           </GraphicCard>
         ))}
@@ -87,7 +87,7 @@ const jsonLd = [
 
   <section class="py-20 sm:py-28" aria-labelledby="sectors-title">
     <div class="container-x">
-      <SectionHeading id="sectors-title" eyebrow="Sectores" title="Áreas donde la especialización y el enfoque surgen" description="Conocemos el ciclo de venta de estos sectores y construimos embudos a su medida." />
+      <SectionHeading id="sectors-title" eyebrow="Sectores" title="Sectores donde ya sabemos qué funciona" description="Conocemos cómo compra la gente en estos sectores y armamos el embudo a su medida." />
       <ul class="mt-12 grid gap-5 lg:grid-cols-3" role="list">
         {sectors.map(({ icon, title, items }) => (
           <li class="reveal card-surface p-7">
@@ -103,7 +103,7 @@ const jsonLd = [
           </li>
         ))}
       </ul>
-      <div class="mt-10 flex justify-center"><Button href={site.bookingUrl} icon={false}>Agendar demo</Button></div>
+      <div class="mt-10 flex justify-center"><Button href={site.bookingUrl} icon={false}>Agendar diagnóstico</Button></div>
     </div>
   </section>
 
@@ -111,7 +111,7 @@ const jsonLd = [
     <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="cases-title">
       <div class="container-x grid gap-10 lg:grid-cols-12 lg:items-center">
         <div class="lg:col-span-5">
-          <SectionHeading id="cases-title" eyebrow="Caso de éxito" title="Resultados que impactan las ventas" description="Un funnel para preventa inmobiliaria que conecta proyectos con prospectos calificados listos para dar el siguiente paso." align="left" />
+          <SectionHeading id="cases-title" eyebrow="Caso de éxito" title="Un funnel que llena la agenda" description="Preventa inmobiliaria: prospectos calificados, listos para dar el siguiente paso." align="left" />
           <div class="mt-8"><Button href="/portafolio/" variant="secondary">Ver portafolio completo</Button></div>
         </div>
         <ul class="grid gap-6 lg:col-span-7" role="list">
