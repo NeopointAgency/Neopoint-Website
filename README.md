@@ -25,7 +25,8 @@ src/
   components/
     layout/    Header, Footer
     sections/  Hero, ClientsMarquee, Services, Portfolio, Results, Testimonials,
-               FinalCta, Showcase (portafolio con monitor fijo), ProjectDetail
+               FinalCta, Showcase (portafolio con monitor fijo), ProjectDetail,
+               WebProcessScene (animación CSS del hero de diseño web, 16 s en bucle)
     ui/        Button, Monitor, ProjectCard, PageHero, SectionHeading, FeatureGrid, Faq, Logo,
                GraphicCard (tarjeta ilustrada con degradado)
     graphics/  ilustraciones CSS/SVG para GraphicCard: Sitemap, Seo, Editor, Code, Ad, Funnel, Chat
@@ -56,7 +57,7 @@ public/
 
 ## Diseño
 
-Estilo minimalista inspirado en moritzpetersen.com: botones de radio 14px sin sombras, tarjetas con borde fino y radio 20px, tipografía Rethink Sans en pesos medium/semibold, acento lima solo en detalles. La página de portafolio usa `theme="dark"` y el componente `Showcase`: la lista resalta el proyecto activo al hacer scroll o hover y el monitor cambia de pantalla. Las tarjetas de servicios (home), pilares (diseño web) y método (leads) son tarjetas ilustradas (`GraphicCard` + `src/components/graphics/`): área visual con degradado oscuro, baldosas flotantes y gráficos en CSS/SVG escalados con unidades `cqw`. Las secciones oscuras usan la utilidad `ink-glow` (halos que se desplazan lentamente, estilo portafolio) y las tarjetas sobre fondo oscuro `card-ink`. El hero del home es oscuro, con dos carriles de tarjetas de proyectos en desplazamiento horizontal infinito (se pausan al pasar el cursor; trazo animado y sombra en hover) bajo un degradado que deja visible el lado derecho.
+Estilo minimalista inspirado en moritzpetersen.com: botones de radio 14px sin sombras, tarjetas con borde fino y radio 20px, tipografía Rethink Sans en pesos medium/semibold, acento lima solo en detalles. La página de portafolio usa `theme="dark"` y el componente `Showcase`: la lista resalta el proyecto activo al hacer scroll o hover y el monitor cambia de pantalla. Las tarjetas de servicios (home), pilares (diseño web) y método (leads) son tarjetas ilustradas (`GraphicCard` + `src/components/graphics/`): área visual con degradado oscuro, baldosas flotantes y gráficos en CSS/SVG escalados con unidades `cqw`. Las secciones oscuras usan la utilidad `ink-glow` (halos que se desplazan lentamente, estilo portafolio) y las tarjetas sobre fondo oscuro `card-ink`. El hero de diseño web lleva `WebProcessScene`: una escena en CSS puro (sin video ni librerías) donde un cursor investiga el negocio, reúne palabras clave y voz del cliente, arma el mockup, lo convierte en un proyecto real y lo suma a la fila del portafolio. Los textos y el proyecto están al inicio del componente; con movimiento reducido se muestra el cuadro final. El hero del home es oscuro, con dos carriles de tarjetas de proyectos en desplazamiento horizontal infinito (se pausan al pasar el cursor; trazo animado y sombra en hover) bajo un degradado que deja visible el lado derecho.
 
 ## URLs
 

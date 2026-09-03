@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import PageHero from '../../components/ui/PageHero.astro';
+import WebProcessScene from '../../components/sections/WebProcessScene.astro';
 import Button from '../../components/ui/Button.astro';
 import GraphicCard from '../../components/ui/GraphicCard.astro';
 import SitemapGraphic from '../../components/graphics/SitemapGraphic.astro';
@@ -68,12 +68,22 @@ const jsonLd = [
 ---
 
 <Base {title} {description} {jsonLd}>
-  <PageHero eyebrow="Diseño web" title="No hacemos páginas web, hacemos sitios web que venden" description="Nos enfocamos en que tu sitio web sea un medio de captación de clientes potenciales.">
-    <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-      <Button href={site.bookingUrl} size="lg" icon={false}>Agendar tu asesoría</Button>
-      <Button href="/portafolio/" variant="secondary" size="lg">Ver portafolio</Button>
+  <section class="bg-paper">
+    <div class="container-x grid items-center gap-12 pt-14 pb-12 sm:pt-24 sm:pb-16 lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-6">
+        <p class="mb-4 text-sm font-medium text-muted">Diseño web</p>
+        <h1 class="text-4xl font-semibold leading-[1.08] sm:text-5xl lg:text-[3.5rem]">No hacemos páginas web, hacemos sitios web que venden</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">Nos enfocamos en que tu sitio web sea un medio de captación de clientes potenciales.</p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <Button href={site.bookingUrl} size="lg" icon={false}>Agendar tu asesoría</Button>
+          <Button href="/portafolio/" variant="secondary" size="lg">Ver portafolio</Button>
+        </div>
+      </div>
+      <div class="lg:col-span-6">
+        <WebProcessScene />
+      </div>
     </div>
-  </PageHero>
+  </section>
 
   <section class="py-20 sm:py-28" aria-labelledby="pillars-title">
     <div class="container-x">
