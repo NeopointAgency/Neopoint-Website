@@ -154,7 +154,7 @@ const jsonLd = [
           <span class="size-1.5 rounded-full bg-lime-deep" aria-hidden="true"></span>Diseño web estratégico
         </p>
         <h1 class="text-4xl font-semibold leading-[1.06] tracking-[-0.025em] sm:text-5xl lg:text-[3.15rem] xl:text-[3.5rem]">Un sitio que convierte visitas en clientes agendados</h1>
-        <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">No es una página nueva por tener una página nueva. Es un puente entre lo que busca tu cliente y tu oferta: responde sus dudas, carga rápido y lleva a una sola acción.</p>
+        <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">Sabemos cuál es el miedo: pagar por una web que se ve bien y no trae clientes. Por eso cada sitio se construye como un puente entre lo que busca tu cliente y tu oferta: responde sus dudas, carga rápido y lleva a una sola acción.</p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href={site.bookingUrl} size="lg" icon={false}>Agendar diagnóstico</Button>
           <Button href="#puente" variant="secondary" size="lg">Ver cómo funciona</Button>
@@ -184,7 +184,7 @@ const jsonLd = [
   <!-- 01 · El problema -->
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="problem-title">
     <div class="container-x">
-      <SectionHeading id="problem-title" eyebrow="El problema" title="El trabajo ya lo haces bien. Falta que tu sitio lo demuestre." description="Casi todos los sitios hablan de la empresa: años de experiencia, lista de servicios, fotos genéricas. Y la persona que entra está pensando en otra cosa: si van a cumplir, si es seguro, por qué ellos y no el de al lado. Si el sitio no lo responde, se va con el competidor que sí lo hizo." tone="dark" />
+      <SectionHeading id="problem-title" eyebrow="El problema" title="Equivocarse con una web sale caro. Y casi todas se equivocan igual." description="El trabajo ya lo haces bien; falta que el sitio lo demuestre. Casi todos hablan de la empresa: años de experiencia, lista de servicios, fotos genéricas. Y la persona que entra está pensando en otra cosa: si van a cumplir, si es seguro, por qué ellos y no el de al lado. Si el sitio no lo responde, se va con el competidor que sí lo hizo." tone="dark" />
       <ul class="mt-14 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4" role="list">
         {mistakes.map(({ kind, title, text }, i) => (
           <GraphicCard {title} description={text} eyebrow={`Error 0${i + 1}`} tone="dark">
@@ -345,7 +345,7 @@ const jsonLd = [
   <!-- 07 · Garantías y alcance -->
   <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="guarantees-title">
     <div class="container-x">
-      <SectionHeading id="guarantees-title" eyebrow="Lo que protege a los dos" title="Garantías por escrito y un alcance claro" description="No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes revisar, y el alcance queda definido antes de empezar." />
+      <SectionHeading id="guarantees-title" eyebrow="Lo que protege a los dos" title="Garantías por escrito, para que esta vez no te equivoques" description="No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes revisar, el primer resultado llega en 10 días y el alcance queda definido antes de empezar." />
       <ul class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
         {guarantees.map(({ title, text }) => (
           <li class="reveal card p-6 sm:p-7">
