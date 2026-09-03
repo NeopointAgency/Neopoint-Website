@@ -20,21 +20,28 @@ import { site } from '../../data/site';
 
 const title = 'Diseño Web que convierte | Sitios que agendan clientes | Neopoint';
 const description =
-  'Diseñamos sitios web como un puente entre lo que busca tu cliente y tu oferta: responden sus dudas, cargan rápido y llevan a una sola acción. Estudio del negocio, textos, diseño a la medida, sistema de agendado y SEO. Primer resultado en 10 días, entrega en 45.';
+  'Sitios web que convierten visitas en clientes. Responden las dudas de tu cliente, cargan rápido y llevan a una sola acción. Primer boceto en 10 días, sitio listo en 45.';
 
 /* Cifras del método (aplican a todo proyecto) */
 const promises = [
-  { value: '10 días', label: 'para ver el primer boceto' },
-  { value: '45 días', label: 'del arranque al lanzamiento' },
-  { value: '90+', label: 'calificación en las pruebas de Google' },
+  { value: '10 días', label: 'y ves el primer boceto' },
+  { value: '45 días', label: 'y tu sitio está en línea' },
+  { value: '90+', label: 'de calificación en Google' },
 ];
 
 /* 01 · Lo que espanta a los clientes */
 const mistakes = [
-  { kind: 'company', title: 'Habla de la empresa, no del cliente', text: 'Años de experiencia, lista de servicios, fotos genéricas. El visitante entró preguntándose otra cosa.' },
-  { kind: 'fear', title: 'No responde el miedo principal', text: '“¿Y si pago y no vuelven?”, “¿sí van a terminar?”. Si el sitio no lo contesta, se va con el competidor que sí.' },
-  { kind: 'proof', title: 'No hay prueba', text: 'Sin trabajos reales, reseñas ni registros visibles nadie contrata. En servicios, la confianza lo es todo.' },
-  { kind: 'button', title: 'El botón está escondido y la página es lenta', text: 'Menús, formularios largos y segundos de espera. Quien entra con urgencia desde el celular necesita un botón grande, y ya.' },
+  { kind: 'company', title: 'Habla de la empresa, no del cliente', text: 'Años de experiencia y lista de servicios. Tu cliente entró preguntando otra cosa.' },
+  { kind: 'fear', title: 'No responde su miedo', text: '“¿Y si pago y no cumplen?” Si el sitio no contesta, se va con otro.' },
+  { kind: 'proof', title: 'No hay pruebas', text: 'Sin fotos reales ni reseñas, nadie contrata. La confianza lo es todo.' },
+  { kind: 'button', title: 'Botón escondido y página lenta', text: 'Menús largos y segundos de espera. Desde el celular, la gente se rinde.' },
+];
+
+/* Lo que ya intentaste */
+const attempts = [
+  { title: 'La agencia que hace de todo', what: 'Redes, logos, videos y páginas.', happened: 'Te entregó una página bonita que habla de tu empresa. No vende, porque eso no es lo suyo.', missing: 'Un método con un solo fin: que el sitio venda.' },
+  { title: 'El freelancer', what: 'Buen precio y buena voluntad.', happened: 'Sin proceso ni garantías. Se alarga o desaparece, y te deja un sitio a medias.', missing: 'Fechas, pagos contra entregas y alguien que responda.' },
+  { title: 'Hacerla tú en Wix o WordPress', what: 'Una plantilla con tus datos.', happened: 'Semanas de tu tiempo, carga lenta y textos que no convencen.', missing: 'Saber qué decirle a tu cliente. Eso no viene en la plantilla.' },
 ];
 
 /* 03 · Perfil del comprador (ejemplo real, resumido) */
@@ -44,86 +51,86 @@ const profileIcons: Record<string, string> = {
   'Necesita ver': '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
 };
 const profile = [
-  { k: 'Lo que desea', v: 'Un techo que aguante el invierno, hecho por alguien que sí llega, sí termina y cobra lo que dijo.' },
+  { k: 'Lo que desea', v: 'Un techo que aguante el invierno, hecho por alguien que sí llega y cobra lo que dijo.' },
   { k: 'Su miedo principal', v: '“¿Y si les doy el anticipo y no vuelven?”', quote: true },
-  { k: 'Necesita ver', v: 'Licencia visible, fotos de trabajos reales en su zona, reseñas de vecinos y una inspección gratis fácil de agendar.' },
+  { k: 'Necesita ver', v: 'Licencia, fotos de trabajos en su zona, reseñas de vecinos y una inspección fácil de agendar.' },
 ];
 
 /* 04 · Los 4 pilares */
 const pillars = [
-  { graphic: SitemapGraphic, title: 'Estructura que vende antes de que lean', description: 'Cada sección tiene un trabajo: resolver una duda, dar confianza o llevar al botón. La información se acomoda según qué tan decidido llega el visitante.' },
-  { graphic: EditorGraphic, title: 'Diseño y textos que te vuelven la opción obvia', description: 'Diseño a la medida de tu marca, no una plantilla. Textos que le hablan a tu cliente de sus miedos reales y una sección de prueba: trabajos, reseñas, registros.' },
-  { graphic: BookingGraphic, title: 'Sistema de agendado y seguimiento', description: 'Formulario corto o calendario para elegir día y hora. Aviso inmediato a tu celular y correo, y cada contacto guardado en una lista para que ninguno se pierda.' },
-  { graphic: SeoGraphic, title: 'Que te encuentren en Google', description: 'Cada página lista para que Google la entienda, conexión con tu perfil de negocio y páginas por ciudad o zona para las búsquedas locales.' },
+  { graphic: SitemapGraphic, title: 'Estructura que vende', description: 'Cada sección hace un trabajo: quitar una duda, dar confianza o llevar al botón.' },
+  { graphic: EditorGraphic, title: 'Diseño y textos a tu medida', description: 'Nada de plantillas. Textos que hablan de lo que a tu cliente le importa, con pruebas a la vista.' },
+  { graphic: BookingGraphic, title: 'Sistema para agendar', description: 'Formulario corto o calendario. Te avisa al celular y guarda cada contacto.' },
+  { graphic: SeoGraphic, title: 'Que te encuentren en Google', description: 'Sitio listo para Google, conectado a tu perfil de negocio y con páginas por zona.' },
 ];
 
 /* 05 · Lo que recibes */
 const deliverables = [
-  'Estudio del negocio y plan para que el sitio convierta',
-  'Boceto de la página de inicio en 10 días, que define el estilo de todo',
-  'Todos los textos del sitio, escritos para tu cliente',
-  'Diseño a la medida, pensado dos veces: celular y computadora',
-  'Sistema de agendado: formulario corto y calendario',
-  'Aviso inmediato de cada solicitud y lista de contactos',
-  'Páginas de servicio que terminan en el mismo botón',
-  'Páginas por ciudad o zona para búsquedas locales',
-  'Trabajo completo para aparecer en Google',
-  'Tecnología de alto desempeño: carga rápido, siempre',
-  'Panel de monitoreo anual: leads, visitas y de dónde llega el tráfico',
+  'Estudio de tu negocio y plan para que el sitio venda',
+  'Boceto de la página de inicio en 10 días',
+  'Todos los textos, escritos para tu cliente',
+  'Diseño a la medida para celular y computadora',
+  'Sistema para agendar: formulario y calendario',
+  'Aviso de cada solicitud y lista de contactos',
+  'Páginas de servicio que llevan al botón',
+  'Páginas por ciudad o zona',
+  'Sitio listo para aparecer en Google',
+  'Carga rápida, siempre',
+  'Panel de monitoreo por un año: visitas, leads y citas',
 ];
 /* Incluido en cada proyecto, sin costo adicional */
 const extras = [
-  { title: 'Sesión de arranque y plan estructurado', text: 'Qué necesitamos de ti, qué hacemos nosotros y las fechas de cada cosa.' },
-  { title: 'Ajuste de logo', text: 'Lo pulimos para que se vea nítido en el sitio, en Google y donde se use.' },
-  { title: 'Guía de fotos', text: 'Cómo tomar fotos de tus trabajos con el celular, para que la galería crezca sola.' },
-  { title: 'Soporte directo 30 días', text: 'Después del lanzamiento, línea directa por WhatsApp para ajustes y dudas.' },
+  { title: 'Sesión de arranque y plan', text: 'Qué pones tú, qué ponemos nosotros y las fechas.' },
+  { title: 'Ajuste de logo', text: 'Para que se vea nítido en el sitio y en Google.' },
+  { title: 'Guía de fotos', text: 'Cómo fotografiar tus trabajos con el celular.' },
+  { title: 'Soporte directo 30 días', text: 'Línea directa por WhatsApp después del lanzamiento.' },
 ];
 
 /* 06 · Cronograma */
 const stages = [
-  { days: 'Días 1–10', title: 'Arranque y primer resultado', items: ['Reunimos logo, fotos, registros y datos del negocio', 'Definimos cómo se organiza el sitio y dónde van los botones', 'Entregamos el boceto de la página de inicio'], pay: 'Primer pago · ves el primer resultado' },
-  { days: 'Días 11–20', title: 'Diseño completo', items: ['Con la inicio aprobada, diseñamos el resto del sitio', 'Escribimos todos los textos para tu cliente', 'Apruebas el diseño completo antes de construir'], pay: 'Al aprobar, segundo pago' },
-  { days: 'Días 21–35', title: 'Construcción', items: ['Construimos el sitio, el formulario y el calendario', 'Subimos fotos, servicios y páginas por ciudad', 'Revisas todo ya en funcionamiento'], pay: null },
-  { days: 'Días 36–45', title: 'Lanzamiento', items: ['Configuramos el sitio con Google', 'Probamos velocidad y funcionamiento en celular', 'Lanzamos y damos seguimiento los primeros días'], pay: 'Contra entrega, el tercer pago' },
+  { days: 'Días 1–10', title: 'Arranque', items: ['Reunimos tu material y entregamos el boceto de la página de inicio.'], pay: 'Primer pago' },
+  { days: 'Días 11–20', title: 'Diseño completo', items: ['Diseñamos el resto del sitio y escribimos los textos. Tú apruebas.'], pay: 'Segundo pago, al aprobar' },
+  { days: 'Días 21–35', title: 'Construcción', items: ['Construimos el sitio, el formulario y el calendario. Lo revisas en vivo.'], pay: null },
+  { days: 'Días 36–45', title: 'Lanzamiento', items: ['Lo conectamos con Google, probamos en celular y lo publicamos.'], pay: 'Tercer pago, contra entrega' },
 ];
 
 /* 07 · Garantías y alcance */
 const guarantees = [
-  { title: 'Primer resultado en 10 días', text: 'A los 10 días hábiles tienes el boceto de la página de inicio listo para revisar y aprobar. Si no llega, lo ves de inmediato, no seis meses después.' },
-  { title: 'Garantía de satisfacción', text: 'Trabajamos contigo hasta lograr un diseño que apruebes y que cumpla lo acordado. No firmamos la entrega hasta que estés conforme.' },
-  { title: 'Garantía de rendimiento', text: 'Entregamos el sitio con calificación de 90 o más en las herramientas de medición de Google: velocidad, buscadores y facilidad de uso.' },
+  { title: 'Primer resultado en 10 días', text: 'A los 10 días hábiles ves el boceto de tu página de inicio. Si no llega, lo sabes de inmediato.' },
+  { title: 'Garantía de satisfacción', text: 'Trabajamos contigo hasta que apruebes el diseño. No entregamos hasta que estés conforme.' },
+  { title: 'Garantía de rendimiento', text: 'Tu sitio sale con 90 o más en las pruebas de Google: velocidad, buscadores y uso.' },
 ];
 
 /* Para quién es */
 const fit = {
   yes: [
-    'Vendes un servicio donde la confianza decide la compra',
-    'Ves tu sitio como una inversión con retorno, no como un gasto de diseño',
-    'Quieres un proceso con fechas, entregas revisables y garantías por escrito',
+    'Vendes un servicio donde la confianza decide',
+    'Ves tu sitio como una inversión, no como un gasto',
+    'Quieres fechas, entregas y garantías por escrito',
   ],
   no: [
-    'Buscas la opción más barata o una plantilla con tus datos',
-    'Esperas aparecer primero en Google en 30 días',
-    'Quieres “una página” solo por tener una',
+    'Buscas lo más barato o una plantilla con tus datos',
+    'Esperas estar primero en Google en 30 días',
+    'Quieres una página solo por tener una',
   ],
 };
 
 /* Siguiente paso */
 const nextSteps = [
-  'Sesión de diagnóstico: 30 minutos por videollamada para entender tu negocio y tu cliente',
-  'Recibes una propuesta con alcance exacto, fechas y esquema de pagos',
-  'Firmamos acuerdo y arrancamos en 48 horas',
+  'Hablamos 30 minutos por videollamada sobre tu negocio',
+  'Recibes una propuesta con alcance, fechas y pagos',
+  'Firmamos y arrancamos en 48 horas',
 ];
 
 const faqs = [
-  { q: 'Ya nos quedó mal una agencia antes. ¿En qué son diferentes?', a: 'No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes ver y revisar, el primer resultado llega en 10 días y hay garantías por escrito. Si en algún punto no cumplimos, lo ves de inmediato, no seis meses después.' },
-  { q: '¿Qué pasa con mi sitio actual y el dominio?', a: 'El dominio es tuyo y así se queda. Tu sitio actual sigue en línea mientras construimos el nuevo, y el día del lanzamiento se hace el cambio. Sin días fuera del aire.' },
-  { q: '¿Por qué no arrancamos con los anuncios de una vez?', a: 'Porque pagar anuncios para mandar gente a una página que no convence es tirar el dinero. Primero el vehículo; luego, con la investigación de palabras clave lista, la estrategia de anuncios en su propia propuesta.' },
-  { q: 'Hay opciones más baratas. ¿Por qué invertir más?', a: 'Si lo que buscas es lo más barato, no somos la opción, y preferimos decirlo desde ahora. Una plantilla con tus datos cuesta menos porque no investiga a tu comprador, no escribe para sus miedos reales, no agenda citas ni te posiciona por zona. Nuestro trabajo es para negocios que ven su sitio como una inversión: un solo cliente cerrado suele pagarla.' },
-  { q: '¿Cuánto cuesta?', a: 'La inversión se define por el alcance: número de páginas, sistema de agendado, páginas por zona e integraciones. Cada propuesta llega con el valor de cada entregable desglosado y un esquema de tres pagos ligados a entregas. Lo revisamos juntos en la sesión de diagnóstico.' },
-  { q: '¿Cómo sé si el sitio está funcionando?', a: 'Con tu sitio recibes acceso a un panel de monitoreo durante un año: cuántas personas lo visitan, de dónde llegan (Google, anuncios, recomendados), cuántas se convierten en leads y cuántas en citas. Sin métricas de vanidad: lo que necesitas para decidir dónde invertir.' },
-  { q: '¿Cómo se paga?', a: 'En tres pagos ligados a entregas que puedes ver y revisar: al firmar, al aprobar el diseño completo y contra entrega con el sitio funcionando. El esquema exacto va en tu propuesta.' },
-  { q: '¿Trabajan con clientes fuera de México?', a: 'Sí. Tenemos clientes en México, LATAM y Estados Unidos, con sitios en español e inglés. Todo el proceso se lleva de forma remota.' },
+  { q: 'Ya nos quedó mal una agencia. ¿En qué son diferentes?', a: 'No te pedimos confianza en palabras. Cada pago se libera contra algo que puedes ver. El primer resultado llega en 10 días y hay garantías por escrito.' },
+  { q: '¿Qué pasa con mi sitio actual y el dominio?', a: 'El dominio es tuyo y así se queda. Tu sitio actual sigue en línea hasta el día del cambio. Sin días fuera del aire.' },
+  { q: '¿Por qué no empezamos con anuncios?', a: 'Porque mandar gente a una página que no convence es tirar el dinero. Primero el sitio; luego los anuncios, en su propia propuesta.' },
+  { q: 'Hay opciones más baratas. ¿Por qué invertir más?', a: 'Si buscas lo más barato, no somos la opción. Una plantilla no estudia a tu cliente ni escribe para él. Nuestro trabajo es una inversión: un solo cliente cerrado suele pagarla.' },
+  { q: '¿Cuánto cuesta?', a: 'Depende del alcance: páginas, agendado, zonas e integraciones. Tu propuesta llega con cada punto y su valor, en tres pagos contra entregas.' },
+  { q: '¿Cómo sé si el sitio funciona?', a: 'Con un panel de monitoreo por un año. Ves cuánta gente entra, de dónde llega y cuántos se vuelven leads y citas.' },
+  { q: '¿Cómo se paga?', a: 'En tres pagos: al firmar, al aprobar el diseño y contra entrega con el sitio funcionando.' },
+  { q: '¿Trabajan fuera de México?', a: 'Sí. Tenemos clientes en México, LATAM y Estados Unidos, en español e inglés. Todo es remoto.' },
 ];
 
 const jsonLd = [
@@ -153,13 +160,13 @@ const jsonLd = [
         <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-muted">
           <span class="size-1.5 rounded-full bg-lime-deep" aria-hidden="true"></span>Diseño web estratégico
         </p>
-        <h1 class="text-4xl font-semibold leading-[1.06] tracking-[-0.025em] sm:text-5xl lg:text-[3.15rem] xl:text-[3.5rem]">Un sitio que convierte visitas en clientes agendados</h1>
-        <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">Sabemos cuál es el miedo: pagar por una web que se ve bien y no trae clientes. Por eso cada sitio se construye como un puente entre lo que busca tu cliente y tu oferta: responde sus dudas, carga rápido y lleva a una sola acción.</p>
+        <h1 class="text-4xl font-semibold leading-[1.06] tracking-[-0.025em] sm:text-5xl lg:text-[3.15rem] xl:text-[3.5rem]">Un sitio que convierte visitas en clientes</h1>
+        <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">Sabemos cuál es el miedo: pagar por una web bonita que no trae clientes. Por eso hacemos sitios que responden dudas, cargan rápido y llevan a una sola acción.</p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href={site.bookingUrl} size="lg" icon={false}>Agendar diagnóstico</Button>
           <Button href="#puente" variant="secondary" size="lg">Ver cómo funciona</Button>
         </div>
-        <p class="mt-4 text-sm text-faint">30 minutos, sin costo. Te decimos con claridad si tiene sentido trabajar juntos.</p>
+        <p class="mt-4 text-sm text-faint">30 minutos, sin costo. Te decimos si tiene sentido trabajar juntos.</p>
       </div>
       <div class="lg:col-span-7">
         <WebProcessScene />
@@ -184,7 +191,7 @@ const jsonLd = [
   <!-- 01 · El problema -->
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="problem-title">
     <div class="container-x">
-      <SectionHeading id="problem-title" eyebrow="El problema" title="Equivocarse con una web sale caro. Y casi todas se equivocan igual." description="El trabajo ya lo haces bien; falta que el sitio lo demuestre. Casi todos hablan de la empresa: años de experiencia, lista de servicios, fotos genéricas. Y la persona que entra está pensando en otra cosa: si van a cumplir, si es seguro, por qué ellos y no el de al lado. Si el sitio no lo responde, se va con el competidor que sí lo hizo." tone="dark" />
+      <SectionHeading id="problem-title" eyebrow="El problema" title="Equivocarse con una web sale caro. Y casi todas se equivocan igual." description="Tu trabajo ya es bueno. Falta que el sitio lo demuestre. Casi todos hablan de la empresa, y el cliente entra preguntando si van a cumplir. Si el sitio no responde, se va con otro." tone="dark" />
       <ul class="mt-14 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4" role="list">
         {mistakes.map(({ kind, title, text }, i) => (
           <GraphicCard {title} description={text} eyebrow={`Error 0${i + 1}`} tone="dark">
@@ -195,10 +202,33 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- 02 · El puente -->
-  <section id="puente" class="py-20 sm:py-28" aria-labelledby="bridge-title">
+  <!-- Lo que ya intentaste -->
+  <section class="py-20 sm:py-28" aria-labelledby="attempts-title">
     <div class="container-x">
-      <SectionHeading id="bridge-title" eyebrow="La solución" title="Un puente sólido: no importa por dónde entre, el sitio lo lleva por un solo camino" description="Un solo destino para todo el sitio: que el visitante confíe y dé el paso. Cada página, cada texto y cada botón trabajan para eso." />
+      <SectionHeading id="attempts-title" eyebrow="Lo que ya intentaste" title="Si ya probaste y no funcionó, no es tu culpa" description="Casi todos nuestros clientes pasaron por uno de estos caminos. El problema no fue la persona ni la herramienta. Nadie pensó en tu cliente antes de diseñar." />
+      <ul class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
+        {attempts.map(({ title, what, happened, missing }) => (
+          <li class="reveal card flex flex-col p-6 sm:p-7">
+            <h3 class="text-lg font-semibold text-text">{title}</h3>
+            <p class="mt-1 text-sm text-faint">{what}</p>
+            <div class="mt-5 flex gap-3">
+              <span class="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-surface text-muted ring-1 ring-line" aria-hidden="true"><svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg></span>
+              <p class="text-muted">{happened}</p>
+            </div>
+            <div class="mt-4 flex gap-3">
+              <span class="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true"><svg class="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6" /></svg></span>
+              <p class="text-muted">{missing}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 02 · El puente -->
+  <section id="puente" class="bg-paper-soft py-20 sm:py-28" aria-labelledby="bridge-title">
+    <div class="container-x">
+      <SectionHeading id="bridge-title" eyebrow="La solución" title="El sitio es un puente: entre por donde entre, llega al mismo lugar" description="Cada página, cada texto y cada botón tienen un solo fin: que el visitante confíe y agende." />
 
       <div class="reveal mt-14"><BridgeScene /></div>
     </div>
@@ -208,9 +238,9 @@ const jsonLd = [
   <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="offer-title">
     <div class="container-x grid gap-12 lg:grid-cols-12 lg:items-center">
       <div class="lg:col-span-5">
-        <SectionHeading id="offer-title" eyebrow="Antes de diseñar" title="Primero construimos la oferta. Luego el sitio la comunica." description="Un sitio bonito sin oferta es un folleto. Por eso todo proyecto empieza con un estudio del negocio: a quién le vendes, qué desea, qué teme y qué necesita ver para decidirse." />
+        <SectionHeading id="offer-title" eyebrow="Antes de diseñar" title="Primero la oferta. Luego el sitio." description="Un sitio bonito sin oferta es un folleto. Por eso empezamos por tu cliente: qué quiere, qué teme y qué necesita ver para decidirse." />
         <ul class="mt-8 space-y-3 text-muted" role="list">
-          {['Perfil del comprador con sus miedos y objeciones reales', 'Qué prometer, en qué orden y con qué prueba', 'El camino del visitante: de la entrada al botón', 'Un plan de sitio que se aprueba antes de construir'].map((t) => (
+          {['Perfil de tu cliente: miedos y dudas reales', 'Qué prometer y con qué prueba', 'Un plan que apruebas antes de construir'].map((t) => (
             <li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-lime-deep" aria-hidden="true"></span>{t}</li>
           ))}
         </ul>
@@ -232,7 +262,6 @@ const jsonLd = [
               </div>
             ))}
           </dl>
-          <p class="border-t border-line bg-paper-soft px-6 py-4 text-sm text-muted">El sitio atiende a los dos visitantes: al que tiene un problema hoy le da velocidad y confianza inmediata; al que está comparando, prueba y razones. Y a ambos los lleva al mismo lugar.</p>
         </div>
       </div>
     </div>
@@ -241,7 +270,7 @@ const jsonLd = [
   <!-- 04 · Pilares -->
   <section class="py-20 sm:py-28" aria-labelledby="pillars-title">
     <div class="container-x">
-      <SectionHeading id="pillars-title" eyebrow="Cómo lo construimos" title="Los cuatro pilares de un sitio que convierte" />
+      <SectionHeading id="pillars-title" eyebrow="Cómo lo construimos" title="Cuatro cosas que hacen que un sitio venda" />
       <ul class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2" role="list">
         {pillars.map(({ graphic: Graphic, title, description }) => (
           <GraphicCard {title} {description}><Graphic /></GraphicCard>
@@ -260,13 +289,13 @@ const jsonLd = [
         </div>
       </div>
       <div class="order-1 lg:order-2 lg:col-span-6">
-        <SectionHeading id="monitor-title" eyebrow="Después del lanzamiento" title="Sabes qué pasa con tu sitio, todo el año" description="Un sitio que no se mide es una apuesta. Con tu proyecto recibes acceso a un panel de monitoreo durante un año: cuánta gente entra, de dónde llega y cuántos se convierten en leads y en citas." />
+        <SectionHeading id="monitor-title" eyebrow="Después del lanzamiento" title="Sabes qué pasa con tu sitio, todo el año" description="Un sitio que no se mide es una apuesta. Por eso recibes un panel por un año: cuánta gente entra, de dónde llega y cuántos agendan." />
         <ul class="mt-8 grid gap-3 sm:grid-cols-2" role="list">
           {[
-            ['Visitas y tráfico', 'Cuántas personas entran y desde qué canal: Google, anuncios, recomendados.'],
-            ['Leads y citas', 'Cada contacto y cada cita agendada, en un solo lugar.'],
-            ['Tendencia mes a mes', 'Ves si el sitio crece o si hay que ajustar algo.'],
-            ['Decisiones con datos', 'Sabes dónde invertir el siguiente peso, sin adivinar.'],
+            ['Visitas', 'Cuánta gente entra y de dónde: Google, anuncios o recomendados.'],
+            ['Leads y citas', 'Cada contacto y cada cita, en un solo lugar.'],
+            ['Mes a mes', 'Ves si el sitio crece o si hay que ajustar.'],
+            ['Decisiones con datos', 'Sabes dónde poner el siguiente peso.'],
           ].map(([t, d]) => (
             <li class="card p-5">
               <h3 class="font-semibold text-text">{t}</h3>
@@ -285,10 +314,10 @@ const jsonLd = [
   <!-- 06 · Cronograma -->
   <section class="py-20 sm:py-28" aria-labelledby="timeline-title">
     <div class="container-x">
-      <SectionHeading id="timeline-title" eyebrow="Proceso" title="45 días, en 4 etapas. Cada pago, contra algo que puedes ver." description="Sabemos que es difícil saber qué poner en la web para que venda. De eso nos encargamos nosotros: investigamos, escribimos, diseñamos y construimos. Tú revisas y apruebas en cada etapa." />
+      <SectionHeading id="timeline-title" eyebrow="Proceso" title="45 días, 4 etapas. Cada pago, contra algo que puedes ver." description="Sabemos que es difícil saber qué poner en la web para que venda. De eso nos encargamos nosotros. Tú revisas y apruebas." />
       <!-- Barra de tiempo: cada tramo mide sus días; las monedas marcan los pagos -->
       <div class="reveal mt-20 hidden lg:block" aria-hidden="true">
-        <p class="mb-14 text-sm text-muted">Los pagos se liberan contra entregas: el primero al arrancar, el segundo al aprobar el diseño, el tercero con el sitio funcionando.</p>
+        <div class="mb-14"></div>
         <div class="flex items-center gap-1.5">
           {[10, 10, 15, 10].map((d, i) => (
             <div class="relative" style={`flex:${d}`}>
@@ -317,7 +346,7 @@ const jsonLd = [
   <!-- 05 · Lo que recibes -->
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="deliverables-title">
     <div class="container-x">
-      <SectionHeading id="deliverables-title" eyebrow="Lo que recibes" title="Todo lo que incluye un proyecto" description="Cada entregable llega en tu propuesta con su valor desglosado. Sabes exactamente en qué inviertes, y el proyecto no crece sin control." tone="dark" />
+      <SectionHeading id="deliverables-title" eyebrow="Lo que recibes" title="Todo lo que incluye un proyecto" description="Cada punto llega en tu propuesta con su valor. Sabes en qué inviertes y el proyecto no crece sin control." tone="dark" />
       <div class="mt-12 grid gap-8 lg:grid-cols-12">
         <ul class="card-ink divide-y divide-white/[0.07] lg:col-span-7" role="list">
           {deliverables.map((d) => (
@@ -345,7 +374,7 @@ const jsonLd = [
   <!-- 07 · Garantías y alcance -->
   <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="guarantees-title">
     <div class="container-x">
-      <SectionHeading id="guarantees-title" eyebrow="Lo que protege a los dos" title="Garantías por escrito, para que esta vez no te equivoques" description="No te pedimos que confíes en palabras. Cada pago se libera contra algo que puedes revisar, el primer resultado llega en 10 días y el alcance queda definido antes de empezar." />
+      <SectionHeading id="guarantees-title" eyebrow="Lo que protege a los dos" title="Garantías por escrito, para que esta vez no te equivoques" description="No te pedimos confianza en palabras. Cada pago va contra algo que puedes ver, y el alcance queda claro antes de empezar." />
       <ul class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
         {guarantees.map(({ title, text }) => (
           <li class="reveal card p-6 sm:p-7">
@@ -363,7 +392,7 @@ const jsonLd = [
   <!-- Para quién es -->
   <section class="py-20 sm:py-28" aria-labelledby="fit-title">
     <div class="container-x">
-      <SectionHeading id="fit-title" eyebrow="Para quién es" title="No hacemos sitios baratos. Hacemos sitios que se pagan solos." description="Tomamos pocos proyectos al mes para cumplir cada fecha, así que preferimos ser claros desde el principio." />
+      <SectionHeading id="fit-title" eyebrow="Para quién es" title="No hacemos sitios baratos. Hacemos sitios que se pagan solos." />
       <div class="mt-12 grid gap-4 lg:grid-cols-2">
         <div class="reveal card p-6 sm:p-8">
           <h3 class="text-lg font-semibold text-text">Es para ti si…</h3>
@@ -397,7 +426,7 @@ const jsonLd = [
   <section class="ink-glow py-24 text-white sm:py-32" aria-labelledby="next-title">
     <div class="container-x">
       <div class="max-w-3xl">
-        <p class="text-xl font-medium leading-snug text-white/70 sm:text-2xl">“Una página web es solo una herramienta. Con estrategia detrás, se convierte en la máquina que llena tu calendario.”</p>
+        <p class="text-xl font-medium leading-snug text-white/70 sm:text-2xl">“Una página web es solo una herramienta. Con estrategia, llena tu calendario.”</p>
         <p class="mt-10 text-sm font-medium text-white/50">Siguiente paso</p>
         <h2 id="next-title" class="mt-3 text-4xl font-semibold leading-[1.08] sm:text-5xl">¿Listo para arrancar?</h2>
         <ol class="mt-8 space-y-4" role="list">
