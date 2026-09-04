@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 
 /**
- * Botón minimalista: radio 14px, sin sombras ni gradientes.
+ * Botón con el acabado de las tarjetas: degradado, brillo fijo arriba y sombra suave (estilos en global.css).
  * primary   → relleno con el color de texto (negro en claro, blanco en oscuro)
  * secondary → superficie suave con borde fino
  * ghost     → solo texto
@@ -21,14 +21,14 @@ const { href, variant = 'primary', size = 'md', external, icon = true, class: cl
 const isExternal = external ?? /^https?:\/\//.test(href);
 
 const base =
-  'group inline-flex items-center justify-center gap-2 rounded-btn font-medium whitespace-nowrap transition-[background-color,border-color,color,transform] duration-300 ease-(--ease-out-expo) active:scale-[0.985]';
+  'group inline-flex items-center justify-center gap-2 rounded-btn font-medium whitespace-nowrap transition-[background-color,border-color,color,transform,box-shadow,filter] duration-300 ease-(--ease-out-expo) active:translate-y-0 active:scale-[0.985]';
 const sizes = { sm: 'h-9 px-3.5 text-sm', md: 'h-11 px-5 text-[0.95rem]', lg: 'h-12 px-6 text-base' };
 const variants = {
-  primary: 'bg-text text-paper hover:opacity-90',
-  secondary: 'border border-line bg-surface text-text hover:border-line-strong hover:bg-surface-hover',
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
   ghost: 'text-muted hover:text-text',
-  inverse: 'bg-white text-[#0a0a0a] hover:bg-white/90',
-  glass: 'border border-white/15 bg-white/5 text-white backdrop-blur hover:border-white/30 hover:bg-white/10',
+  inverse: 'btn-inverse',
+  glass: 'btn-glass',
 };
 ---
 
