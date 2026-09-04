@@ -8,7 +8,7 @@ export const heroStats = [
 ];
 
 export const resultStats = [
-  { value: '+4 años', label: 'De experiencia' },
+  { value: '+5 años', label: 'De experiencia' },
   { value: '+20k', label: 'Clientes potenciales generados' },
   { value: '+1 mill', label: 'De pesos invertidos' },
   { value: '+60', label: 'Negocios impulsados' },
