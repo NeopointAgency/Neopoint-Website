@@ -20,7 +20,7 @@ import TestimonialVideo from '../../components/ui/TestimonialVideo.astro';
 import { getProjects, projectHref } from '../../lib/portfolio';
 import { site } from '../../data/site';
 
-const caseProject = (await getProjects()).find((p) => p.data.testimonial);
+const caseProjects = (await getProjects()).filter((p) => p.data.testimonial);
 
 const title = 'Diseño Web que convierte | Sitios que agendan clientes | Neopoint';
 const description =
@@ -309,12 +309,17 @@ const jsonLd = [
     </div>
   </section>
 
-  {caseProject?.data.testimonial && (
+  {caseProjects.length > 0 && (
     <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="case-title">
       <div class="container-x">
-        <SectionHeading id="case-title" eyebrow="Caso real" title="Ya había pagado a cuatro agencias. Esta vez sí funcionó." description={`${caseProject.data.title}, ${caseProject.data.sector.split(' · ')[1] ?? ''}. En sus palabras.`} />
-        <div class="reveal mt-12">
-          <TestimonialVideo {...caseProject.data.testimonial} href={projectHref(caseProject)} />
+        <SectionHeading id="case-title" eyebrow="Casos reales" title="Ya habían pagado a otras agencias. Esta vez sí funcionó." description="En palabras de nuestros clientes, con su sitio ya en línea." />
+        <div class="mt-12 space-y-16">
+          {caseProjects.map((p) => (
+            <div class="reveal">
+              <p class="mb-5 text-sm font-medium text-muted">{p.data.title} · {p.data.sector.split(' · ')[1] ?? p.data.sector}</p>
+              <TestimonialVideo {...p.data.testimonial!} href={projectHref(p)} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
