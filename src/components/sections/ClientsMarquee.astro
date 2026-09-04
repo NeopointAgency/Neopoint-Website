@@ -1,11 +1,16 @@
 ---
 import { Image } from 'astro:assets';
 import { clients } from '../../data/home';
+
+/** tone="dark" (gris oscuro, logos blancos) o "light" (blanco, logos grises) */
+interface Props { tone?: 'dark' | 'light' }
+const { tone = 'dark' } = Astro.props;
+const dark = tone === 'dark';
 ---
 
-<section class="border-y border-white/10 bg-[#141414] py-10 text-white" aria-labelledby="clients-title">
+<section class:list={['border-y py-10', dark ? 'border-white/10 bg-[#141414] text-white' : 'border-line bg-paper']} aria-labelledby="clients-title">
   <div class="container-x">
-    <h2 id="clients-title" class="text-sm font-medium text-white/50">+60 empresas impactando en el mundo digital</h2>
+    <h2 id="clients-title" class:list={['text-sm font-medium', dark ? 'text-white/50' : 'text-muted']}>+60 empresas impactando en el mundo digital</h2>
   </div>
 
   <div class="group relative mt-7 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
@@ -21,7 +26,7 @@ import { clients } from '../../data/home';
               quality={80}
               loading="lazy"
               decoding="async"
-              class="h-9 w-auto brightness-0 invert opacity-55 transition-opacity duration-300 hover:opacity-100 sm:h-11"
+              class:list={['h-9 w-auto brightness-0 transition-opacity duration-300 sm:h-11', dark ? 'invert opacity-55 hover:opacity-100' : 'opacity-45 hover:opacity-85']}
             />
           </li>
         )),
