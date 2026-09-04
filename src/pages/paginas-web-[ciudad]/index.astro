@@ -19,8 +19,8 @@ export function getStaticPaths() {
 }
 const { city } = Astro.props;
 
-const title = `Páginas web en ${city.name} | Diseño web que trae clientes | Neopoint`;
-const description = `Diseño de páginas web en ${city.name}, ${city.state}. Sitios que aparecen en Google y convierten visitas en clientes. Casos reales de negocios de la región. Tu MVP en línea en 10 días.`;
+const title = `Diseño web en ${city.name} | Páginas y sitios web que traen clientes | Neopoint`;
+const description = `Diseño y desarrollo de páginas web en ${city.name}, ${city.state}. Sitios web que aparecen en Google y convierten visitas en clientes. Casos reales de la región. Tu MVP en línea en 10 días.`;
 
 const all = await getProjects();
 const localProjects = all.filter((p) => city.match.test(p.data.sector) || city.match.test(p.body ?? ''));
@@ -34,14 +34,14 @@ const promises = [
 ];
 
 const local = [
-  { title: `Que te encuentren en ${city.name}`, text: 'Sitio listo para Google y conectado a tu perfil de negocio, con páginas por zona si vendes en varias colonias o ciudades.' },
-  { title: 'Hecho para el celular', text: `La mayoría de tus clientes en ${city.name} llegan desde el teléfono. Carga rápido y lleva a un botón: WhatsApp o agendar.` },
+  { title: `Sitios web que aparecen en Google en ${city.name}`, text: 'Sitio listo para Google y conectado a tu perfil de negocio, con páginas por zona si vendes en varias colonias o ciudades.' },
+  { title: 'Desarrollo web a la medida', text: `Nada de plantillas. Tu sitio se programa para cargar rápido en el celular, que es desde donde llegan tus clientes en ${city.name}, y lleva a un botón: WhatsApp o agendar.` },
   { title: 'Atención cercana', text: city.near },
 ];
 
 const faqs = [
-  { q: `¿Cuánto cuesta una página web en ${city.name}?`, a: 'Depende del alcance: páginas, catálogo, agendado, zonas. En 30 minutos de diagnóstico te damos una propuesta clara con todo lo que incluye.' },
-  { q: '¿En cuánto tiempo la tengo?', a: 'Tu MVP en línea en 10 días: la página o función que más necesitas para empezar a vender. El sitio completo depende del alcance.' },
+  { q: `¿Cuánto cuesta el diseño de una página web en ${city.name}?`, a: 'Depende del alcance: páginas, catálogo, agendado, zonas. En 30 minutos de diagnóstico te damos una propuesta clara con todo lo que incluye.' },
+  { q: `¿En cuánto tiempo tengo mi sitio web en ${city.name}?`, a: 'Tu MVP en línea en 10 días: la página o función que más necesitas para empezar a vender. El sitio completo depende del alcance.' },
   { q: '¿Aparece en Google?', a: 'Sale construido para Google desde el día uno. Bajíopack, en Celaya, apareció en primer lugar para sus productos en los primeros días.' },
   { q: `¿Atienden negocios fuera de ${city.name}?`, a: 'Sí. Trabajamos en todo México, LATAM y Estados Unidos. Nuestra base está en Celaya, Guanajuato.' },
 ];
@@ -58,7 +58,7 @@ const jsonLd = [
     address: { '@type': 'PostalAddress', addressLocality: 'Celaya', addressRegion: 'Guanajuato', addressCountry: 'MX' },
     areaServed: [{ '@type': 'City', name: city.name }, { '@type': 'State', name: city.state }],
     parentOrganization: { '@id': `${site.url}/#organization` },
-    makesOffer: { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño de páginas web', areaServed: `${city.name}, ${city.state}` } },
+    makesOffer: ['Diseño web', 'Desarrollo web', 'Páginas web', 'Sitios web'].map((n) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: `${n} en ${city.name}`, areaServed: `${city.name}, ${city.state}` } })),
   },
   {
     '@context': 'https://schema.org',
@@ -75,7 +75,7 @@ const jsonLd = [
         <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-muted">
           <span class="size-1.5 rounded-full bg-lime-deep" aria-hidden="true"></span>{city.name}, {city.state}
         </p>
-        <h1 class="mt-5 text-4xl font-semibold leading-[1.06] tracking-[-0.025em] sm:text-5xl lg:text-[3.5rem]">Páginas web en {city.name} que traen clientes</h1>
+        <h1 class="mt-5 text-4xl font-semibold leading-[1.06] tracking-[-0.025em] sm:text-5xl lg:text-[3.5rem]">Diseño y desarrollo de páginas web en {city.name}</h1>
         <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">{city.intro}</p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href={site.bookingUrl} size="lg" icon={false}>Agendar diagnóstico</Button>
@@ -96,7 +96,7 @@ const jsonLd = [
 
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="local-title">
     <div class="container-x">
-      <SectionHeading id="local-title" eyebrow="Diseño web local" title={`Hecho para vender en ${city.name}`} tone="dark" />
+      <SectionHeading id="local-title" eyebrow={`Diseño web en ${city.name}`} title={`Páginas web hechas para vender en ${city.name}`} tone="dark" />
       <ul class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
         {local.map(({ title, text }) => (
           <li class="reveal card-ink p-6 sm:p-7">
@@ -110,7 +110,7 @@ const jsonLd = [
 
   <section class="py-20 sm:py-28" aria-labelledby="cases-title">
     <div class="container-x">
-      <SectionHeading id="cases-title" eyebrow={localProjects.length > 0 ? `Negocios de ${city.name} y la región` : 'Trabajo reciente'} title="Sitios que ya están trabajando" />
+      <SectionHeading id="cases-title" eyebrow={localProjects.length > 0 ? `Negocios de ${city.name} y la región` : 'Trabajo reciente'} title={`Sitios web que ya están trabajando en ${city.name} y la región`} />
       <ul class="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" role="list">
         {shown.map((p, i) => <li class="reveal"><ProjectCard project={p} eager={i < 3} /></li>)}
       </ul>
@@ -130,6 +130,6 @@ const jsonLd = [
     </section>
   )}
 
-  <Faq items={faqs} title={`Preguntas sobre páginas web en ${city.name}`} />
+  <Faq items={faqs} title={`Preguntas sobre diseño y desarrollo web en ${city.name}`} />
   <FinalCta />
 </Base>
