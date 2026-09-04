@@ -2,6 +2,7 @@
 import Button from '../ui/Button.astro';
 import { site } from '../../data/site';
 import { heroStats } from '../../data/home';
+import PathScene from './PathScene.astro';
 ---
 
 <section class="hero relative flex min-h-svh flex-col justify-center overflow-hidden bg-ink text-white" aria-labelledby="hero-title">
@@ -14,14 +15,12 @@ import { heroStats } from '../../data/home';
   <div class="beam" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
 
-  <div class="container-x relative py-24 sm:py-28">
-    <div class="max-w-3xl">
+  <div class="container-x relative grid items-center gap-x-10 gap-y-12 py-24 sm:py-28 lg:grid-cols-12">
+    <div class="lg:col-span-5">
       <p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-xs font-medium text-white/70 backdrop-blur">
         <span class="size-1.5 rounded-full bg-lime" aria-hidden="true"></span>Digital Marketing Studio · México
       </p>
-      <h1 id="hero-title" class="mt-6 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[5rem]">
-        Marketing que trae clientes,<br class="hidden sm:block" /> no likes
-      </h1>
+      <h1 id="hero-title" class="mt-6 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[4rem]">Marketing que trae clientes, no likes</h1>
       <p class="mt-7 max-w-xl text-lg leading-relaxed text-white/65 sm:text-xl">Sabemos cuál es el miedo: pagar por una web o por anuncios que no traen nada. Hacemos sitios que venden y campañas que llenan tu agenda.</p>
       <div class="mt-9 flex flex-col gap-3 sm:flex-row">
         <Button href={site.bookingUrl} variant="inverse" size="lg" icon={false}>Agendar diagnóstico</Button>
@@ -29,6 +28,7 @@ import { heroStats } from '../../data/home';
       </div>
       <p class="mt-4 text-sm text-white/40">30 minutos, sin costo. Te decimos si tiene sentido trabajar juntos.</p>
     </div>
+    <div class="lg:col-span-7"><PathScene /></div>
   </div>
 
   <dl class="container-x relative grid grid-cols-1 gap-y-6 border-t border-white/10 py-8 sm:grid-cols-3 sm:gap-x-8" aria-label="Métricas">
