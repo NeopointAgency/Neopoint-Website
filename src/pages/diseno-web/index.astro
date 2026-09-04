@@ -16,7 +16,11 @@ import Portfolio from '../../components/sections/Portfolio.astro';
 import ClientsMarquee from '../../components/sections/ClientsMarquee.astro';
 import Results from '../../components/sections/Results.astro';
 import Testimonials from '../../components/sections/Testimonials.astro';
+import TestimonialVideo from '../../components/ui/TestimonialVideo.astro';
+import { getProjects, projectHref } from '../../lib/portfolio';
 import { site } from '../../data/site';
+
+const caseProject = (await getProjects()).find((p) => p.data.testimonial);
 
 const title = 'Diseño Web que convierte | Sitios que agendan clientes | Neopoint';
 const description =
@@ -304,6 +308,17 @@ const jsonLd = [
       </div>
     </div>
   </section>
+
+  {caseProject?.data.testimonial && (
+    <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="case-title">
+      <div class="container-x">
+        <SectionHeading id="case-title" eyebrow="Caso real" title="Ya había pagado a cuatro agencias. Esta vez sí funcionó." description={`${caseProject.data.title}, ${caseProject.data.sector.split(' · ')[1] ?? ''}. En sus palabras.`} />
+        <div class="reveal mt-12">
+          <TestimonialVideo {...caseProject.data.testimonial} href={projectHref(caseProject)} />
+        </div>
+      </div>
+    </section>
+  )}
 
   <Portfolio />
   <Results />

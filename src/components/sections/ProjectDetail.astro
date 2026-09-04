@@ -4,12 +4,13 @@ import { render } from 'astro:content';
 import Button from '../ui/Button.astro';
 import ProjectCard from '../ui/ProjectCard.astro';
 import DevicePreview from '../ui/DevicePreview.astro';
+import TestimonialVideo from '../ui/TestimonialVideo.astro';
 import { projectHref, type Project } from '../../lib/portfolio';
 import { site } from '../../data/site';
 
 interface Props { project: Project; prev?: Project; next?: Project; related: Project[] }
 const { project, prev, next, related } = Astro.props;
-const { title, sector, url, cover, gallery, results, category, preview } = project.data;
+const { title, sector, url, cover, gallery, results, category, preview, testimonial } = project.data;
 const { Content } = await render(project);
 ---
 
@@ -58,6 +59,15 @@ const { Content } = await render(project);
       )}
     </div>
   </section>
+
+  {testimonial && (
+    <section class="border-t border-line bg-paper-soft py-14 sm:py-20">
+      <div class="container-x">
+        <p class="mb-8 text-sm font-medium text-muted">En palabras del cliente</p>
+        <TestimonialVideo {...testimonial} />
+      </div>
+    </section>
+  )}
 
   <!-- Descripción + resultados -->
   <section class="container-x py-14 sm:py-20">

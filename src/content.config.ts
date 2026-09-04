@@ -18,6 +18,10 @@ const portfolio = defineCollection({
       results: z
         .array(z.object({ value: z.string(), label: z.string(), note: z.string().optional() }))
         .default([]),
+      /** Video testimonial alojado en /public (mp4 con subtítulos quemados) */
+      testimonial: z
+        .object({ video: z.string(), poster: z.string(), quote: z.string(), author: z.string(), role: z.string().optional() })
+        .optional(),
     }),
 });
 
