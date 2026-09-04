@@ -1,0 +1,135 @@
+---
+/**
+ * Página local: /paginas-web-<ciudad>/. Contenido y casos propios de cada ciudad,
+ * enlazada desde el footer y el sitemap para que Google la encuentre.
+ */
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/ui/Button.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import ProjectCard from '../../components/ui/ProjectCard.astro';
+import TestimonialVideo from '../../components/ui/TestimonialVideo.astro';
+import Faq from '../../components/ui/Faq.astro';
+import FinalCta from '../../components/sections/FinalCta.astro';
+import { getProjects, getFeaturedProjects, projectHref } from '../../lib/portfolio';
+import { cities } from '../../data/cities';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return cities.map((c) => ({ params: { ciudad: c.slug }, props: { city: c } }));
+}
+const { city } = Astro.props;
+
+const title = `Páginas web en ${city.name} | Diseño web que trae clientes | Neopoint`;
+const description = `Diseño de páginas web en ${city.name}, ${city.state}. Sitios que aparecen en Google y convierten visitas en clientes. Casos reales de negocios de la región. Tu MVP en línea en 10 días.`;
+
+const all = await getProjects();
+const localProjects = all.filter((p) => city.match.test(p.data.sector) || city.match.test(p.body ?? ''));
+const shown = localProjects.length >= 3 ? localProjects : [...localProjects, ...(await getFeaturedProjects(6)).filter((p) => !localProjects.includes(p))].slice(0, 6);
+const withVideo = all.filter((p) => p.data.testimonial);
+
+const promises = [
+  { value: '10 días', label: 'y tu MVP ya está en línea' },
+  { value: '1 año', label: 'de soporte, sistema de leads y panel' },
+  { value: '90+', label: 'de calificación en Google' },
+];
+
+const local = [
+  { title: `Que te encuentren en ${city.name}`, text: 'Sitio listo para Google y conectado a tu perfil de negocio, con páginas por zona si vendes en varias colonias o ciudades.' },
+  { title: 'Hecho para el celular', text: `La mayoría de tus clientes en ${city.name} llegan desde el teléfono. Carga rápido y lleva a un botón: WhatsApp o agendar.` },
+  { title: 'Atención cercana', text: city.near },
+];
+
+const faqs = [
+  { q: `¿Cuánto cuesta una página web en ${city.name}?`, a: 'Depende del alcance: páginas, catálogo, agendado, zonas. En 30 minutos de diagnóstico te damos una propuesta clara con todo lo que incluye.' },
+  { q: '¿En cuánto tiempo la tengo?', a: 'Tu MVP en línea en 10 días: la página o función que más necesitas para empezar a vender. El sitio completo depende del alcance.' },
+  { q: '¿Aparece en Google?', a: 'Sale construido para Google desde el día uno. Bajíopack, en Celaya, apareció en primer lugar para sus productos en los primeros días.' },
+  { q: `¿Atienden negocios fuera de ${city.name}?`, a: 'Sí. Trabajamos en todo México, LATAM y Estados Unidos. Nuestra base está en Celaya, Guanajuato.' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${site.url}/paginas-web-${city.slug}/#local`,
+    name: `${site.name} · Diseño web en ${city.name}`,
+    url: `${site.url}/paginas-web-${city.slug}/`,
+    image: `${site.url}/og-neopoint.png`,
+    description,
+    address: { '@type': 'PostalAddress', addressLocality: 'Celaya', addressRegion: 'Guanajuato', addressCountry: 'MX' },
+    areaServed: [{ '@type': 'City', name: city.name }, { '@type': 'State', name: city.state }],
+    parentOrganization: { '@id': `${site.url}/#organization` },
+    makesOffer: { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño de páginas web', areaServed: `${city.name}, ${city.state}` } },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+  },
+];
+---
+
+<Base {title} {description} {jsonLd}>
+  <section class="bg-paper !pt-16">
+    <div class="container-x pt-14 pb-12 sm:pt-24 sm:pb-16">
+      <div class="max-w-3xl">
+        <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-muted">
+          <span class="size-1.5 rounded-full bg-lime-deep" aria-hidden="true"></span>{city.name}, {city.state}
+        </p>
+        <h1 class="mt-5 text-4xl font-semibold leading-[1.06] tracking-[-0.025em] sm:text-5xl lg:text-[3.5rem]">Páginas web en {city.name} que traen clientes</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">{city.intro}</p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button href={site.bookingUrl} size="lg" icon={false}>Agendar diagnóstico</Button>
+          <Button href="/diseno-web/" variant="secondary" size="lg">Ver cómo trabajamos</Button>
+        </div>
+        <p class="mt-4 text-sm text-faint">30 minutos, sin costo. Te decimos si tiene sentido trabajar juntos.</p>
+      </div>
+      <dl class="mt-12 grid gap-3 sm:grid-cols-3">
+        {promises.map(({ value, label }) => (
+          <div class="card-surface flex items-baseline gap-3 px-5 py-4">
+            <dd class="text-2xl font-semibold tracking-tight text-text">{value}</dd>
+            <dt class="text-sm text-muted">{label}</dt>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="local-title">
+    <div class="container-x">
+      <SectionHeading id="local-title" eyebrow="Diseño web local" title={`Hecho para vender en ${city.name}`} tone="dark" />
+      <ul class="mt-12 grid gap-4 lg:grid-cols-3" role="list">
+        {local.map(({ title, text }) => (
+          <li class="reveal card-ink p-6 sm:p-7">
+            <h3 class="text-lg font-semibold">{title}</h3>
+            <p class="mt-2 leading-relaxed text-white/60">{text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-20 sm:py-28" aria-labelledby="cases-title">
+    <div class="container-x">
+      <SectionHeading id="cases-title" eyebrow={localProjects.length > 0 ? `Negocios de ${city.name} y la región` : 'Trabajo reciente'} title="Sitios que ya están trabajando" />
+      <ul class="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" role="list">
+        {shown.map((p, i) => <li class="reveal"><ProjectCard project={p} eager={i < 3} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  {withVideo.length > 0 && (
+    <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="voices-title">
+      <div class="container-x">
+        <SectionHeading id="voices-title" eyebrow="En sus palabras" title="Lo que dicen los negocios que ya trabajan con nosotros" />
+        <div class="mt-12 space-y-16">
+          {withVideo.map((p) => (
+            <div class="reveal"><TestimonialVideo {...p.data.testimonial!} href={projectHref(p)} /></div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Faq items={faqs} title={`Preguntas sobre páginas web en ${city.name}`} />
+  <FinalCta />
+</Base>

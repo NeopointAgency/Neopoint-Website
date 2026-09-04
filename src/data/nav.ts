@@ -11,6 +11,8 @@ export const footerNav = {
   servicios: [
     { label: 'Diseño Web', href: '/diseno-web/' },
     { label: 'Generación de Leads', href: '/generacion-de-leads/' },
+    { label: 'Páginas web en Celaya', href: '/paginas-web-celaya/' },
+    { label: 'Páginas web en Querétaro', href: '/paginas-web-queretaro/' },
   ],
   empresa: [
     { label: 'Portafolio', href: '/portafolio/' },
