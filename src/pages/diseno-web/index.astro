@@ -259,9 +259,13 @@ const jsonLd = [
   <!-- Cómo trabajamos: la animación del proceso y, debajo, los tres momentos -->
   <section class="bg-paper-soft py-20 sm:py-28" aria-labelledby="how-title">
     <div class="container-x">
-      <SectionHeading id="how-title" eyebrow="Cómo trabajamos" title="Ves resultados antes de avanzar" description="Sabemos que es difícil saber qué poner en la web para que venda. De eso nos encargamos nosotros. Tú revisas y apruebas." />
-      <div class="reveal mx-auto mt-12 max-w-4xl overflow-hidden rounded-card border border-line bg-paper"><WebProcessScene /></div>
-      <ol class="mt-8 grid gap-4 lg:grid-cols-3" role="list">
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-5">
+          <SectionHeading id="how-title" eyebrow="Cómo trabajamos" title="Ves resultados antes de avanzar" description="Sabemos que es difícil saber qué poner en la web para que venda. De eso nos encargamos nosotros. Tú revisas y apruebas." />
+        </div>
+        <div class="reveal overflow-hidden rounded-card border border-line bg-paper lg:col-span-7"><WebProcessScene /></div>
+      </div>
+      <ol class="mt-10 grid gap-4 lg:grid-cols-3" role="list">
         {moments.map(({ n, title, text, win }) => (
           <li class:list={['reveal flex flex-col p-6 sm:p-7', win ? 'card ring-2 ring-lime' : 'card']}>
             <span class="text-2xl font-semibold tracking-tight text-text">{n}</span>
