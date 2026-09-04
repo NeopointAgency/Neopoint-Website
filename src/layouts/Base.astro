@@ -100,7 +100,8 @@ const schemas = [organization, website, ...jsonLd];
     <script>
       // Cuadrícula al pasar el cursor en secciones claras: marca las secciones y sigue al ratón
       const dark = /(^|\s)(ink-glow|bg-ink|bg-\[#141414\])(\s|$)/;
-      const sections = [...document.querySelectorAll<HTMLElement>('main > section')].filter((el) => !dark.test(el.className));
+      const isDarkPage = document.documentElement.dataset.theme === 'dark';
+      const sections = isDarkPage ? [] : [...document.querySelectorAll<HTMLElement>('main > section')].filter((el) => !dark.test(el.className));
       for (const el of sections) {
         el.classList.add('grid-hover');
         const track = (e: MouseEvent) => {
