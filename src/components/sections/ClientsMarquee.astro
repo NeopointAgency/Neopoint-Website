@@ -3,9 +3,9 @@ import { Image } from 'astro:assets';
 import { clients } from '../../data/home';
 ---
 
-<section class="border-y border-line bg-paper py-10" aria-labelledby="clients-title">
+<section class="border-y border-white/10 bg-[#141414] py-10 text-white" aria-labelledby="clients-title">
   <div class="container-x">
-    <h2 id="clients-title" class="text-sm font-medium text-muted">+60 empresas impactando en el mundo digital</h2>
+    <h2 id="clients-title" class="text-sm font-medium text-white/50">+60 empresas impactando en el mundo digital</h2>
   </div>
 
   <div class="group relative mt-7 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
@@ -21,7 +21,7 @@ import { clients } from '../../data/home';
               quality={80}
               loading="lazy"
               decoding="async"
-              class="h-9 w-auto brightness-0 opacity-45 transition-opacity duration-300 hover:opacity-85 sm:h-11 [html[data-theme=dark]_&]:invert"
+              class="h-9 w-auto brightness-0 invert opacity-55 transition-opacity duration-300 hover:opacity-100 sm:h-11"
             />
           </li>
         )),

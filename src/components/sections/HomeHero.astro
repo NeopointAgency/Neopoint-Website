@@ -12,7 +12,6 @@ import PathScene from './PathScene.astro';
   <div class="orb orb--2" aria-hidden="true"></div>
   <div class="orb orb--3" aria-hidden="true"></div>
   <div class="grid-dots" aria-hidden="true"></div>
-  <div class="beam" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
 
   <div class="container-x relative grid items-center gap-x-10 gap-y-12 py-24 sm:py-28 lg:grid-cols-12">
@@ -51,26 +50,16 @@ import PathScene from './PathScene.astro';
     background: conic-gradient(from 180deg at 60% 40%, #0a0a0a 0deg, #303030 70deg, #0a0a0a 140deg, #484848 210deg, #0a0a0a 280deg, #262626 330deg, #0a0a0a 360deg);
     filter: blur(70px);
     opacity: 0.9;
-    animation: spin 60s linear infinite;
-    will-change: transform;
   }
   /* Halos blancos suaves que derivan */
   .orb {
     border-radius: 50%;
     background: radial-gradient(closest-side, rgb(255 255 255 / 0.28), transparent);
     filter: blur(60px);
-    will-change: transform;
   }
-  .orb--1 { left: 45%; top: -10%; width: 55vw; height: 55vw; animation: drift1 26s ease-in-out infinite alternate; }
-  .orb--2 { left: -15%; bottom: -30%; width: 45vw; height: 45vw; opacity: 0.7; animation: drift2 32s ease-in-out infinite alternate; }
-  .orb--3 { right: -10%; bottom: 0; width: 30vw; height: 30vw; opacity: 0.5; animation: drift3 22s ease-in-out infinite alternate; }
-  /* Barrido de luz diagonal */
-  .beam {
-    inset: -20% -40%;
-    background: linear-gradient(115deg, transparent 44%, rgb(255 255 255 / 0.12) 50%, transparent 56%);
-    animation: sweep 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    will-change: transform;
-  }
+  .orb--1 { left: 45%; top: -10%; width: 55vw; height: 55vw; }
+  .orb--2 { left: -15%; bottom: -30%; width: 45vw; height: 45vw; opacity: 0.7; }
+  .orb--3 { right: -10%; bottom: 0; width: 30vw; height: 30vw; opacity: 0.5; }
   /* Trama de puntos, visible solo alrededor del centro */
   .grid-dots {
     inset: 0;
@@ -83,10 +72,4 @@ import PathScene from './PathScene.astro';
   /* Oscurece el borde inferior para que la franja de cifras se asiente */
   .vignette { inset: 0; background: linear-gradient(to top, #0a0a0a 0%, transparent 40%), linear-gradient(to right, rgb(10 10 10 / 0.7) 0%, transparent 60%); }
 
-  @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes drift1 { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(-12%, 10%, 0) scale(1.15); } }
-  @keyframes drift2 { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(18%, -14%, 0) scale(1.1); } }
-  @keyframes drift3 { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-20%, -18%, 0); } }
-  @keyframes sweep { 0% { transform: translateX(-35%); } 60%, 100% { transform: translateX(35%); } }
-  @media (prefers-reduced-motion: reduce) { .aurora, .orb, .beam { animation: none; } }
 </style>
