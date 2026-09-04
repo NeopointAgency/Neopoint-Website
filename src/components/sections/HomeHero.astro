@@ -1,36 +1,92 @@
 ---
 import Button from '../ui/Button.astro';
-import ConnectScene from './ConnectScene.astro';
 import { site } from '../../data/site';
 import { heroStats } from '../../data/home';
-
 ---
 
-<section class="bg-paper !pt-16" aria-labelledby="hero-title">
-  <div class="container-x pt-10 pb-14 sm:pt-16 sm:pb-20">
-    <div class="max-w-3xl">
-      <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-muted">
-        <span class="size-1.5 rounded-full bg-lime-deep" aria-hidden="true"></span>Digital Marketing Studio · México
-      </p>
-      <h1 id="hero-title" class="mt-5 text-4xl font-semibold leading-[1.06] tracking-[-0.025em] sm:text-5xl lg:text-[3.75rem]">Marketing que trae clientes, no likes</h1>
-      <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">Sabemos cuál es el miedo: pagar por una web o por anuncios que no traen nada. Hacemos sitios que venden y campañas que llenan tu agenda.</p>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <Button href={site.bookingUrl} size="lg" icon={false}>Agendar diagnóstico</Button>
-        <Button href="/portafolio/" variant="secondary" size="lg">Ver portafolio</Button>
-      </div>
-      <p class="mt-4 text-sm text-faint">30 minutos, sin costo. Te decimos si tiene sentido trabajar juntos.</p>
-    </div>
+<section class="hero relative flex min-h-svh flex-col justify-center overflow-hidden bg-ink text-white" aria-labelledby="hero-title">
+  <!-- Luz: aurora en grises, halos que derivan, barrido diagonal y trama de puntos -->
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="orb orb--1" aria-hidden="true"></div>
+  <div class="orb orb--2" aria-hidden="true"></div>
+  <div class="orb orb--3" aria-hidden="true"></div>
+  <div class="grid-dots" aria-hidden="true"></div>
+  <div class="beam" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
 
-    <!-- El cursor conecta a tu cliente con tu negocio; en medio, Neopoint -->
-    <div class="reveal mt-12"><ConnectScene /></div>
+  <div class="container-x relative py-24 sm:py-28">
+    <div class="max-w-3xl">
+      <p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-xs font-medium text-white/70 backdrop-blur">
+        <span class="size-1.5 rounded-full bg-lime" aria-hidden="true"></span>Digital Marketing Studio · México
+      </p>
+      <h1 id="hero-title" class="mt-6 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.03em] sm:text-6xl lg:text-[5rem]">
+        Marketing que trae clientes,<br class="hidden sm:block" /> no likes
+      </h1>
+      <p class="mt-7 max-w-xl text-lg leading-relaxed text-white/65 sm:text-xl">Sabemos cuál es el miedo: pagar por una web o por anuncios que no traen nada. Hacemos sitios que venden y campañas que llenan tu agenda.</p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <Button href={site.bookingUrl} variant="inverse" size="lg" icon={false}>Agendar diagnóstico</Button>
+        <Button href="/portafolio/" variant="glass" size="lg">Ver portafolio</Button>
+      </div>
+      <p class="mt-4 text-sm text-white/40">30 minutos, sin costo. Te decimos si tiene sentido trabajar juntos.</p>
+    </div>
   </div>
 
-  <dl class="container-x grid grid-cols-1 gap-y-6 border-t border-line py-10 sm:grid-cols-3 sm:gap-x-8" aria-label="Métricas">
+  <dl class="container-x relative grid grid-cols-1 gap-y-6 border-t border-white/10 py-8 sm:grid-cols-3 sm:gap-x-8" aria-label="Métricas">
     {heroStats.map(({ value, label }) => (
       <div>
-        <dd class="text-3xl font-semibold tracking-tight text-text sm:text-4xl">{value}</dd>
-        <dt class="mt-1 text-sm text-muted">{label}</dt>
+        <dd class="text-3xl font-semibold tracking-tight sm:text-4xl">{value}</dd>
+        <dt class="mt-1 text-sm text-white/50">{label}</dt>
       </div>
     ))}
   </dl>
 </section>
+
+<style>
+  .hero { isolation: isolate; }
+  .hero > [aria-hidden] { position: absolute; pointer-events: none; }
+
+  /* Aurora: gradiente cónico en grises que gira muy despacio detrás de todo */
+  .aurora {
+    inset: -30%;
+    background: conic-gradient(from 180deg at 60% 40%, #0a0a0a 0deg, #303030 70deg, #0a0a0a 140deg, #484848 210deg, #0a0a0a 280deg, #262626 330deg, #0a0a0a 360deg);
+    filter: blur(70px);
+    opacity: 0.9;
+    animation: spin 60s linear infinite;
+    will-change: transform;
+  }
+  /* Halos blancos suaves que derivan */
+  .orb {
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.28), transparent);
+    filter: blur(60px);
+    will-change: transform;
+  }
+  .orb--1 { left: 45%; top: -10%; width: 55vw; height: 55vw; animation: drift1 26s ease-in-out infinite alternate; }
+  .orb--2 { left: -15%; bottom: -30%; width: 45vw; height: 45vw; opacity: 0.7; animation: drift2 32s ease-in-out infinite alternate; }
+  .orb--3 { right: -10%; bottom: 0; width: 30vw; height: 30vw; opacity: 0.5; animation: drift3 22s ease-in-out infinite alternate; }
+  /* Barrido de luz diagonal */
+  .beam {
+    inset: -20% -40%;
+    background: linear-gradient(115deg, transparent 44%, rgb(255 255 255 / 0.12) 50%, transparent 56%);
+    animation: sweep 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
+  }
+  /* Trama de puntos, visible solo alrededor del centro */
+  .grid-dots {
+    inset: 0;
+    background-image: radial-gradient(rgb(255 255 255 / 0.16) 1px, transparent 1.2px);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(60% 60% at 55% 45%, #000 0%, transparent 100%);
+    mask-image: radial-gradient(60% 60% at 55% 45%, #000 0%, transparent 100%);
+    opacity: 0.9;
+  }
+  /* Oscurece el borde inferior para que la franja de cifras se asiente */
+  .vignette { inset: 0; background: linear-gradient(to top, #0a0a0a 0%, transparent 40%), linear-gradient(to right, rgb(10 10 10 / 0.7) 0%, transparent 60%); }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes drift1 { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(-12%, 10%, 0) scale(1.15); } }
+  @keyframes drift2 { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(18%, -14%, 0) scale(1.1); } }
+  @keyframes drift3 { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-20%, -18%, 0); } }
+  @keyframes sweep { 0% { transform: translateX(-35%); } 60%, 100% { transform: translateX(35%); } }
+  @media (prefers-reduced-motion: reduce) { .aurora, .orb, .beam { animation: none; } }
+</style>
