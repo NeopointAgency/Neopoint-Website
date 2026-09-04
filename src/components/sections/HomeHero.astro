@@ -1,14 +1,9 @@
 ---
 import Button from '../ui/Button.astro';
-import WebProcessScene from './WebProcessScene.astro';
-import LeadsProcessScene from './LeadsProcessScene.astro';
+import ConnectScene from './ConnectScene.astro';
 import { site } from '../../data/site';
 import { heroStats } from '../../data/home';
 
-const services = [
-  { href: '/diseno-web/', title: 'Diseño web', text: 'Sitios que responden dudas, cargan rápido y llevan a una sola acción. Tu MVP en 10 días.' },
-  { href: '/generacion-de-leads/', title: 'Generación de leads', text: 'Anuncios con embudos que filtran. A ti solo llegan los que sí quieren comprar.' },
-];
 ---
 
 <section class="bg-paper !pt-16" aria-labelledby="hero-title">
@@ -26,23 +21,8 @@ const services = [
       <p class="mt-4 text-sm text-faint">30 minutos, sin costo. Te decimos si tiene sentido trabajar juntos.</p>
     </div>
 
-    <!-- Dos caminos: cada uno con su animación -->
-    <div class="mt-14 grid gap-6 lg:grid-cols-2">
-      {services.map(({ href, title, text }, i) => (
-        <a href={href} class="group reveal block overflow-hidden rounded-card border border-line bg-paper transition-[border-color,transform] duration-500 ease-(--ease-out-expo) hover:-translate-y-1 hover:border-line-strong">
-          <div class="border-b border-line">{i === 0 ? <WebProcessScene /> : <LeadsProcessScene />}</div>
-          <div class="flex items-start justify-between gap-4 p-6 sm:p-7">
-            <div>
-              <h2 class="text-xl font-semibold text-text sm:text-2xl">{title}</h2>
-              <p class="mt-1.5 text-muted">{text}</p>
-            </div>
-            <span class="mt-1 inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-line text-text transition-colors group-hover:bg-ink group-hover:text-white">
-              <svg class="size-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
-            </span>
-          </div>
-        </a>
-      ))}
-    </div>
+    <!-- El cursor conecta a tu cliente con tu negocio; en medio, Neopoint -->
+    <div class="reveal mt-12"><ConnectScene /></div>
   </div>
 
   <dl class="container-x grid grid-cols-1 gap-y-6 border-t border-line py-10 sm:grid-cols-3 sm:gap-x-8" aria-label="Métricas">
