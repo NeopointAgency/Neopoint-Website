@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/sections/Hero.astro';
+import HomeHero from '../components/sections/HomeHero.astro';
 import ClientsMarquee from '../components/sections/ClientsMarquee.astro';
 import Services from '../components/sections/Services.astro';
 import HowWeWork from '../components/sections/HowWeWork.astro';
@@ -37,8 +37,8 @@ const jsonLd = [
 ];
 ---
 
-<Base {title} {description} {jsonLd} headerTone="dark">
-  <Hero />
+<Base {title} {description} {jsonLd}>
+  <HomeHero />
   <ClientsMarquee />
   <Services />
   <HowWeWork />
