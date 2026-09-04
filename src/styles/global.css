@@ -192,6 +192,26 @@ html[data-theme="dark"] {
   &:hover { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14), inset 0 1px 0 rgb(255 255 255 / 0.16); }
 }
 
+/* ---------- Cuadrícula que se enciende al pasar el cursor (solo secciones claras) ---------- */
+@layer components {
+  .grid-hover { position: relative; isolation: isolate; --mx: 50%; --my: 50%; }
+  .grid-hover::before {
+    content: "";
+    position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgb(151 239 73 / 0.45) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(151 239 73 / 0.45) 1px, transparent 1px);
+    background-size: 96px 96px;
+    background-position: 0 0;
+    -webkit-mask-image: radial-gradient(360px 360px at var(--mx) var(--my), #000 0%, rgb(0 0 0 / 0.6) 45%, transparent 100%);
+    mask-image: radial-gradient(360px 360px at var(--mx) var(--my), #000 0%, rgb(0 0 0 / 0.6) 45%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-expo);
+  }
+  .grid-hover:hover::before { opacity: 1; }
+  @media (hover: none) { .grid-hover::before { display: none; } }
+}
+
 /* ---------- Botones: degradado, brillo fijo y sombra suave (mismo acabado que las tarjetas) ---------- */
 @layer components {
   .btn-primary {

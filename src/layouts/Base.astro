@@ -97,5 +97,20 @@ const schemas = [organization, website, ...jsonLd];
       <slot />
     </main>
     <Footer />
+    <script>
+      // Cuadrícula al pasar el cursor en secciones claras: marca las secciones y sigue al ratón
+      const dark = /(^|\s)(ink-glow|bg-ink|bg-\[#141414\])(\s|$)/;
+      const sections = [...document.querySelectorAll<HTMLElement>('main > section')].filter((el) => !dark.test(el.className));
+      for (const el of sections) {
+        el.classList.add('grid-hover');
+        const track = (e: MouseEvent) => {
+          const r = el.getBoundingClientRect();
+          el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+          el.style.setProperty('--my', `${e.clientY - r.top}px`);
+        };
+        el.addEventListener('pointermove', track, { passive: true });
+        el.addEventListener('mousemove', track, { passive: true });
+      }
+    </script>
   </body>
 </html>
