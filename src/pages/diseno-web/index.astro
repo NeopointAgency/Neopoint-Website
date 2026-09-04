@@ -63,10 +63,10 @@ const profile = [
 
 /* 04 · Los 4 pilares */
 const pillars = [
-  { graphic: SitemapGraphic, title: 'Estructura que vende', description: 'Cada sección hace un trabajo: quitar una duda, dar confianza o llevar al botón.' },
-  { graphic: EditorGraphic, title: 'Diseño y textos a tu medida', description: 'Nada de plantillas. Textos que hablan de lo que a tu cliente le importa, con pruebas a la vista.' },
-  { graphic: BookingGraphic, title: 'Sistema para agendar', description: 'Formulario corto o calendario. Te avisa al celular y guarda cada contacto.' },
-  { graphic: SeoGraphic, title: 'Que te encuentren en Google', description: 'Sitio listo para Google, conectado a tu perfil de negocio y con páginas por zona.' },
+  { graphic: SeoGraphic, title: '1. Que te encuentren en Google', description: 'Sitio listo para Google, conectado a tu perfil de negocio y con páginas por zona. Primero tienen que llegar.' },
+  { graphic: SitemapGraphic, title: '2. Estructura que guía', description: 'Cada sección hace un trabajo: quitar una duda, dar confianza o llevar al botón. Nadie se pierde.' },
+  { graphic: EditorGraphic, title: '3. Diseño y textos que convencen', description: 'Nada de plantillas. Textos que hablan de lo que a tu cliente le importa, con pruebas a la vista.' },
+  { graphic: BookingGraphic, title: '4. Sistema para agendar', description: 'Formulario corto o calendario. Te avisa al celular y guarda cada contacto. El paso final, sin fricción.' },
 ];
 
 /* 05 · Lo que recibes */
@@ -247,7 +247,7 @@ const jsonLd = [
   <!-- 04 · Pilares -->
   <section class="ink-glow py-20 text-white sm:py-28" aria-labelledby="pillars-title">
     <div class="container-x">
-      <SectionHeading id="pillars-title" eyebrow="Cómo lo construimos" title="Cuatro cosas que hacen que un sitio venda" tone="dark" />
+      <SectionHeading id="pillars-title" eyebrow="Cómo lo construimos" title="Cuatro cosas que hacen que un sitio venda, en el orden en que las vive tu cliente" tone="dark" />
       <ul class="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2" role="list">
         {pillars.map(({ graphic: Graphic, title, description }) => (
           <GraphicCard {title} {description} tone="dark"><Graphic /></GraphicCard>
