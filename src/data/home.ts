@@ -20,8 +20,8 @@ export const services = [
     title: 'Diseño Web',
     href: '/diseno-web/',
     description:
-      'Un sitio que responde las dudas de tu cliente, carga rápido y lleva a una sola acción. Tu MVP en línea en 10 días.',
-    bullets: ['MVP en 10 días', 'Sistema para agendar', 'Un año de soporte y panel'],
+      'Un sitio que responde las dudas de tu cliente, carga rápido y lleva a una sola acción. Tu primera página en línea en 10 días.',
+    bullets: ['Primera página en 10 días', 'Sistema para agendar', 'Un año de soporte y panel'],
   },
   {
     title: 'Generación de Leads',

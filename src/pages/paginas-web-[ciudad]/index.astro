@@ -20,7 +20,7 @@ export function getStaticPaths() {
 const { city } = Astro.props;
 
 const title = `Diseño web en ${city.name} | Páginas y sitios web que traen clientes | Neopoint`;
-const description = `Diseño y desarrollo de páginas web en ${city.name}, ${city.state}. Sitios web que aparecen en Google y convierten visitas en clientes. Casos reales de la región. Tu MVP en línea en 10 días.`;
+const description = `Diseño y desarrollo de páginas web en ${city.name}, ${city.state}. Sitios web que aparecen en Google y convierten visitas en clientes. Casos reales de la región. Tu primera página en línea en 10 días.`;
 
 const all = await getProjects();
 const localProjects = all.filter((p) => city.match.test(p.data.sector) || city.match.test(p.body ?? ''));
@@ -28,7 +28,7 @@ const shown = localProjects.length >= 3 ? localProjects : [...localProjects, ...
 const withVideo = all.filter((p) => p.data.testimonial);
 
 const promises = [
-  { value: '10 días', label: 'y tu MVP ya está en línea' },
+  { value: '10 días', label: 'y tu primera página ya está en línea' },
   { value: '1 año', label: 'de soporte, sistema de leads y panel' },
   { value: '90+', label: 'de calificación en Google' },
 ];
@@ -41,7 +41,7 @@ const local = [
 
 const faqs = [
   { q: `¿Cuánto cuesta el diseño de una página web en ${city.name}?`, a: 'Depende del alcance: páginas, catálogo, agendado, zonas. En 30 minutos de diagnóstico te damos una propuesta clara con todo lo que incluye.' },
-  { q: `¿En cuánto tiempo tengo mi sitio web en ${city.name}?`, a: 'Tu MVP en línea en 10 días: la página o función que más necesitas para empezar a vender. El sitio completo depende del alcance.' },
+  { q: `¿En cuánto tiempo tengo mi sitio web en ${city.name}?`, a: 'En 10 días ya está en línea lo primero que necesitas para vender: la página o la función más importante. El sitio completo depende de qué tan grande sea.' },
   { q: '¿Aparece en Google?', a: 'Sale construido para Google desde el día uno. Bajíopack, en Celaya, apareció en primer lugar para sus productos en los primeros días.' },
   { q: `¿Atienden negocios fuera de ${city.name}?`, a: 'Sí. Trabajamos en todo México, LATAM y Estados Unidos. Nuestra base está en Celaya, Guanajuato.' },
 ];
